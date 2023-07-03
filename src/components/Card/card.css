@@ -1,0 +1,58 @@
+.card {
+    width: 300px;
+    height: 450px;
+    border-radius: 30px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+#select-icon {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+}
+
+h2,
+h4,
+p,
+.card {
+    margin: 0;
+    color: white;
+    font-family: Microsoft JhengHei;
+}
+
+.card {
+    margin: 0 auto;
+}
+
+h4 {
+    font-size: 1.25rem;
+}
+
+p {
+    font-family: FZChaoCuHei;
+    font-size: 0.69rem;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+span {
+    display: inline-block;
+    margin-left: 8px;
+    border-radius: 100%;
+    width: 10px;
+    height: 10px;
+}
+
+.filled-dot {
+    background-color: green;
+}
+
+.half-dot {
+    clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+}
+
+.empty-dot {
+    background-color: transparent;
+}

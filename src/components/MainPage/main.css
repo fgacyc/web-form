@@ -1,0 +1,42 @@
+h1,
+h2 {
+    margin: 0;
+    color: #1A3A66;
+}
+
+#main {
+    background-image: url('../../images/KV_white_bg.png');
+}
+
+#sticky-lego {
+    position: fixed;
+    top: 30;
+    right: calc(30px + 0.5rem);
+    width: 77px;
+    height: 77px;
+    border-radius: 77px;
+    background: #FFF;
+    box-shadow: 9px 2px 23px 0px rgba(0, 0, 0, 0.50);
+    cursor: pointer;
+}
+
+#txt-search {
+    width: 314px;
+    height: 60px;
+    border: none;
+    border-radius: 30px;
+    background: #FFF;
+    padding-left: 70px;
+    color: #000;
+    font-size: 1rem;
+    font-family: SF Pro Display;
+    font-weight: 700;
+}
+
+#search-icon {
+    position: absolute;
+    left: 35px;
+    top: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}

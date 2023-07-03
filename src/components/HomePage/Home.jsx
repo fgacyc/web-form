@@ -1,9 +1,11 @@
 import './home.css'
+import '../../App.css'
 import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper";
+import Main from '../MainPage/Main';
 
 export default function Home() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -18,12 +20,17 @@ export default function Home() {
         document.body.style.overflow = 'hidden';
     }
 
-    const handleClick = () => {
-        setIsScrolled(false);
+    const handleScroll = () => {
+        const screenHeight = window.innerHeight;
         window.scrollTo({
-            top: document.body.scrollHeight,
+            top: screenHeight,
             behavior: 'smooth',
         });
+    };
+
+    const handleClick = () => {
+        setIsScrolled(false);
+        handleScroll();
     };
 
     return (
@@ -91,6 +98,7 @@ export default function Home() {
                     </section>
                 </SwiperSlide>
             </Swiper>
+            <Main />
         </>
     )
 }

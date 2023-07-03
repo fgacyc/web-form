@@ -1,0 +1,16 @@
+.overlay{
+    margin-top: 50%;
+}
+
+.overflow-hidden{
+    overflow: hidden;
+}
+
+h5{
+    font-weight: 400;
+}
+
+#team-cat{
+    font-family: SF Pro Display !important;
+    font-size: 1rem !important;
+}
