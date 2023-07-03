@@ -1,34 +1,29 @@
 import './home.css'
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper";
 
 export default function Home() {
+    const [isScrolled, setIsScrolled] = useState(false);
+
     useEffect(() => {
-        disableScroll();
-        return () => {
-            enableScroll();
-        };
+        setIsScrolled(false);
     }, []);
 
-    const disableScroll = () => {
-        document.body.style.overflow = 'hidden';
-    };
-
-    const enableScroll = () => {
+    if (isScrolled) {
         document.body.style.overflow = 'auto';
-    };
+    } else {
+        document.body.style.overflow = 'hidden';
+    }
 
-    const handleButtonClick = () => {
-        enableScroll();
-        scrollToLandingInfo();
-    };
-
-    const scrollToLandingInfo = () => {
-        const landingInfo = document.getElementById('landing-info-1');
-        landingInfo.scrollIntoView({ behavior: 'smooth' });
+    const handleClick = () => {
+        setIsScrolled(false);
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth',
+        });
     };
 
     return (
@@ -36,7 +31,7 @@ export default function Home() {
             <section id='landing' className='flex flex-col justify-between align-center'>
                 <img src="../src/images/CYC_logo.png" alt="CYC Logo" id='cyc-logo' className='mt-45' />
                 <img src="../src/images/KV_title.png" alt="Landing Title" />
-                <button className='mb-45' onClick={handleButtonClick}>开启你的服事旅程</button>
+                <button className='mb-45' onClick={handleClick}>开启你的服事旅程</button>
             </section>
             <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
                 <SwiperSlide>
