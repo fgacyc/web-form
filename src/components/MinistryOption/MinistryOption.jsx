@@ -1,7 +1,6 @@
 import './ministryOption.css'
 import  {useEffect, useState} from 'react';
 import PubSub from "pubsub-js";
-import Selection from "../SelectionPage/Selection.jsx";
 import {useNavigate} from "react-router-dom";
 
 export default function MinistryOption(){
@@ -10,7 +9,7 @@ export default function MinistryOption(){
 
     useEffect(() => {
         const subscription = PubSub.subscribe('departmentsNum', (msg, data) => {
-            console.log(data.message);
+            // console.log(data.message);
             setDepartmentsNum(data.message);
         });
         return () => PubSub.unsubscribe(subscription);

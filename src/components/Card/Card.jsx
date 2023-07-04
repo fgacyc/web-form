@@ -2,6 +2,7 @@ import '../../App.css'
 import './card.css'
 import {useState} from "react";
 import {updateSelectedDepartment} from "./cardStore.js";
+import {findMinistry} from "../../data/organization_structure.js";
 
 // Rating component
 const Rating = ({ rateTxt, rate, color }) => {
@@ -38,8 +39,9 @@ const Card = ({ img, title1, title2, description, rate1, rate2 }) => {
 
     const handleClick = () => {
         setSelected(!selected);
-        // console.log(title2)
+        //console.log(title2)
         updateSelectedDepartment(title2, !selected);
+        console.log(findMinistry(title2));
     };
 
     return (

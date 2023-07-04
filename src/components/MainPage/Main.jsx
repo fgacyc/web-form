@@ -29,7 +29,7 @@ export default function Main() {
         teamTile: "Wonderkids",
     }]
 
-    console.log(team_data[0].cnTeamTitle)
+    //console.log(team_data[0].cnTeamTitle)
     return (
         <section id='main' className='flex flex-col'>
             <div id='main-container'>
