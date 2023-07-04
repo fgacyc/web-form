@@ -1,5 +1,6 @@
 import '../../App.css'
 import './card.css'
+import {useState} from "react";
 
 // Rating component
 const Rating = ({ rateTxt, rate, color }) => {
@@ -32,10 +33,23 @@ const Rating = ({ rateTxt, rate, color }) => {
 };
 
 const Card = ({ img, title1, title2, description, rate1, rate2 }) => {
+    const [selected, setSelected] = useState(false);
+
+    const handleClick = () => {
+        setSelected(!selected);
+        // console.log(title2)
+    };
+
     return (
-        <div key={title2} className="card relative" style={{ backgroundImage: `url(${img})` }}>
+        <div key={title2} className="card relative"
+             style={{ backgroundImage: `url(${img})` }}
+                onClick={handleClick}
+        >
             <div className='overlay' style={{ borderRadius: "30px" }}></div>
-            <img src="../src/icons/select.svg" alt="Select Icon" id="select-icon" />
+            {
+                selected ? <img src="../src/icons/select.svg" alt="Select Icon" id="select-icon" />
+                : <img src="../src/icons/unselect.svg" alt="Unselect Icon" id="select-icon" />
+            }
             <div className='flex flex-col justify-end relative' style={{ height: "95%", margin: "0 25px" }}>
                 <h4 style={{ fontFamily: "FZChaoCuHei", fontWeight: "400", color: "white" }}>{title1}</h4>
                 <h2 style={{ fontFamily: "SF Pro Display", fontWeight: "900", fontSize: "2.313rem", color: "white" }}>{title2}</h2>
