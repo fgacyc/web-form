@@ -1,6 +1,7 @@
 import '../../App.css'
 import './card.css'
 import {useState} from "react";
+import {updateSelectedDepartment} from "./cardStore.js";
 
 // Rating component
 const Rating = ({ rateTxt, rate, color }) => {
@@ -38,6 +39,7 @@ const Card = ({ img, title1, title2, description, rate1, rate2 }) => {
     const handleClick = () => {
         setSelected(!selected);
         // console.log(title2)
+        updateSelectedDepartment(title2, !selected);
     };
 
     return (
