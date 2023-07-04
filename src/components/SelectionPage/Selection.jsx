@@ -1,5 +1,8 @@
+import {useNavigate} from "react-router-dom";
+
 export default function Selection() {
     const color = ["#193A66", "#336397", "#00BB9E", "#E46E48"]
+    const navigation = useNavigate()
 
     return (
         <section style={{ backgroundImage: "url('../src/images/KV_white_bg.png')" }} className="flex flex-col justify-between">
@@ -9,7 +12,9 @@ export default function Selection() {
                     backgroundColor: "#6c5c5c",
                     borderRadius: "100%", padding: "8px",
                     marginRight: "35px"
-                }} />
+                }}
+                    onClick={() => navigation(-1)}
+                />
                 <h3 style={{
                     color: "#21416D", fontSize: "1.125rem", fontFamily: "SF Pro Display", fontWeight: "600",
                     textAlign: "center", width: "100%", marginTop: "30px"
