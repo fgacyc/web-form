@@ -32,17 +32,22 @@ export default function Form() {
                             <option value="wonderkids">Wonderkids</option>
                         </optgroup>
                         <optgroup label="Young Warrior">
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
+                            <option value="heart">Heart</option>
+                            <option value="move">Move</option>
+                            <option value="force">Force</option>
+                            <option value="voice">Voice</option>
+                            <option value="mind">Mind</option>
                         </optgroup>
                         <optgroup label="General">
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
+                            <option value="yp_zone">YP Zone</option>
+                            <option value="pro_family">Pro Family</option>
+                            <option value="young_dreamer">Young Dreamer</option>
+                            <option value="joshua_zone">Joshua Zone</option>
                         </optgroup>
                     </select>
                 </form>
                 <div className='flex flex-col align-center'>
-                    <h4 className="input-text" style={{marginBottom: "15px 0px"}}>Your Ministry Selection</h4>
+                    <h4 className="input-text" style={{ marginBottom: "15px 0px" }}>Your Ministry Selection</h4>
                     <SelectedMinistry />
                 </div>
             </div>
