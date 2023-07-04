@@ -1,0 +1,46 @@
+.input-text {
+    color: #173965;
+    font-size: 1.125rem;
+    font-family: "SF Pro Display";
+    font-weight: 800;
+    margin-top: 20px;
+}
+
+input,
+select,
+input:focus,
+select:focus {
+    margin-top: 10px;
+    width: 235px;
+    height: 50px;
+    padding-left: 10px;
+    border-radius: 5px;
+    border: 1px solid #e6e6e6;
+    background-color: #f9f9f9;
+    color: #737373;
+    font-size: 0.938rem;
+    font-family: "SF Pro Display";
+    font-weight: 400;
+}
+
+select {
+    width: 245px;
+}
+
+@media (max-height: 843px) {
+    label {
+        font-size: 1rem !important;
+        margin-top: 0px;
+    }
+
+    input,
+    select,
+    input:focus,
+    select:focus {
+        height: 30px;
+    }
+
+    button {
+        height: 150px;
+    }
+}

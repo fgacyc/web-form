@@ -1,5 +1,5 @@
-import './card.css'
 import '../../App.css'
+import './card.css'
 
 // Rating component
 const Rating = ({ rateTxt, rate, color }) => {
@@ -25,7 +25,7 @@ const Rating = ({ rateTxt, rate, color }) => {
 
     return (
         <div className="flex align-center mb-5">
-            <h6 style={{ color, marginRight: 8 }}>{rateTxt}</h6>
+            <h6 style={{ color, marginRight: 8, fontFamily: "FZChaoCuHei", fontWeight: "400" }}>{rateTxt}</h6>
             {renderDots()}
         </div>
     );
@@ -34,13 +34,14 @@ const Rating = ({ rateTxt, rate, color }) => {
 const Card = ({ img, title1, title2, description, rate1, rate2 }) => {
     return (
         <div key={title2} className="card relative" style={{ backgroundImage: `url(${img})` }}>
+            <div className='overlay' style={{ borderRadius: "30px" }}></div>
             <img src="../src/icons/select.svg" alt="Select Icon" id="select-icon" />
-            <div className='flex flex-col justify-end' style={{ height: "95%", margin: "0 25px" }}>
-                <h4>{title1}</h4>
-                <h2>{title2}</h2>
+            <div className='flex flex-col justify-end relative' style={{ height: "95%", margin: "0 25px" }}>
+                <h4 style={{ fontFamily: "FZChaoCuHei", fontWeight: "400", color: "white" }}>{title1}</h4>
+                <h2 style={{ fontFamily: "SF Pro Display", fontWeight: "900", fontSize: "2.313rem", color: "white" }}>{title2}</h2>
                 {description.map((desc, index) => {
                     return (
-                        <p key={index}>{desc}</p>
+                        <p key={index} style={{ fontFamily: "Microsoft JhengHei", color: "white" }}>{desc}</p>
                     )
                 })}
                 <Rating rateTxt="技术等级" rate={rate1} color="rgba(45, 192, 113)" />

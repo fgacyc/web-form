@@ -1,19 +1,23 @@
 import './App.css'
-// import {  Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Home from './components/HomePage/Home'
-import Main from './components/MainPage/Main'
-import Card from './components/Card/Card'
 import Team from './components/Team/Team'
+import Search from './components/Search/Search';
+import Selection from './components/SelectionPage/Selection';
+import Complete from './components/Complete/Complete';
+import Form from './components/Form/Form';
 
 function App() {
   return (
-    // <Routes>
-    //   <Route path='/' element={<Home/>} />
-    //   <Route path='/team/:team' element={<Team/>} />
-    // </Routes>
-    // <Home />
-    // <Main />
-    <Team />
+    <Routes>
+      <Route path='/' element={<Home />} />
+      <Route path='/team' element={<Team />} />
+      <Route path='/team/:team' element={<Team />} />
+      <Route path='/search' element={<Search />} />
+      <Route path='/selection' element={<Selection />} />
+      <Route path='/complete' element={<Complete />} />
+      <Route path='/form' element={<Form />} />
+    </Routes>
   )
 }
 

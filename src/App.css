@@ -18,6 +18,11 @@
     src: url('./fonts/SF-Pro-Display-Regular.otf');
 }
 
+::-webkit-scrollbar {
+    width: 0;
+    background-color: transparent;
+}
+
 body {
     margin: 0;
     color: #fff;
@@ -132,7 +137,7 @@ button:active {
     margin-top: 45px;
 }
 
-.mb-5{
+.mb-5 {
     margin-bottom: 5px;
 }
 

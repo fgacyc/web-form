@@ -1,0 +1,19 @@
+.search-card {
+    width: 153px;
+    height: 227px;
+    margin-bottom: 20px;
+    border-radius: 30px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    /* box-shadow: 0px 30px 60px 0px rgba(57, 57, 57, 0.10); */
+}
+
+h2,
+h4 {
+    margin: 0;
+}
+
+.card {
+    margin: 0 auto;
+}

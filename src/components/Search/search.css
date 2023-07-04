@@ -1,0 +1,12 @@
+input::placeholder {
+    color: black;
+}
+
+input,
+input:focus {
+    all: unset;
+    color: black;
+    font-size: 1rem;
+    font-family: SF Pro Display;
+    font-weight: 800;
+}

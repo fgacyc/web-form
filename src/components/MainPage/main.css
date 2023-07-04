@@ -8,20 +8,28 @@ h2 {
     background-image: url('../../images/KV_white_bg.png');
 }
 
-#sticky-lego {
-    position: fixed;
-    top: 30;
-    right: calc(30px + 0.5rem);
-    width: 77px;
-    height: 77px;
-    border-radius: 77px;
-    background: #FFF;
-    box-shadow: 9px 2px 23px 0px rgba(0, 0, 0, 0.50);
-    cursor: pointer;
+#main-container {
+    margin-top: 30px;
+}
+
+#container {
+    margin: 30px 50px 0px 50px;
+}
+
+#txt {
+    margin: 25px 0px;
+}
+
+#explore {
+    color: "#1A3A66" !important;
+    font-size: 1.8.75rem !important;
+    font-family: SF Pro Display !important;
+    font-weight: 800 !important;
+    margin-bottom: 18px !important;
 }
 
 #txt-search {
-    width: 314px;
+    /* width: 314px; */
     height: 60px;
     border: none;
     border-radius: 30px;
@@ -39,4 +47,35 @@ h2 {
     top: 0;
     top: 50%;
     transform: translateY(-50%);
+}
+
+@media (max-height: 843px) {
+    #main-container{
+        margin-top: 15px;
+    }
+
+    #container {
+        margin: 10px 50px 0px 50px;
+    }
+
+    #container h1 {
+        font-size: 2.75rem;
+    }
+    
+    #txt{
+        margin: 15px 0px;
+    }
+
+    #explore {
+        font-size: 1.375rem !important;
+    }
+
+    #search-icon {
+        left: 30px;
+    }
+
+    #txt-search {
+        height: 45px;
+        font-size: 0.9rem;
+    }
 }
