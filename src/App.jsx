@@ -5,7 +5,7 @@ import Team from './components/Team/Team'
 import Search from './components/Search/Search';
 import Selection from './components/SelectionPage/Selection';
 import Complete from './components/Complete/Complete';
-import Form from './components/Form/Form';
+import Submission from './components/Submission/Submission';
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
       <Route path='/search' element={<Search />} />
       <Route path='/selection' element={<Selection />} />
       <Route path='/complete' element={<Complete />} />
-      <Route path='/form' element={<Form />} />
+      <Route path='/form' element={<Submission />} />
     </Routes>
   )
 }

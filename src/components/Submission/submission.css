@@ -27,20 +27,39 @@ select {
     width: 245px;
 }
 
+.input-error {
+    border-color: red;
+}
+
+.input-error{
+    color: red;
+    font-size: 0.75rem;
+    font-family: "SF Pro Display";
+    font-weight: 400;
+    padding-top: 2px;
+    padding-left: 10px;
+}
+
 @media (max-height: 843px) {
     label {
         font-size: 1rem !important;
         margin-top: 0px;
     }
 
+    .input-text {
+        margin-top: 10px;
+    }
+
     input,
     select,
     input:focus,
     select:focus {
+        margin-top: 5px;
         height: 30px;
     }
 
-    button {
-        height: 150px;
+    .btn-submit{
+        height: 75px;
+        margin-bottom: 20px;
     }
 }
