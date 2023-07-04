@@ -2,6 +2,8 @@ import './department.css'
 import Card from '../Card/Card'
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+//import {Navigation, Pagination} from "swiper";
+import "../HomePage/Home.css"
 
 
 export default function Department({ team }) {
@@ -247,7 +249,7 @@ export default function Department({ team }) {
         <div className='team-bg'>
             {team_data[team].department.individual.map((dep, index) => {
                 return (
-                    <section key={`${dep.cnDepTitle}`} className='flex flex-col justify-center align-center' style={{ margin: "0px 35px" }}>
+                    <section key={index} className='flex flex-col justify-center align-center' style={{ margin: "0px 35px" }}>
                         <h5 style={{ fontSize: "1.5rem", fontWeight: "400" }}>{dep.cnDepTitle}</h5>
                         <h2 style={{
                             fontSize: "3rem", fontFamily: "SF Pro Display",
@@ -255,13 +257,15 @@ export default function Department({ team }) {
                         }}>{dep.depTitle}</h2>
                         <h6 style={{ margin: "20px 0px", fontWeight: "700", textAlign: "center" }}>{dep.desc}</h6>
                         <Swiper
-                            className='w-full'
+                            className='w-full mySwiper'
                             slidesPerView={1}
-                            centeredSlides={true}>
+                            centeredSlides={true}
+                            loop={true}
+                        >
                             {
                                 dep.ministry.map((ministry, index) => {
                                     return (
-                                        <SwiperSlide key={ministry.ministryTitle}>
+                                        <SwiperSlide key={index}>
                                             <Card
                                                 img={ministry.img}
                                                 title1={ministry.cnMinistryTitle}

@@ -1,9 +1,11 @@
 import '../../App.css'
 import './main.css'
-import MinistryOption from '../MinistryOption/MinistryOption'
+//import MinistryOption from '../MinistryOption/MinistryOption'
 import MainCard from '../MainCard/MainCard'
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import {Pagination} from "swiper";
+import "../HomePage/Home.css"
 
 export default function Main() {
     const team_data = [{
@@ -44,11 +46,15 @@ export default function Main() {
                 <Swiper
                     style={{ width: "100vw" }}
                     slidesPerView={1}
-                    centeredSlides={true}>
+                    centeredSlides={true}
+                    pagination={true}
+                    modules={[Pagination]} className="mySwiper"
+                >
+
                     {
                         team_data.map((team, index) => {
                             return (
-                                <SwiperSlide key={team.team}>
+                                <SwiperSlide key={index}>
                                     <MainCard
                                         img={`../src/images/${team.team}_main.png`}
                                         title1={team.cnTeamTitle}
