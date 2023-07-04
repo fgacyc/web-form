@@ -6,8 +6,18 @@ import Search from './components/Search/Search';
 import Selection from './components/SelectionPage/Selection';
 import Complete from './components/Complete/Complete';
 import Form from './components/Form/Form';
+import {useEffect} from "react";
+
+function clearDepartment() {
+    localStorage.removeItem('cyc-department-selected');
+}
+
 
 function App() {
+    useEffect(() => {
+        clearDepartment();
+    },[]);
+
   return (
     <Routes>
       <Route path='/' element={<Home />} />

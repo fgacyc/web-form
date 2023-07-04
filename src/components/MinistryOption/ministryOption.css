@@ -10,3 +10,18 @@
     cursor: pointer;
     z-index: 9999;
 }
+
+.logo-num{
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+    background:#c93e30;
+    line-height: 25px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    top: -5px;
+    right: -5px;
+}

@@ -1,3 +1,5 @@
+import PubSub from 'pubsub-js';
+
 export function updateSelectedDepartment(departmentName, boolValue) {
     // 从本地存储获取数组
     let selectedDepartments = JSON.parse(localStorage.getItem('cyc-department-selected')) || [];
@@ -17,4 +19,9 @@ export function updateSelectedDepartment(departmentName, boolValue) {
 
     // 将更新后的数组存回本地存储
     localStorage.setItem('cyc-department-selected', JSON.stringify(selectedDepartments));
+    sendDepartmentNumToLogo(selectedDepartments.length);
+}
+
+function sendDepartmentNumToLogo(num){
+    PubSub.publish('departmentsNum', { message: num });
 }
