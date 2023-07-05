@@ -3,8 +3,7 @@ import Card from '../Card/Card'
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 //import {Navigation, Pagination} from "swiper";
-import "../HomePage/Home.css"
-import { handleTouchEnd } from '../../js/scroll';
+import "src/components/HomePage/home.css"
 import { useState, useEffect } from 'react';
 
 export default function Department({ team }) {
