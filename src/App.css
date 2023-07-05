@@ -15,7 +15,7 @@
 
 @font-face {
     font-family: SF Pro Display;
-    src: url('./fonts/SF-Pro-Display-Regular.otf');
+    src: url('./fonts/SF-Pro-Display-Black.otf');
 }
 
 ::-webkit-scrollbar {
@@ -35,6 +35,8 @@ section {
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
+    /* height: calc(100vh - constant(safe-area-inset-top)); */
+    /* height: calc(100vh - env(safe-area-inset-top)); */
 }
 
 .overlay {

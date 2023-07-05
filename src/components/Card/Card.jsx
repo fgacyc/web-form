@@ -55,11 +55,11 @@ const Card = ({ img, title1, title2, description, rate1, rate2 }) => {
                 : <img src="../src/icons/unselect.svg" alt="Unselect Icon" id="select-icon" />
             }
             <div className='flex flex-col justify-end relative' style={{ height: "95%", margin: "0 25px" }}>
-                <h4 style={{ fontFamily: "FZChaoCuHei", fontWeight: "400", color: "white" }}>{title1}</h4>
-                <h2 style={{ fontFamily: "SF Pro Display", fontWeight: "900", fontSize: "2.313rem", color: "white" }}>{title2}</h2>
+                <h4 className="card-h4" style={{ fontFamily: "FZChaoCuHei", fontWeight: "400", color: "white" }}>{title1}</h4>
+                <h2 className="card-h2" style={{ fontFamily: "SF Pro Display", fontWeight: "900", fontSize: "2.313rem", color: "white" }}>{title2}</h2>
                 {description.map((desc, index) => {
                     return (
-                        <p key={index} style={{ fontFamily: "Microsoft JhengHei", color: "white" }}>{desc}</p>
+                        <p key={index} className="card-p" style={{ fontFamily: "Microsoft JhengHei", color: "white" }}>{desc}</p>
                     )
                 })}
                 <Rating rateTxt="技术等级" rate={rate1} color="rgba(45, 192, 113)" />

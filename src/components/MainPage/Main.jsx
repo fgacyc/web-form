@@ -4,8 +4,10 @@ import './main.css'
 import MainCard from '../MainCard/MainCard'
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import {Pagination} from "swiper";
+import { Pagination } from "swiper";
 import "../HomePage/Home.css"
+import { handleScroll, handleTouchEnd } from '../../js/scroll';
+import { useNavigate } from 'react-router-dom';
 
 export default function Main() {
     const team_data = [{
@@ -30,6 +32,13 @@ export default function Main() {
     }]
 
     //console.log(team_data[0].cnTeamTitle)
+    const navigate = useNavigate();
+
+    const navigateToSearch = () => {
+        console.log("navigate to search")
+        navigate(`/search`)
+    }
+
     return (
         <section id='main' className='flex flex-col'>
             <div id='main-container'>

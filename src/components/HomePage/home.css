@@ -41,3 +41,7 @@
     --swiper-pagination-bullet-inactive-color: #5A5555;
     --swiper-pagination-bullet-inactive-opacity: 1;
 }
+
+.home-swiper {
+    --swiper-pagination-bottom: 70px
+}

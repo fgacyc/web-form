@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 //import {Navigation, Pagination} from "swiper";
 import "../HomePage/Home.css"
+import { handleTouchEnd } from '../../js/scroll';
 
 
 export default function Department({ team }) {
@@ -129,7 +130,7 @@ export default function Department({ team }) {
                         ministryTitle: "Photography",
                         desc: ["属灵的摄影师拥有敏锐圣灵的能力，并能够即时的捕抓神运行的画面。从构图到拍摄，修图到调色，他们透过摄影的创作传递情绪，让神家里发生的大小事物都能被记录和被传播。"],
                         rate: [3, 3]
-                    }, ]
+                    },]
                 }]
             }
         },
@@ -253,14 +254,17 @@ export default function Department({ team }) {
                         <h5 style={{ fontSize: "1.5rem", fontWeight: "400" }}>{dep.cnDepTitle}</h5>
                         <h2 style={{
                             fontSize: "3rem", fontFamily: "SF Pro Display",
-                            fontWeight: "900", color: "#21416D"
+                            fontWeight: "900", color: "#21416D", textAlign: "center"
                         }}>{dep.depTitle}</h2>
                         <h6 style={{ margin: "20px 0px", fontWeight: "700", textAlign: "center" }}>{dep.desc}</h6>
                         <Swiper
-                            className='w-full mySwiper'
-                            slidesPerView={1}
-                            centeredSlides={true}
-                            loop={true}
+                            className='w-full mySwiper depSwiper'
+                            // loop={true}
+                            style={{paddingLeft: "25px"}}
+                            slidesPerView={2}
+                            spaceBetween={258}
+                            // centeredSlides={true}
+                            // onTouchEnd={() => {handleTouchEnd("dep")}}
                         >
                             {
                                 dep.ministry.map((ministry, index) => {
@@ -278,6 +282,7 @@ export default function Department({ team }) {
                                     )
                                 })
                             }
+                            <SwiperSlide></SwiperSlide>
                         </Swiper>
                     </section>
                 )

@@ -1,4 +1,5 @@
 import '../../App.css'
+import { handleScroll } from '../../js/scroll';
 import Department from '../Department/Department'
 import './team.css'
 import { useNavigate, useParams } from "react-router-dom";
@@ -57,7 +58,7 @@ export default function Team({selected_team}) {
                             )
                         })
                     }
-                    <div className='flex flex-col align-center'>
+                    <div className='flex flex-col align-center' onClick={handleScroll}>
                         <h5 style={{ marginTop: "65px", marginBottom: "10px" }}>理解更多</h5>
                         <img src="../src/icons/down.png" alt="Down Arrow Icon" />
                     </div>
