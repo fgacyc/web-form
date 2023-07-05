@@ -12,6 +12,12 @@ export default function MinistryOption(){
             // console.log(data.message);
             setDepartmentsNum(data.message);
         });
+
+        let selectedMinistry = JSON.parse(localStorage.getItem('cyc-department-selected'));
+        if (selectedMinistry) {
+            setDepartmentsNum(selectedMinistry.length);
+        }
+
         return () => PubSub.unsubscribe(subscription);
     }, []);
 
