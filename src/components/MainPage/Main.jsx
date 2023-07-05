@@ -71,7 +71,7 @@ export default function Main() {
                     <h1>一起建造</h1>
                     <h1>属于我们的家</h1>
                     <div id='txt' className='relative' onClick={navigateToSearch}>
-                        <img src="src/assets/icons/search.svg" alt="Search Icon" id='search-icon' />
+                        <img src="/icons/search.svg" alt="Search Icon" id='search-icon' />
                         <input type="text" name="search" id="txt-search" placeholder='Search' style={{ width: "75%" }} />
                     </div>
                     <h2 id="explore">Explore</h2>
@@ -92,7 +92,7 @@ export default function Main() {
                             return (
                                 <SwiperSlide key={index}>
                                     <MainCard
-                                        img={`src/assets/images/${team.team}_main.png`}
+                                        img={`/images/${team.team}_main.png`}
                                         title1={team.cnTeamTitle}
                                         title2={team.teamTile}
                                         team={team.team}

@@ -141,7 +141,7 @@ export default function Submission() {
         >
 
             <div id="submission-container" className='flex' style={{ paddingTop: "25px" }}>
-                <img src="src/assets/icons/left.svg" alt="Back Icon" onClick={()=>{navigate(-1)}}/>
+                <img src="/icons/left.svg" alt="Back Icon" onClick={()=>{navigate(-1)}}/>
                 <h3 style={{
                     color: "#21416d", fontSize: "1.125rem", fontFamily: "SF Pro Display",
                     fontWeight: "600", marginLeft: "90px"

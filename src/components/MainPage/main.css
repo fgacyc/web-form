@@ -5,7 +5,7 @@ h2 {
 }
 
 #main {
-    background-image: url('../../assets/images/KV_white_bg.png');
+    background-image: url('../../../public/images/KV_white_bg.png');
 }
 
 #main-container {
@@ -81,19 +81,19 @@ h2 {
 }
 
 #landing {
-    background-image: url('../../assets/images/KV_blue_bg.png');
+    background-image: url('../../../public/images/KV_blue_bg.png');
 }
 
 #landing-info-1 {
-    background-image: url('../../assets/images/landing_bg_1.png');
+    background-image: url('../../../public/images/landing_bg_1.png');
 }
 
 #landing-info-2 {
-    background-image: url('../../assets/images/landing_bg_2.png');
+    background-image: url('../../../public/images/landing_bg_2.png');
 }
 
 #landing-info-3 {
-    background-image: url('../../assets/images/landing_bg_3.png');
+    background-image: url('../../../public/images/landing_bg_3.png');
 }
 
 .overlay {
