@@ -76,7 +76,15 @@ export default function Submission() {
         const isPastoralTeamValid = validatePastoralTeam();
 
         if (isNameValid && isPhoneValid && isEmailValid && isPastoralTeamValid) {
-            console.log("Form submitted successfully!");
+            let info = {
+                name,
+                phone,
+                email,
+                pastoralTeam,
+                // ministry
+            }
+            console.log(info);
+            // let data = await postReq("/recruiter", info);
         }
     };
 
@@ -110,6 +118,7 @@ export default function Submission() {
 
                 <label htmlFor="pastoral_team" className="input-text">Pastoral Team</label>
                 <select name="pastoral_team" id="pastoral_team" value={pastoralTeam} onChange={(e) => setPastoralTeam(e.target.value)}>
+                    <option value="" disabled hidden>Select a pastoral team</option>
                     <optgroup label="Wonderkids">
                         <option value="wonderkids">Wonderkids</option>
                     </optgroup>

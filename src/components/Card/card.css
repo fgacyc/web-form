@@ -56,3 +56,17 @@ span {
 .empty-dot {
     background-color: transparent;
 }
+
+@media (max-height: 843px) {
+    .card-p {
+        font-size: 0.55rem !important;
+    }
+
+    .card-h4 {
+        font-size: 1rem !important;
+    }
+
+    .card-h2 {
+        font-size: 1.875rem !important;
+    }
+}

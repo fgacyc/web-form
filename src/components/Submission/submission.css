@@ -31,7 +31,7 @@ select {
     border-color: red;
 }
 
-.input-error{
+.input-error {
     color: red;
     font-size: 0.75rem;
     font-family: "SF Pro Display";
@@ -58,8 +58,18 @@ select {
         height: 30px;
     }
 
-    .btn-submit{
-        height: 75px;
-        margin-bottom: 20px;
+    .btn-submit,
+    .btn-submit:focus,
+    .btn-submit:active {
+        height: 50px;
+        padding: 15px 0px;
+    }
+
+    #submission-container {
+        padding-top: 15px;
+    }
+
+    #submission-form {
+        margin-top: 0px;
     }
 }
