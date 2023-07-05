@@ -38,7 +38,7 @@ export const  ministry_search_data_list = [{
         ministryTitle: "Shuttle",
         department: "general_affair",
         cnDepartment: "总务部",
-        desc: ["由于教会的迅速发展，停车问题日益严重，导致会友和新朋友们有时不得不将车辆停放在较远的地方，然后步行到聚会地点。为了改善每个人来教会的体验，他们提供贴心的运送服务，确保每个人都能享受到愉快的教会体验。 FGACYC 聚会每个年龄层的膳食量。如果你是美食达人，对食物有高度的要求，欢迎加入我们！"],
+        desc: ["由于教会的迅速发展，停车问题日益严重，导致会友和新朋友们有时不得不将车辆停放在较远的地方，然后步行到聚会地点。为了改善每个人来教会的体验，他们提供贴心的运送服务，确保每个人都能享受到愉快的教会体验。"],
         rate: [3, 2]
     }, {
         img: "/images/software_development.png",
@@ -46,7 +46,7 @@ export const  ministry_search_data_list = [{
         ministryTitle: "Software Development",
         department: "technology",
         cnDepartment: "科技部",
-        desc: ["软件开发人员负责将软件项目的需求转化为实际可用的软件应用。他们在软件的设计、编码、测试和维护过程中发挥关键作用，确保软件的功能性、可靠性和可扩展性。透过各种科技的应用，让教会有更完善的管理系统和拓展潜能。FGACYC 大量的资料流量，可说是 FGACYC的支柱！没有了他们的统计，我们可能都没办法透过见证神应许给 FGACYC 爆炸性复兴的时刻！"],
+        desc: ["软件开发人员负责将软件项目的需求转化为实际可用的软件应用。他们在软件的设计、编码、测试和维护过程中发挥关键作用，确保软件的功能性、可靠性和可扩展性。透过各种科技的应用，让教会有更完善的管理系统和拓展潜能。"],
         rate: [5, 2]
     }, {
         img: "/images/project_management.png",
@@ -54,7 +54,7 @@ export const  ministry_search_data_list = [{
         ministryTitle: "Project Management",
         department: "technology",
         cnDepartment: "科技部",
-        desc: ["项目管理人员负责规划、组织、监督和控制项目的全过程，确保项目按时、按预算和按质量要求完成。他们是技术和需求的桥梁，让教会的需求透过适当的技术和科技能够完善的结合。 FGACYC 聚会每个年龄层的膳食量。如果你是美食达人，对食物有高度的要求，欢迎加入我们！"],
+        desc: ["项目管理人员负责规划、组织、监督和控制项目的全过程，确保项目按时、按预算和按质量要求完成。他们是技术和需求的桥梁，让教会的需求透过适当的技术和科技能够完善的结合。"],
         rate: [4, 2],
     }, {
         img: "/images/content_creator.png",
@@ -186,6 +186,6 @@ export const  ministry_search_data_list = [{
         ministryTitle: "Children Minister",
         department: "wonderkids",
         cnDepartment: "神奇王国",
-        desc: ["“WELCOME HOME!他们充满童真但绝不幼稚，他们善良、友爱、和蔼可亲又温柔，他们肩负培养下一代伟大的使命，喜欢小朋友且愿意耐心教导？来吧！我们需要你！ 不是一句可有可无的口号，一句温暖的欢迎加上亲切的笑容，是人们对于 FGACYC 这个 “家” 的第一印象。他们背负着维持聚会秩序的重任、提供指导和帮助，小事细至帮助会众找到座位都由他们一手包办。"],
+        desc: ["他们充满童真但绝不幼稚，他们善良、友爱、和蔼可亲又温柔，他们肩负培养下一代伟大的使命，喜欢小朋友且愿意耐心教导？来吧！我们需要你！"],
         rate: [2, 4],
     }]
