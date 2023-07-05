@@ -1,6 +1,7 @@
 import PubSub from 'pubsub-js';
 
 export function updateSelectedDepartment(departmentName, boolValue) {
+    departmentName = departmentName.toLowerCase();
     // 从本地存储获取数组
     let selectedDepartments = JSON.parse(localStorage.getItem('cyc-department-selected')) || [];
 
