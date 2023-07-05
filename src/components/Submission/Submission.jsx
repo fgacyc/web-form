@@ -155,15 +155,15 @@ export default function Submission() {
     }
 
     const options = {
-        title: 'Title',
-        message: 'Message',
+        title: '',
+        message: '确认提交？',
         buttons: [
             {
-                label: 'Yes',
+                label: '是',
                 onClick: () => submitToServer()
             },
             {
-                label: 'No',
+                label: '否',
                 // onClick: () => alert('Click No')
             }
         ],
