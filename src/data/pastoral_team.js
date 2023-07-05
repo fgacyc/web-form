@@ -1,19 +1,19 @@
 let pastoral_team = {
-    "wonder kids": [
-        "wonder kids"
+    "wonderkids": [
+        "wonderkids"
     ],
-    "young warrior": [
+    "young_warrior": [
         "heart",
         "move",
         "force",
         "voice",
         "mind"
     ],
-    "general service": [
-        "yp zone",
-        "pro family",
-        "young dreamer",
-        "joshua zone"
+    "general_service": [
+        "yp_zone",
+        "pro_family",
+        "young_dreamer",
+        "joshua_zone"
     ]
 }
 
