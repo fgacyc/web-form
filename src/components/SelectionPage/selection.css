@@ -1,0 +1,12 @@
+.selection-card{
+    /*height: 132px;*/
+    border-radius: 20px;
+    box-shadow: 3px 4px 12px 0 rgba(0, 0, 0, 0.25);
+    padding: 20px;
+    margin: 10px 0;
+}
+
+.selection-card-con{
+    overflow-y: auto;
+    height: 60vh;
+}

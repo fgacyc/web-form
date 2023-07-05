@@ -2,7 +2,9 @@ import '../../App.css'
 import { handleScroll } from '../../js/scroll';
 import Department from '../Department/Department'
 import './team.css'
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import MinistryOption from "../MinistryOption/MinistryOption.jsx";
+
 
 export default function Team({selected_team}) {
     const team = useParams().team || selected_team;
@@ -40,6 +42,7 @@ export default function Team({selected_team}) {
 
     return (
         <>
+            <MinistryOption />
             <section className='flex flex-col justify-end overflow-hidden'
                 style={{ backgroundImage: `url('../src/images/${team}_team.png')` }}>
                 <div className='overlay' style={{marginTop: "50%"}}></div>

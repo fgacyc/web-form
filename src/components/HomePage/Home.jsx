@@ -6,8 +6,8 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper";
 import Main from '../MainPage/Main';
-import Team from '../Team/Team';
-import MinistryOption from '../MinistryOption/MinistryOption';
+//import Team from '../Team/Team';
+//import MinistryOption from '../MinistryOption/MinistryOption';
 import { handleScroll, handleTouchEnd } from '../../js/scroll';
 
 export default function Home() {
@@ -34,7 +34,6 @@ export default function Home() {
 
     return (
         <>
-            <MinistryOption />
             <section id='landing' className='flex flex-col justify-between align-center'>
                 <img src="../src/images/CYC_logo.png" alt="CYC Logo" id='cyc-logo' className='mt-45' />
                 <img src="../src/images/KV_title.png" alt="Landing Title" />

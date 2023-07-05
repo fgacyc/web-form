@@ -15,7 +15,7 @@ function clearDepartment() {
 
 function App() {
     useEffect(() => {
-        clearDepartment();
+        // clearDepartment();
     },[]);
 
   return (
