@@ -14,6 +14,15 @@ export const handleScroll = (num = 1) => {
     });
 };
 
+export function handlerSectionScroll(num){
+    const sections = document.querySelectorAll('section');
+    const targetSection = sections[num];
+
+    targetSection.scrollIntoView({
+        behavior: 'smooth',
+    })
+}
+
 export const handleTouchEnd = (classname) => {
     const swiperContainer = document.querySelector(classname);
     const swiperSlides = swiperContainer.getElementsByClassName('swiper-slide');

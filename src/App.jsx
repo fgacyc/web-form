@@ -15,7 +15,7 @@ function clearDepartment() {
 
 function App() {
     useEffect(() => {
-        // clearDepartment();
+        clearDepartment();
     },[]);
 
   return (
@@ -23,6 +23,7 @@ function App() {
       <Route path='/' element={<Home />} />
       <Route path='/team' element={<Team />} />
       <Route path='/team/:team' element={<Team />} />
+      <Route path='/team/:team/:sectionNum' element={<Team />} />
       <Route path='/search' element={<Search />} />
       <Route path='/selection' element={<Selection />} />
       <Route path='/complete' element={<Complete />} />

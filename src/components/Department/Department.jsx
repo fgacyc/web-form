@@ -3,12 +3,18 @@ import Card from '../Card/Card'
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { useState, useEffect } from 'react';
+import {handlerSectionScroll} from "../../js/scroll.js";
 
-export default function Department({ team }) {
+export default function Department({ team,sectionNum }) {
     const [isHeightLessThan843, setIsHeightLessThan843] = useState(false);
+    // console.log(sectionNum)
+
 
     useEffect(() => {
         setIsHeightLessThan843(window.innerHeight < 844);
+        setTimeout(() => {
+            handlerSectionScroll(sectionNum);
+        }, 500);
     }, []);
 
     const team_data = {

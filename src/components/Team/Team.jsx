@@ -9,6 +9,7 @@ import MinistryOption from "../MinistryOption/MinistryOption.jsx";
 
 export default function Team({ selected_team }) {
     const team = useParams().team || selected_team;
+    const sectionNum = useParams().sectionNum;
 
     const team_data = {
         people: {
@@ -75,7 +76,7 @@ export default function Team({ selected_team }) {
                     </div>
                 </div>
             </section>
-            <Department team={team} />
+            <Department team={team} sectionNum={sectionNum} />
         </>
     )
 }
