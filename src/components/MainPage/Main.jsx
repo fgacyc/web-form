@@ -34,7 +34,6 @@ export default function Main() {
         teamTile: "Wonderkids",
     }]
 
-    //console.log(team_data[0].cnTeamTitle)
     const navigate = useNavigate();
 
     const [startX, setStartX] = useState(null);
@@ -56,7 +55,7 @@ export default function Main() {
         const distance = endX - startX;
 
         if (distance > 50) {
-            // handleScrollUp();
+            handleScrollUp();
         }
     };
 
@@ -74,7 +73,7 @@ export default function Main() {
                     <h1>属于我们的家</h1>
                     <div id='txt' className='relative' onClick={navigateToSearch}>
                         <img src="../src/icons/search.svg" alt="Search Icon" id='search-icon' />
-                        <input type="text" name="search" id="txt-search" placeholder='Search' style={{width: "75%"}} />
+                        <input type="text" name="search" id="txt-search" placeholder='Search' style={{ width: "75%" }} />
                     </div>
                     <h2 id="explore">Explore</h2>
                 </div>

@@ -25,18 +25,10 @@ export const handleTouchEnd = (classname) => {
     }
 };
 
-export const handleScrollUp = (num = 1) => {
+export const handleScrollUp = () => {
     const currentSection = document.querySelector('section');
-    const prevSection = currentSection.previousElementSibling;
-alert(prevSection);
-    if (!prevSection) {
-        return;
-    }
-
-    const sectionHeight = prevSection.offsetHeight / num;
 
     window.scrollTo({
-        top: window.pageYOffset - sectionHeight,
-        behavior: 'smooth',
+        top: window.innerHeight,
     });
 };

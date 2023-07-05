@@ -6,30 +6,29 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper";
 import Main from '../MainPage/Main';
-import MinistryOption from '../MinistryOption/MinistryOption';
-import { handleScroll, handleTouchEnd } from '../../js/scroll';
+import { handleScroll } from '../../js/scroll';
 export default function Home() {
-    const [isScrolled, setIsScrolled] = useState(false);
-
-    useEffect(() => {
-        setIsScrolled(false);
-    }, []);
-
-    if (isScrolled) {
-        document.body.style.overflow = 'auto';
-    } else {
-        document.body.style.overflow = 'hidden';
-    }
+    const [startX, setStartX] = useState(null);
 
     const handleClick = () => {
-        setIsScrolled(true);
         handleScroll();
     };
 
-    const navigateToNextSection = () => {
-        setIsScrolled(true);
-        handleTouchEnd(".mySwiper");
-    }
+    const handleTouchStart = (event) => {
+        const touch = event.touches[0];
+        setStartX(touch.clientX);
+    };
+
+    const handleTouchEnd = (event) => {
+        const touch = event.changedTouches[0];
+        const currentX = touch.clientX;
+
+        const distance = currentX - startX;
+
+        if (distance < 50) {
+            handleScroll();
+        }
+    };
 
     return (
         <>
@@ -38,7 +37,8 @@ export default function Home() {
                 <img src="../src/images/KV_title.png" alt="Landing Title" />
                 <button style={{ marginBottom: "75px" }} onClick={handleClick}>开启你的服事旅程</button>
             </section>
-            <Swiper pagination={true} modules={[Pagination]} className="mySwiper home-swiper" onTouchEnd={navigateToNextSection} >
+            <Swiper pagination={true} modules={[Pagination]} className="mySwiper home-swiper"
+            >
                 <SwiperSlide>
                     <section id='landing-info-1' className='flex flex-col align-center justify-between'>
                         <div className="overlay"></div>
@@ -78,7 +78,7 @@ export default function Home() {
                         </div>
                     </section>
                 </SwiperSlide>
-                <SwiperSlide>
+                <SwiperSlide onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
                     <section id='landing-info-3' className='flex flex-col align-center justify-between'>
                         <div className="overlay"></div>
                         <img src="../src/images/CYC_logo.png" alt="CYC Logo" id='cyc-logo' className='mt-45 relative' />
