@@ -1,7 +1,11 @@
 import './submission.css'
 import SelectedMinistry from '../SelectedMinistry/SelectedMinistry'
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
+import {findPastoralTeam} from "../../data/pastoral_team.js";
+import {findMinistry} from "../../data/organization_structure.js";
+import {hostURL} from "../../config.js";
+
 
 export default function Submission() {
     const navigate = useNavigate();
@@ -14,6 +18,13 @@ export default function Submission() {
     const [phoneError, setPhoneError] = useState("");
     const [emailError, setEmailError] = useState("");
     const [pastoralTeamError, setPastoralTeamError] = useState("");
+    const [selectedMinistry, setSelectedMinistry] = useState(null);
+    
+    useEffect(() => {
+        const selectedMinistry = JSON.parse(localStorage.getItem('cyc-department-selected'));
+        setSelectedMinistry(selectedMinistry[0]);
+    }, []);
+
 
     const validateName = () => {
         if (name.trim() === "") {
@@ -63,36 +74,33 @@ export default function Submission() {
             setPastoralTeamError("Please select a pastoral team");
             return false;
         }
-
-        console.log(pastoralTeam[0]);
-        console.log([...pastoralTeam, "young_warrior"]);
-        switch (pastoralTeam) {
-            case "wonderkids":
-                setPastoralTeam([...pastoralTeam, "wonderkids"]);
-                break;
-            case "heart":
-            case "move":
-            case "force":
-            case "voice":
-            case "mind":
-                setPastoralTeam([...pastoralTeam, "young_warrior"]);
-                break;
-            case "yp_zone":
-            case "pro_family":
-            case "young_dreamer":
-            case "joshua_zone":
-                setPastoralTeam([...pastoralTeam, "general"]);
-                break;
-            default:
-                break;
-        }
-
-
-        console.log(pastoralTeam);
-
         setPastoralTeamError("");
         return true;
     };
+
+    function  pastoralTeamHandler(e) {
+        setPastoralTeam(e.target.value)
+    }
+
+    async function  postRecruiter(info){
+        let url = hostURL + "/recruiter";
+        let options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(info)
+        };
+        try {
+            let response = await fetch(url, options);
+            let data = await response.json();
+            console.log(data);
+            if(data.status === "success") return true;
+        } catch (error) {
+            console.log(error);
+            return false;
+        }
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -103,16 +111,25 @@ export default function Submission() {
         const isPastoralTeamValid = validatePastoralTeam();
 
         if (isNameValid && isPhoneValid && isEmailValid && isPastoralTeamValid) {
+            let pastoralTeamList = findPastoralTeam(pastoralTeam);
+            let ministryList = findMinistry(selectedMinistry);
             let info = {
-                name,
-                phone,
-                email,
-                pastoralTeam,
-                // ministry
+                "name": name,
+                "phone": phone,
+                "email": email,
+                "pastoral_team": pastoralTeamList,
+                "ministry": ministryList
             }
             console.log(info);
-            navigate("/complete");
-            //let data = await postReq("/recruiter", info);
+
+            postRecruiter(info).then((result) => {
+                if(result === true) {
+                    navigate("/complete");
+                } else {
+                    alert("Something went wrong. Please try again.");
+                }
+            });
+
         }
     };
 
@@ -123,7 +140,7 @@ export default function Submission() {
         >
 
             <div id="submission-container" className='flex' style={{ paddingTop: "25px" }}>
-                <img src="../src/icons/left.svg" alt="Back Icon" />
+                <img src="../src/icons/left.svg" alt="Back Icon" onClick={()=>{navigate(-1)}}/>
                 <h3 style={{
                     color: "#21416d", fontSize: "1.125rem", fontFamily: "SF Pro Display",
                     fontWeight: "600", marginLeft: "90px"
@@ -145,7 +162,7 @@ export default function Submission() {
                 {emailError && <div className="input-error">{emailError}</div>}
 
                 <label htmlFor="pastoral_team" className="input-text">Pastoral Team</label>
-                <select name="pastoral_team" id="pastoral_team" value={pastoralTeam} onChange={(e) => setPastoralTeam(e.target.value)}>
+                <select name="pastoral_team" id="pastoral_team" value={pastoralTeam} onChange={pastoralTeamHandler}>
                     <option value="" disabled hidden>Select a pastoral team</option>
                     <optgroup label="Wonderkids">
                         <option value="wonderkids">Wonderkids</option>
@@ -168,7 +185,9 @@ export default function Submission() {
             </form>
             <div className='flex flex-col align-center'>
                 <h4 className="input-text" style={{ marginBottom: "10px 0px" }}>Your Ministry Selection</h4>
-                <SelectedMinistry />
+                { selectedMinistry &&
+                    <SelectedMinistry ministry={selectedMinistry} />
+                }
             </div>
             <button className="btn-submit" style={{ backgroundColor: "#173965", color: "white", marginBottom: "35px" }} onClick={handleSubmit}>
                 Submit
