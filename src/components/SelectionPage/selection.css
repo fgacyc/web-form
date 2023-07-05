@@ -9,4 +9,22 @@
 .selection-card-con{
     overflow-y: auto;
     height: 60vh;
+    width: 70%;
+}
+
+.selection-card-upper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.selection-card-delete{
+    width: 15px;
+    height: 15px;
+}
+
+.selection-card-delete-con{
+    width: 20px;
+    height: 20px;
+    text-align: right;
 }
