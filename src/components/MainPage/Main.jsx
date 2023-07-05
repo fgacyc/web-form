@@ -5,7 +5,7 @@ import MainCard from '../MainCard/MainCard'
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Pagination } from "swiper";
-import "../HomePage/Home.css"
+import "../HomePage/home.css"
 import { handleScrollUp } from '../../js/scroll';
 import { useNavigate } from 'react-router-dom';
 import { useState, useRef } from 'react';
