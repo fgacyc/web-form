@@ -51,8 +51,8 @@ const Card = ({ img, title1, title2, description, rate1, rate2 }) => {
         >
             <div className='overlay' style={{ borderRadius: "30px" }}></div>
             {
-                selected ? <img src="../src/icons/select.svg" alt="Select Icon" id="select-icon" />
-                : <img src="../src/icons/unselect.svg" alt="Unselect Icon" id="select-icon" />
+                selected ? <img src="src/assets/icons/select.svg" alt="Select Icon" id="select-icon" />
+                : <img src="src/assets/icons/unselect.svg" alt="Unselect Icon" id="select-icon" />
             }
             <div className='flex flex-col justify-end relative' style={{ height: "95%", margin: "0 25px" }}>
                 <h4 className="card-h4" style={{ fontFamily: "FZChaoCuHei", fontWeight: "400", color: "white" }}>{title1}</h4>

@@ -51,9 +51,9 @@ export default function Selection() {
     }
 
     return (
-        <section style={{ backgroundImage: "url('../src/images/KV_white_bg.png')" }} className="flex flex-col justify-between">
+        <section style={{ backgroundImage: "url('src/assets/images/KV_white_bg.png')" }} className="flex flex-col justify-between">
             <div className="flex flex-col align-center relative" style={{ marginTop: "30px" }}>
-                <img src="../src/icons/cross.png" alt="Cross Icon" style={{
+                <img src="src/assets/icons/cross.png" alt="Cross Icon" style={{
                     position: "absolute", top: "0px", right: "0px",
                     backgroundColor: "#6c5c5c",
                     borderRadius: "100%", padding: "8px",
@@ -66,7 +66,7 @@ export default function Selection() {
                     textAlign: "center", width: "100%", marginTop: "30px"
                 }}>Selection</h3>
                 <div className="flex align-center">
-                    {/*<img src="../src/icons/swipe.png" alt="Swipe Icon" />
+                    {/*<img src="src/assets/icons/swipe.png" alt="Swipe Icon" />
                     <h6 style={{
                         color: "black", fontSize: "0.625rem",
                         fontFamily: "SF Pro Display", fontWeight: "400", marginLeft: "5px"

@@ -50,7 +50,7 @@ export default function Team({ selected_team }) {
         <>
             <MinistryOption />
             <section className='flex flex-col justify-end overflow-hidden'
-                style={{ backgroundImage: `url('../src/images/${team}_team.png')` }}>
+                style={{ backgroundImage: `url('src/assets/images/${team}_team.png')` }}>
                 <div className='overlay' style={{ marginTop: "50%" }}></div>
                 <div className='relative' style={{ margin: "30px 50px" }}>
                     <h5>{team_data[team].cnTeamTitle}</h5>
@@ -71,7 +71,7 @@ export default function Team({ selected_team }) {
                         style={{ marginBottom: "50px" }}
                         onClick={() => { handleScroll(team !== "wonderkids" ? 3 : 1) }}>
                         <h5 style={{ marginTop: "65px", marginBottom: "10px" }}>理解更多</h5>
-                        <img src="../src/icons/down.png" alt="Down Arrow Icon" />
+                        <img src="src/assets/icons/down.png" alt="Down Arrow Icon" />
                     </div>
                 </div>
             </section>

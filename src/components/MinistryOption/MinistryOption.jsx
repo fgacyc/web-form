@@ -25,7 +25,7 @@ export default function MinistryOption(){
         <>
             {departmentsNum >0 &&
             <div id='sticky-lego' className='flex justify-center align-center relative' onClick={toggleNavigation}>
-                <img src="../src/images/lego.png" alt="Ministry Option" />
+                <img src="src/assets/images/lego.png" alt="Ministry Option" />
                 <div className="logo-num">{departmentsNum}</div>
             </div>
             }

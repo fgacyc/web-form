@@ -1,7 +1,7 @@
 export default function Complete() {
     return (
         <section className="flex flex-col align-center"
-            style={{ backgroundImage: "url('../src/images/KV_white_bg.png')", padding: "0px 35px" }}
+            style={{ backgroundImage: "url('src/assets/images/KV_white_bg.png')", padding: "0px 35px" }}
         >
             <h3 style={{
                 color: "#21416d", fontSize: "1.125rem", fontFamily: "SF Pro Display",
@@ -10,7 +10,7 @@ export default function Complete() {
                 Completed
             </h3>
             <div className="flex flex-col align-center" style={{ marginTop: "180px" }}>
-                <img src="../src/images/completed.png" alt="Complete Icon" />
+                <img src="src/assets/images/completed.png" alt="Complete Icon" />
                 <h4 style={{
                     color: "#173965", fontSize: "2.188rem", fontFamily: "FZChaoCuHei",
                     fontWeight: "400", textAlign: "center", marginTop: "20px"
