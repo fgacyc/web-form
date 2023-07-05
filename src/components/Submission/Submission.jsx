@@ -108,6 +108,12 @@ export default function Submission() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const ifSubmitted = localStorage.getItem("cyc-submission");
+        if (ifSubmitted === "true") {
+            alert("You have already submitted your application. Please wait for the response.");
+            return;
+        }
+
         const isNameValid = validateName();
         const isPhoneValid = validatePhone();
         const isEmailValid = validateEmail();
@@ -130,6 +136,7 @@ export default function Submission() {
             postRecruiter(info).then((result) => {
                 if(result === true) {
                     navigate("/complete");
+                    localStorage.setItem("cyc-submission", "true")
                 } else {
                     alert("Something went wrong. Please try again.");
                 }
