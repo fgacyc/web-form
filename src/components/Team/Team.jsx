@@ -2,9 +2,10 @@ import '../../App.css'
 import { handleScroll } from '../../js/scroll';
 import Department from '../Department/Department'
 import './team.css'
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useEffect } from 'react';
 
-export default function Team({selected_team}) {
+export default function Team({ selected_team }) {
     const team = useParams().team || selected_team;
 
     const team_data = {
@@ -38,11 +39,16 @@ export default function Team({selected_team}) {
         }
     }
 
+    useEffect(() => {
+        document.body.style.overflow = 'auto';
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
         <>
             <section className='flex flex-col justify-end overflow-hidden'
                 style={{ backgroundImage: `url('../src/images/${team}_team.png')` }}>
-                <div className='overlay' style={{marginTop: "50%"}}></div>
+                <div className='overlay' style={{ marginTop: "50%" }}></div>
                 <div className='relative' style={{ margin: "30px 50px" }}>
                     <h5>{team_data[team].cnTeamTitle}</h5>
                     <h2 style={{ fontFamily: "SF Pro Display", fontSize: "2.5rem", fontWeight: 900, color: "white" }}>
@@ -58,7 +64,9 @@ export default function Team({selected_team}) {
                             )
                         })
                     }
-                    <div className='flex flex-col align-center' onClick={handleScroll}>
+                    <div className='flex flex-col align-center'
+                        style={{ marginBottom: "50px" }}
+                        onClick={() => { handleScroll(team !== "wonderkids" ? 3 : 1) }}>
                         <h5 style={{ marginTop: "65px", marginBottom: "10px" }}>理解更多</h5>
                         <img src="../src/icons/down.png" alt="Down Arrow Icon" />
                     </div>

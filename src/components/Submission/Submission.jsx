@@ -1,9 +1,10 @@
 import './submission.css'
 import SelectedMinistry from '../SelectedMinistry/SelectedMinistry'
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Submission() {
-    const [submitted, setSubmitted] = useState(false);
+    const navigate = useNavigate();
 
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
@@ -58,10 +59,36 @@ export default function Submission() {
     };
 
     const validatePastoralTeam = () => {
-        if (pastoralTeam === "") {
+        if (pastoralTeam.length === 0) {
             setPastoralTeamError("Please select a pastoral team");
             return false;
         }
+
+        console.log(pastoralTeam[0]);
+        console.log([...pastoralTeam, "young_warrior"]);
+        switch (pastoralTeam) {
+            case "wonderkids":
+                setPastoralTeam([...pastoralTeam, "wonderkids"]);
+                break;
+            case "heart":
+            case "move":
+            case "force":
+            case "voice":
+            case "mind":
+                setPastoralTeam([...pastoralTeam, "young_warrior"]);
+                break;
+            case "yp_zone":
+            case "pro_family":
+            case "young_dreamer":
+            case "joshua_zone":
+                setPastoralTeam([...pastoralTeam, "general"]);
+                break;
+            default:
+                break;
+        }
+
+
+        console.log(pastoralTeam);
 
         setPastoralTeamError("");
         return true;
@@ -84,6 +111,7 @@ export default function Submission() {
                 // ministry
             }
             console.log(info);
+            navigate("/complete");
             // let data = await postReq("/recruiter", info);
         }
     };

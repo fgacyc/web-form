@@ -6,10 +6,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Pagination } from "swiper";
 import "../HomePage/Home.css"
-import { handleScroll, handleTouchEnd } from '../../js/scroll';
+import { handleScrollUp } from '../../js/scroll';
 import { useNavigate } from 'react-router-dom';
+import { useState, useRef } from 'react';
 
 export default function Main() {
+    const swiperRef = useRef(null);
+
     const team_data = [{
         team: "people",
         cnTeamTitle: "贵宾体验团队",
@@ -33,13 +36,36 @@ export default function Main() {
 
     const navigate = useNavigate();
 
+    const [startX, setStartX] = useState(null);
+    const [endX, setEndX] = useState(null);
+
+    const handleTouchStart = (event) => {
+        const touch = event.touches[0];
+        setStartX(touch.clientX);
+    };
+
+    const handleTouchEnd = (event) => {
+        if (swiperRef.current && swiperRef.current.contains(event.target)) {
+            return;
+        }
+
+        const touch = event.changedTouches[0];
+        setEndX(touch.clientX);
+
+        const distance = endX - startX;
+
+        if (distance > 50) {
+            handleScrollUp();
+        }
+    };
+
     const navigateToSearch = () => {
         console.log("navigate to search")
         navigate(`/search`)
     }
 
     return (
-        <section id='main' className='flex flex-col'>
+        <section id='main' className='flex flex-col' onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
             <div id='main-container'>
                 {/* <MinistryOption /> */}
                 <div id='container'>
@@ -52,13 +78,14 @@ export default function Main() {
                     <h2 id="explore">Explore</h2>
                 </div>
                 <Swiper
+                    ref={swiperRef}
                     style={{ width: "100vw" }}
                     slidesPerView={1}
                     centeredSlides={true}
                     pagination={true}
                     modules={[Pagination]}
                     className="mySwiper mainSwiper"
-                    // onTouchEnd={() => handleTouchEnd(".mainSwiper")}
+                // onTouchEnd={() => handleTouchEnd(".mainSwiper")}
                 >
                     {
                         team_data.map((team, index) => {

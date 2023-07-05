@@ -5,9 +5,15 @@ import "swiper/css";
 //import {Navigation, Pagination} from "swiper";
 import "../HomePage/Home.css"
 import { handleTouchEnd } from '../../js/scroll';
-
+import { useState, useEffect } from 'react';
 
 export default function Department({ team }) {
+    const [isHeightLessThan843, setIsHeightLessThan843] = useState(false);
+
+    useEffect(() => {
+        setIsHeightLessThan843(window.innerHeight < 844);
+    }, []);
+
     const team_data = {
         people: {
             cnTeamTitle: "贵宾体验团队",
@@ -246,6 +252,8 @@ export default function Department({ team }) {
         }
     }
 
+    console.log(isHeightLessThan843)
+
     return (
         <div className='team-bg'>
             {team_data[team].department.individual.map((dep, index) => {
@@ -260,11 +268,11 @@ export default function Department({ team }) {
                         <Swiper
                             className='w-full mySwiper depSwiper'
                             // loop={true}
-                            style={{paddingLeft: "25px"}}
+                            style={{ paddingLeft: `${isHeightLessThan843 ? "25px" : "15px"}` }}
                             slidesPerView={2}
-                            spaceBetween={258}
-                            // centeredSlides={true}
-                            // onTouchEnd={() => {handleTouchEnd("dep")}}
+                            spaceBetween={isHeightLessThan843 ? 258 : 300}
+                        // centeredSlides={true}
+                        // onTouchEnd={() => {handleTouchEnd("dep")}}
                         >
                             {
                                 dep.ministry.map((ministry, index) => {

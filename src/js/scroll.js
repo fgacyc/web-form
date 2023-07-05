@@ -1,4 +1,4 @@
-export const handleScroll = () => {
+export const handleScroll = (num = 1) => {
     const currentSection = document.querySelector('section');
     const nextSection = currentSection.nextElementSibling;
 
@@ -6,7 +6,7 @@ export const handleScroll = () => {
         return;
     }
 
-    const sectionHeight = nextSection.offsetHeight;
+    const sectionHeight = (nextSection.offsetHeight / num);
 
     window.scrollTo({
         top: window.pageYOffset + sectionHeight,
@@ -21,6 +21,22 @@ export const handleTouchEnd = (classname) => {
     const activeSlideIndex = swiperContainer.swiper.activeIndex;
 
     if (activeSlideIndex === lastSlideIndex) {
-        handleScroll();
+        // handleScroll();
     }
+};
+
+export const handleScrollUp = (num = 1) => {
+    const currentSection = document.querySelector('section');
+    const prevSection = currentSection.previousElementSibling;
+alert(prevSection);
+    if (!prevSection) {
+        return;
+    }
+
+    const sectionHeight = prevSection.offsetHeight / num;
+
+    window.scrollTo({
+        top: window.pageYOffset - sectionHeight,
+        behavior: 'smooth',
+    });
 };
