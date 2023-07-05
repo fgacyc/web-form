@@ -36,7 +36,9 @@ export default function Submission() {
     };
 
     const validatePhone = () => {
-        const phoneRegex = /^\d{8,9,10,11,12}$/; // Regex pattern for 10-digit phone number
+        const phoneRegex = /^\d{6,12}$/; // Regex pattern for 6 - 12-digit phone number
+
+        console.log(phone)
 
         if (phone.trim() === "") {
             setPhoneError("Phone number is required");
@@ -111,6 +113,8 @@ export default function Submission() {
         const isEmailValid = validateEmail();
         const isPastoralTeamValid = validatePastoralTeam();
 
+        console.log(isPhoneValid)
+
         if (isNameValid && isPhoneValid && isEmailValid && isPastoralTeamValid) {
             let pastoralTeamList = findPastoralTeam(pastoralTeam);
             let ministryList = findMinistry(selectedMinistry);
@@ -121,7 +125,7 @@ export default function Submission() {
                 "pastoral_team": pastoralTeamList,
                 "ministry": ministryList
             }
-            console.log(info);
+            // console.log(info);
 
             postRecruiter(info).then((result) => {
                 if(result === true) {
@@ -180,6 +184,9 @@ export default function Submission() {
                         <option value="pro_family">Pro Family</option>
                         <option value="young_dreamer">Young Dreamer</option>
                         <option value="joshua_zone">Joshua Zone</option>
+                    </optgroup>
+                    <optgroup label="Others">
+                        <option value="others">Others</option>
                     </optgroup>
                 </select>
                 {pastoralTeamError && <div className="input-error">{pastoralTeamError}</div>}

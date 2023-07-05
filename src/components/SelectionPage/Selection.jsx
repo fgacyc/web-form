@@ -35,7 +35,7 @@ function SelectionCard({ministry,setMinistries}){
 
 
 export default function Selection() {
-    const color = ["#193A66", "#336397", "#00BB9E", "#E46E48"]
+    //const color = ["#193A66", "#336397", "#00BB9E", "#E46E48"]
     const [ministries, setMinistries] = useState([])
 
     useEffect(() => {
@@ -47,6 +47,8 @@ export default function Selection() {
     function confirmHandler(){
         if (ministries.length === 1){
             navigation('/form')
+        }else{
+            alert("Please select only one ministry")
         }
     }
 

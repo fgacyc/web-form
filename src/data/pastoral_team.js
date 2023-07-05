@@ -14,7 +14,8 @@ let pastoral_team = {
         "pro_family",
         "young_dreamer",
         "joshua_zone"
-    ]
+    ],
+    "others": ["others"]
 }
 
 export function findPastoralTeam(name){
