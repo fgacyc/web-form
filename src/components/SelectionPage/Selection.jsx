@@ -23,7 +23,7 @@ function SelectionCard({ministry,setMinistries}){
                     <h4 style={{ color: "white", fontSize: "1rem", fontFamily: "FZChaoCuHei", fontWeight: "400" }}>
                         {findMinistryName(ministry).cn}</h4>
                     <div className="selection-card-delete-con" onClick={deleteHandler}>
-                        <img src="src/icons/delete.svg" alt="delete" className="selection-card-delete"/>
+                        <img src="src/assets/icons/delete.svg" alt="delete" className="selection-card-delete"/>
                     </div>
                 </div>
                 <h2 style={{ color: "white", fontSize: "1.875rem", fontFamily: "SF Pro Display", fontWeight: "800" }}>
