@@ -21,7 +21,7 @@ export default function Department({ team,sectionNum }) {
 
     const team_data = team_data_dict;
 
-    console.log(isHeightLessThan843)
+    // console.log(isHeightLessThan843)
 
     return (
         <div className='team-bg'>

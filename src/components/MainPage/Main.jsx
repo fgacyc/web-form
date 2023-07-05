@@ -59,7 +59,7 @@ export default function Main() {
     };
 
     const navigateToSearch = () => {
-        console.log("navigate to search")
+        // console.log("navigate to search")
         navigate(`/search`)
     }
 

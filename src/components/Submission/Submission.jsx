@@ -44,7 +44,7 @@ export default function Submission() {
     const validatePhone = () => {
         const phoneRegex = /^\d{6,12}$/; // Regex pattern for 6 - 12-digit phone number
 
-        console.log(phone)
+        //console.log(phone)
 
         if (phone.trim() === "") {
             setPhoneError("Phone number is required");
@@ -102,10 +102,10 @@ export default function Submission() {
         try {
             let response = await fetch(url, options);
             let data = await response.json();
-            console.log(data);
+            //console.log(data);
             if(data.status === "success") return true;
         } catch (error) {
-            console.log(error);
+            //console.log(error);
             return false;
         }
         return false;
@@ -125,7 +125,7 @@ export default function Submission() {
         const isEmailValid = validateEmail();
         const isPastoralTeamValid = validatePastoralTeam();
 
-        console.log(isPhoneValid)
+        // console.log(isPhoneValid)
 
         if (isNameValid && isPhoneValid && isEmailValid && isPastoralTeamValid) {
             confirmAlert(options);

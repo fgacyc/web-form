@@ -48,7 +48,6 @@ const Card = ({ img, title1, title2, description, rate1, rate2 }) => {
         setSelected(!selected);
         //console.log(title2)
         updateSelectedDepartment(title2, !selected);
-        console.log();
     };
 
     return (
