@@ -2,8 +2,6 @@ import './department.css'
 import Card from '../Card/Card'
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-//import {Navigation, Pagination} from "swiper";
-import "src/components/HomePage/home.css"
 import { useState, useEffect } from 'react';
 
 export default function Department({ team }) {
