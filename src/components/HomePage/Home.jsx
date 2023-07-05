@@ -8,6 +8,7 @@ import { Pagination } from "swiper";
 import Main from '../MainPage/Main';
 import Team from '../Team/Team';
 import MinistryOption from '../MinistryOption/MinistryOption';
+import { handleScroll, handleTouchEnd } from '../../js/scroll';
 
 export default function Home() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -16,46 +17,20 @@ export default function Home() {
         setIsScrolled(false);
     }, []);
 
-    // if (isScrolled) {
-    //     document.body.style.overflow = 'auto';
-    // } else {
-    //     document.body.style.overflow = 'hidden';
-    // }
-
-    const handleScroll = () => {
-        const documentHeight = document.documentElement.scrollHeight;
-        const screenHeight = window.innerHeight;
-        const currentPosition = window.pageYOffset;
-        const remainingHeight = documentHeight - currentPosition;
-
-        if (remainingHeight <= screenHeight) {
-            // Scrolled to the bottom, no need to scroll further
-            return;
-        }
-
-        const scrollToPosition = currentPosition + screenHeight;
-
-        window.scrollTo({
-            top: scrollToPosition,
-            behavior: 'smooth',
-        });
-    };
+    if (isScrolled) {
+        document.body.style.overflow = 'auto';
+    } else {
+        document.body.style.overflow = 'hidden';
+    }
 
     const handleClick = () => {
-        setIsScrolled(true);
         handleScroll();
     };
 
-    const handleTouchEnd = () => {
-        const swiperContainer = document.querySelector('.mySwiper');
-        const swiperSlides = swiperContainer.getElementsByClassName('swiper-slide');
-        const lastSlideIndex = swiperSlides.length - 1;
-        const activeSlideIndex = swiperContainer.swiper.activeIndex;
-
-        if (activeSlideIndex === lastSlideIndex) {
-            handleScroll();
-        }
-    };
+    const navigateToNextSection = () => {
+        setIsScrolled(false);
+        handleTouchEnd(".mySwiper");
+    }
 
     return (
         <>
@@ -63,9 +38,9 @@ export default function Home() {
             <section id='landing' className='flex flex-col justify-between align-center'>
                 <img src="../src/images/CYC_logo.png" alt="CYC Logo" id='cyc-logo' className='mt-45' />
                 <img src="../src/images/KV_title.png" alt="Landing Title" />
-                <button className='mb-45' onClick={handleClick}>开启你的服事旅程</button>
+                <button style={{ marginBottom: "75px" }} onClick={handleClick}>开启你的服事旅程</button>
             </section>
-            <Swiper pagination={true} modules={[Pagination]} className="mySwiper" onTouchEnd={handleTouchEnd} >
+            <Swiper pagination={true} modules={[Pagination]} className="mySwiper home-swiper" onTouchEnd={navigateToNextSection} >
                 <SwiperSlide>
                     <section id='landing-info-1' className='flex flex-col align-center justify-between'>
                         <div className="overlay"></div>
@@ -124,10 +99,10 @@ export default function Home() {
                 </SwiperSlide>
             </Swiper>
             <Main />
-            <Team selected_team={"people"} />
+            {/* <Team selected_team={"people"} />
             <Team selected_team={"communication"} />
             <Team selected_team={"creative"} />
-            <Team selected_team={"wonderkids"} />
+            <Team selected_team={"wonderkids"} /> */}
         </>
     )
 }

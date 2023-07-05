@@ -17,3 +17,9 @@ h4 {
 .card {
     margin: 0 auto;
 }
+
+@media (max-height: 843px) {
+    .search-h2{
+        font-size: 1rem !important;
+    }
+}

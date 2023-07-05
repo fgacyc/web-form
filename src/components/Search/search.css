@@ -1,9 +1,9 @@
-input::placeholder {
+.search-input::placeholder {
     color: black;
 }
 
-input,
-input:focus {
+.search-input,
+.search-input:focus {
     all: unset;
     color: black;
     font-size: 1rem;

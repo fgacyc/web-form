@@ -4,8 +4,10 @@ import './main.css'
 import MainCard from '../MainCard/MainCard'
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import {Pagination} from "swiper";
+import { Pagination } from "swiper";
 import "../HomePage/Home.css"
+import { handleScroll, handleTouchEnd } from '../../js/scroll';
+import { useNavigate } from 'react-router-dom';
 
 export default function Main() {
     const team_data = [{
@@ -29,6 +31,13 @@ export default function Main() {
         teamTile: "Wonderkids",
     }]
 
+    const navigate = useNavigate();
+
+    const navigateToSearch = () => {
+        console.log("navigate to search")
+        navigate(`/search`)
+    }
+
     return (
         <section id='main' className='flex flex-col'>
             <div id='main-container'>
@@ -36,9 +45,9 @@ export default function Main() {
                 <div id='container'>
                     <h1>一起建造</h1>
                     <h1>属于我们的家</h1>
-                    <div id='txt' className='relative'>
+                    <div id='txt' className='relative' onClick={navigateToSearch}>
                         <img src="../src/icons/search.svg" alt="Search Icon" id='search-icon' />
-                        <input type="text" name="search" id="txt-search" placeholder='Search' style={{width: "75%"}} />
+                        <input type="text" name="search" id="txt-search" placeholder='Search' style={{ width: "75%" }} />
                     </div>
                     <h2 id="explore">Explore</h2>
                 </div>
@@ -47,9 +56,10 @@ export default function Main() {
                     slidesPerView={1}
                     centeredSlides={true}
                     pagination={true}
-                    modules={[Pagination]} className="mySwiper"
+                    modules={[Pagination]}
+                    className="mySwiper mainSwiper"
+                    // onTouchEnd={() => handleTouchEnd(".mainSwiper")}
                 >
-
                     {
                         team_data.map((team, index) => {
                             return (

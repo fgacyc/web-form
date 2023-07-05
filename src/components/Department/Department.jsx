@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 //import {Navigation, Pagination} from "swiper";
 import "../HomePage/Home.css"
+import { handleTouchEnd } from '../../js/scroll';
 
 
 export default function Department({ team }) {
@@ -257,12 +258,13 @@ export default function Department({ team }) {
                         }}>{dep.depTitle}</h2>
                         <h6 style={{ margin: "20px 0px", fontWeight: "700", textAlign: "center" }}>{dep.desc}</h6>
                         <Swiper
-                            className='w-full mySwiper'
+                            className='w-full mySwiper depSwiper'
                             // loop={true}
                             style={{paddingLeft: "25px"}}
                             slidesPerView={2}
                             spaceBetween={258}
                             // centeredSlides={true}
+                            // onTouchEnd={() => {handleTouchEnd("dep")}}
                         >
                             {
                                 dep.ministry.map((ministry, index) => {
