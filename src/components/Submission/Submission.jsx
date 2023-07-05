@@ -150,7 +150,7 @@ export default function Submission() {
                 </h3>
             </div>
             <form action="#" id="submission-form" className="flex flex-col" style={{ marginTop: "10px" }}>
-                <label htmlFor="name" className="input-text">Name</label>
+                <label htmlFor="name" className="input-text">Full Name</label>
                 <input type="text" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)} />
                 {nameError && <div className="input-error">{nameError}</div>}
 

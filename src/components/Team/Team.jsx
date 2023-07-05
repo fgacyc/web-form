@@ -54,7 +54,7 @@ export default function Team({ selected_team }) {
                 <div className='overlay' style={{ marginTop: "50%" }}></div>
                 <div className='relative' style={{ margin: "30px 50px" }}>
                     <h5>{team_data[team].cnTeamTitle}</h5>
-                    <h2 style={{ fontFamily: "SF Pro Display", fontSize: "2.5rem", fontWeight: 900, color: "white" }}>
+                    <h2 style={{ fontFamily: "SF Pro Display", fontSize: "2.188rem", fontWeight: 900, color: "white" }}>
                         {team_data[team].teamTile}
                     </h2><br />
                     <h5 style={{ fontFamily: "SF Pro Display", fontSize: "1rem", fontWeight: 900 }}>{team_data[team].combination}</h5><br />
