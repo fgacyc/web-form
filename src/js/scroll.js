@@ -21,7 +21,7 @@ export const handleTouchEnd = (classname) => {
     const activeSlideIndex = swiperContainer.swiper.activeIndex;
 
     if (activeSlideIndex === lastSlideIndex) {
-        // handleScroll();
+        handleScroll();
     }
 };
 

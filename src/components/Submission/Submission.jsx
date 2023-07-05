@@ -94,7 +94,7 @@ export default function Submission() {
         return true;
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const isNameValid = validateName();
@@ -112,7 +112,7 @@ export default function Submission() {
             }
             console.log(info);
             navigate("/complete");
-            // let data = await postReq("/recruiter", info);
+            //let data = await postReq("/recruiter", info);
         }
     };
 

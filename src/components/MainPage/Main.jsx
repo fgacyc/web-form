@@ -56,7 +56,7 @@ export default function Main() {
         const distance = endX - startX;
 
         if (distance > 50) {
-            handleScrollUp();
+            // handleScrollUp();
         }
     };
 
@@ -72,7 +72,7 @@ export default function Main() {
                 <div id='container'>
                     <h1>一起建造</h1>
                     <h1>属于我们的家</h1>
-                    <div id='txt' className='relative'>
+                    <div id='txt' className='relative' onClick={navigateToSearch}>
                         <img src="../src/icons/search.svg" alt="Search Icon" id='search-icon' />
                         <input type="text" name="search" id="txt-search" placeholder='Search' style={{width: "75%"}} />
                     </div>

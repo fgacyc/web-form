@@ -4,7 +4,6 @@ import Department from '../Department/Department'
 import './team.css'
 import { useParams } from "react-router-dom";
 import { useEffect } from 'react';
-import { useParams } from "react-router-dom";
 import MinistryOption from "../MinistryOption/MinistryOption.jsx";
 
 

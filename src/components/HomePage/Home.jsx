@@ -8,7 +8,6 @@ import { Pagination } from "swiper";
 import Main from '../MainPage/Main';
 import MinistryOption from '../MinistryOption/MinistryOption';
 import { handleScroll, handleTouchEnd } from '../../js/scroll';
-import { useNavigate } from 'react-router-dom';
 export default function Home() {
     const [isScrolled, setIsScrolled] = useState(false);
 
@@ -32,26 +31,6 @@ export default function Home() {
         handleTouchEnd(".mySwiper");
     }
 
-    const [startX, setStartX] = useState(null);
-    const [endX, setEndX] = useState(null);
-
-    const handleTouchStart = (event) => {
-        const touch = event.touches[0];
-        setStartX(touch.clientX);
-    };
-
-    const handleTouchEnd = (event) => {
-        const touch = event.changedTouches[0];
-        setEndX(touch.clientX);
-
-        // Calculate the distance
-        const distance = endX - startX;
-
-        // Determine if it's a swipe to the right
-        if (distance > 0) {
-            console.log('Swiped to the right');
-        }
-    };
     return (
         <>
             <section id='landing' className='flex flex-col justify-between align-center'>
