@@ -76,6 +76,7 @@ select {
 
 .react-confirm-alert-body{
     width: 60vw  !important;
+    font-family: FZChaoCuHei !important;
 }
 
 .react-confirm-alert-button-group{
