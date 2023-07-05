@@ -100,6 +100,7 @@ export default function Submission() {
             console.log(error);
             return false;
         }
+        return false;
     }
 
     const handleSubmit = async (e) => {
