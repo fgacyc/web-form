@@ -36,7 +36,7 @@ export default function Submission() {
     };
 
     const validatePhone = () => {
-        const phoneRegex = /^\d{10,11}$/; // Regex pattern for 10-digit phone number
+        const phoneRegex = /^\d{8,9,10,11,12}$/; // Regex pattern for 10-digit phone number
 
         if (phone.trim() === "") {
             setPhoneError("Phone number is required");
