@@ -66,13 +66,13 @@ export default function Selection() {
                     textAlign: "center", width: "100%", marginTop: "30px"
                 }}>Selection</h3>
                 <div className="flex align-center">
-                    <img src="../src/icons/swipe.png" alt="Swipe Icon" />
+                    {/*<img src="../src/icons/swipe.png" alt="Swipe Icon" />
                     <h6 style={{
                         color: "black", fontSize: "0.625rem",
                         fontFamily: "SF Pro Display", fontWeight: "400", marginLeft: "5px"
                     }}>
                         swipe on an item to delete
-                    </h6>
+                    </h6>*/}
                 </div>
                 <div className="selection-card-con">
                     { ministries && ministries.length > 0 &&
