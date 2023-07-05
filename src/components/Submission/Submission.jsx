@@ -6,6 +6,8 @@ import {findPastoralTeam} from "../../data/pastoral_team.js";
 import {findMinistry} from "../../data/organization_structure.js";
 import {hostURL} from "../../config.js";
 
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 export default function Submission() {
     const navigate = useNavigate();
@@ -22,6 +24,10 @@ export default function Submission() {
     
     useEffect(() => {
         const selectedMinistry = JSON.parse(localStorage.getItem('cyc-department-selected'));
+        if(!selectedMinistry){
+            navigate("/");
+            return;
+        }
         setSelectedMinistry(selectedMinistry[0]);
     }, []);
 
@@ -122,6 +128,11 @@ export default function Submission() {
         console.log(isPhoneValid)
 
         if (isNameValid && isPhoneValid && isEmailValid && isPastoralTeamValid) {
+            confirmAlert(options);
+        }
+    };
+
+    function submitToServer(){
             let pastoralTeamList = findPastoralTeam(pastoralTeam);
             let ministryList = findMinistry(selectedMinistry);
             let info = {
@@ -141,8 +152,30 @@ export default function Submission() {
                     alert("Something went wrong. Please try again.");
                 }
             });
+    }
 
-        }
+    const options = {
+        title: 'Title',
+        message: 'Message',
+        buttons: [
+            {
+                label: 'Yes',
+                onClick: () => submitToServer()
+            },
+            {
+                label: 'No',
+                // onClick: () => alert('Click No')
+            }
+        ],
+        closeOnEscape: true,
+        closeOnClickOutside: true,
+        keyCodeForClose: [8, 32],
+        willUnmount: () => {},
+        afterClose: () => {},
+        onClickOutside: () => {},
+        onKeypress: () => {},
+        onKeypressEscape: () => {},
+        overlayClassName: "overlay-custom-class-name"
     };
 
     return (

@@ -73,3 +73,13 @@ select {
         margin-top: 0px;
     }
 }
+
+.react-confirm-alert-body{
+    width: 60vw  !important;
+}
+
+.react-confirm-alert-button-group{
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+}

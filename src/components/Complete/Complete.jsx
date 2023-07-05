@@ -1,4 +1,9 @@
+import "./complete.css"
+import {useNavigate} from "react-router-dom";
+
 export default function Complete() {
+    const navigate = useNavigate();
+
     return (
         <section className="flex flex-col align-center"
             style={{ backgroundImage: "url('/images/KV_white_bg.png')", padding: "0px 35px" }}
@@ -25,6 +30,9 @@ export default function Complete() {
                     我们会再通知你面试的详情。
                 </h2>
             </div>
+            <button className="btn-finish" onClick={()=>navigate("/")} >
+                Finish
+            </button>
         </section>
     )
 }
