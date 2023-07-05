@@ -13,11 +13,11 @@ h2 {
 }
 
 #container {
-    margin: 30px 50px 0px 50px;
+    margin: 30px 50px 0 50px;
 }
 
 #txt {
-    margin: 25px 0px;
+    margin: 25px 0;
 }
 
 #explore {
@@ -44,8 +44,7 @@ h2 {
 #search-icon {
     position: absolute;
     left: 35px;
-    top: 0;
-    top: 50%;
+    top: 55%;
     transform: translateY(-50%);
 }
 
@@ -126,4 +125,11 @@ h2 {
 
 .home-swiper {
     --swiper-pagination-bottom: 70px
+}
+
+.search-con{
+    display: flex;
+    flex-direction: row;
+    /*justify-content: space-between;*/
+    align-items: center;
 }
