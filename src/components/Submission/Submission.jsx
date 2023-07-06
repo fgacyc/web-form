@@ -10,6 +10,8 @@ import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 export default function Submission() {
+    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
     const navigate = useNavigate();
 
     const [name, setName] = useState("");
@@ -29,6 +31,13 @@ export default function Submission() {
             return;
         }
         setSelectedMinistry(selectedMinistry[0]);
+
+        const targetTimestamp = 1688826600;
+        const currentTimestamp = Math.floor(Date.now() / 1000);
+
+        if (currentTimestamp >= targetTimestamp) {
+            setIsButtonDisabled(false);
+        }
     }, []);
 
 
@@ -44,7 +53,7 @@ export default function Submission() {
     const validatePhone = () => {
         const phoneRegex = /^\d{6,12}$/; // Regex pattern for 6 - 12-digit phone number
 
-        console.log(phone)
+        // console.log(phone)
 
         if (phone.trim() === "") {
             setPhoneError("Phone number is required");
@@ -102,10 +111,10 @@ export default function Submission() {
         try {
             let response = await fetch(url, options);
             let data = await response.json();
-            console.log(data);
+            // console.log(data);
             if (data.status === "success") return true;
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return false;
         }
         return false;
@@ -113,6 +122,11 @@ export default function Submission() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (isButtonDisabled) {
+            alert("Submission is not open yet. Please wait for the announcement.");
+            return;
+        }
 
         const ifSubmitted = localStorage.getItem("cyc-submission");
         if (ifSubmitted === "true") {
@@ -125,7 +139,7 @@ export default function Submission() {
         const isEmailValid = validateEmail();
         const isPastoralTeamValid = validatePastoralTeam();
 
-        console.log(isPhoneValid)
+        // console.log(isPhoneValid)
 
         if (isNameValid && isPhoneValid && isEmailValid && isPastoralTeamValid) {
             confirmAlert(options);
@@ -239,7 +253,11 @@ export default function Submission() {
                     <SelectedMinistry ministry={selectedMinistry} />
                 }
             </div>
-            <button className="btn-submit" style={{ backgroundColor: "#173965", color: "white", marginBottom: "35px" }} onClick={handleSubmit}>
+            <button
+                className="btn-submit"
+                style={{ backgroundColor: "#173965", color: "white", marginBottom: "35px" }}
+                onClick={handleSubmit}
+            >
                 Submit
             </button>
         </section>
