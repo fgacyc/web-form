@@ -53,7 +53,7 @@ export default function Selection() {
     }
 
     return (
-        <section style={{ backgroundImage: "url('/images/KV_white_bg.png')" }} className="flex flex-col justify-between">
+        <section style={{ backgroundImage: "url('/images/KV_white_bg.jpg')" }} className="flex flex-col justify-between">
             <div className="flex flex-col align-center relative" style={{ marginTop: "30px" }}>
                 <img src="/icons/cross.png" alt="Cross Icon" style={{
                     position: "absolute", top: "0px", right: "0px",

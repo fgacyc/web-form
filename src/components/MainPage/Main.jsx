@@ -89,10 +89,14 @@ export default function Main() {
 
                     {
                         team_data.map((team, index) => {
+                            const imageFormat = team.team === "people" ? "png" : "jpg";
+                            const imageName = team.team.toLocaleLowerCase().replace(/\s/g, '_');
+                            const img = `/images/${imageName}_main.${imageFormat}`;
+
                             return (
                                 <SwiperSlide key={index}>
                                     <MainCard
-                                        img={`/images/${team.team}_main.png`}
+                                        img={img}
                                         title1={team.cnTeamTitle}
                                         title2={team.teamTile}
                                         team={team.team}

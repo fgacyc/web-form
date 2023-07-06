@@ -6,7 +6,7 @@ export default function Complete() {
 
     return (
         <section className="flex flex-col align-center"
-            style={{ backgroundImage: "url('/images/KV_white_bg.png')", padding: "0px 35px" }}
+            style={{ backgroundImage: "url('/images/KV_white_bg.jpg')", padding: "0px 35px" }}
         >
             <h3 style={{
                 color: "#21416d", fontSize: "1.125rem", fontFamily: "SF Pro Display",

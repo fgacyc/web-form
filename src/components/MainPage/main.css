@@ -5,7 +5,7 @@ h2 {
 }
 
 #main {
-    background-image: url('/images/KV_white_bg.png');
+    background-image: url('/images/KV_white_bg.jpg');
 }
 
 #main-container {
@@ -80,19 +80,19 @@ h2 {
 }
 
 #landing {
-    background-image: url('/images/KV_blue_bg.png');
+    background-image: url('/images/KV_blue_bg.jpg');
 }
 
 #landing-info-1 {
-    background-image: url('/images/landing_bg_1.png');
+    background-image: url('/images/landing_bg_1.jpg');
 }
 
 #landing-info-2 {
-    background-image: url('/images/landing_bg_2.png');
+    background-image: url('/images/landing_bg_2.jpg');
 }
 
 #landing-info-3 {
-    background-image: url('/images/landing_bg_3.png');
+    background-image: url('/images/landing_bg_3.jpg');
 }
 
 .overlay {
