@@ -1,7 +1,17 @@
-.btn-finish{
+.btn-finish {
     margin-top: 30px;
     background-color: #00BB9E;
     color: white;
     margin-bottom: 35px;
     font-family: FZChaoCuHei;
+}
+
+.complete-h4 {
+    color: #173965;
+    text-align: center;
+    font-family: SF Pro Display;
+    font-size: 0.938rem;
+    font-weight: 800;
+    margin-top: 5px;
+    /* padding: 0; */
 }

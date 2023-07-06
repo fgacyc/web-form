@@ -222,7 +222,9 @@ export default function Submission() {
                     {emailError && <div className="input-error">{emailError}</div>}
 
                     <label htmlFor="pastoral_team" className="input-text">Pastoral Team</label>
-                    <select name="pastoral_team" id="pastoral_team" value={pastoralTeam} onChange={pastoralTeamHandler}>
+                    <select name="pastoral_team" id="pastoral_team"
+                        style={{ height: "64px" }}
+                        value={pastoralTeam} onChange={pastoralTeamHandler}>
                         <option value="" disabled hidden>Select a pastoral team</option>
                         <optgroup label="Wonderkids">
                             <option value="wonderkids">Wonderkids</option>
