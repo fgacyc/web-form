@@ -43,7 +43,7 @@ export default function Team({ selected_team }) {
     }
 
     useEffect(() => {
-        document.body.style.overflow = 'auto';
+        // document.body.style.overflow = 'auto';
         window.scrollTo(0, 0);
     }, []);
 
@@ -51,7 +51,7 @@ export default function Team({ selected_team }) {
         <>
             <MinistryOption />
             <section className='flex flex-col justify-end overflow-hidden'
-                style={{ backgroundImage: `url('/images/${team}_team.png')` }}>
+                style={{ backgroundImage: `url('/images/${team}_team.jpg')` }}>
                 <div className='overlay' style={{ marginTop: "50%" }}></div>
                 <div className='relative' style={{ margin: "30px 50px" }}>
                     <h5>{team_data[team].cnTeamTitle}</h5>

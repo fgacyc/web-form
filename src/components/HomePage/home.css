@@ -45,3 +45,7 @@
 .home-swiper {
     --swiper-pagination-bottom: 70px
 }
+
+.no-scroll {
+    overflow: hidden;
+}

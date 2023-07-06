@@ -8,7 +8,7 @@ const Card = ({ img, title1, title2 }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        document.body.style.overflow = 'auto';
+        // document.body.style.overflow = 'auto';
         window.scrollTo(0, 0);
     }, []);
 

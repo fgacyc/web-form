@@ -1,10 +1,9 @@
-
-.team-bg{
+.team-bg {
     color: #21416d;
     background-image: url('/images/KV_white_bg_long.png');
 }
 
-.w-full{
+.w-full {
     width: 100%;
 }
 
@@ -13,15 +12,15 @@
 }
 
 #landing-info-1 {
-    background-image: url('/images/landing_bg_1.png');
+    background-image: url('/images/landing_bg_1.jpg');
 }
 
 #landing-info-2 {
-    background-image: url('/images/landing_bg_2.png');
+    background-image: url('/images/landing_bg_2.jpg');
 }
 
 #landing-info-3 {
-    background-image: url('/images/landing_bg_3.png');
+    background-image: url('/images/landing_bg_3.jpg');
 }
 
 .overlay {
@@ -54,4 +53,8 @@
 
 .home-swiper {
     --swiper-pagination-bottom: 70px
+}
+
+.no-scroll {
+    overflow: hidden;
 }

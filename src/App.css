@@ -35,6 +35,7 @@ section {
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
+    /* overflow: hidden; */
     /* height: calc(100vh - constant(safe-area-inset-top)); */
     /* height: calc(100vh - env(safe-area-inset-top)); */
 }

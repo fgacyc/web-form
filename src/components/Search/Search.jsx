@@ -2,7 +2,7 @@ import './search.css'
 import SearchCard from '../SearchCard/SearchCard'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {ministry_search_data_list} from "../../data/ministry_search_data.js";
+import { ministry_search_data_list } from "../../data/ministry_search_data.js";
 
 export default function Search() {
     const [searchText, setSearchText] = useState('');
@@ -23,7 +23,7 @@ export default function Search() {
     return (
         <section style={{ backgroundColor: "#f5f5f8" }} className="flex flex-col">
             <div className="flex" style={{ height: "24px", marginTop: "70px" }}>
-                <img src="/icons/left.svg" alt="Back Icon" style={{ margin: "0px 35px" }} onClick={navigateBack}/>
+                <img src="/icons/left.svg" alt="Back Icon" style={{ margin: "0px 35px" }} onClick={navigateBack} />
                 <input type="text" placeholder="Search" className="search-input" value={searchText}
                     onChange={(e) => setSearchText(e.target.value)} />
             </div>
@@ -44,10 +44,14 @@ export default function Search() {
                     <div className='flex justify-between' style={{ flexWrap: "wrap", margin: "0px 25px" }}>
                         {
                             filteredData.map((ministry, index) => {
+                                const imageFormat = ministry.ministryTitle === "Security" ? "png" : "jpg";
+                                const imageName = ministry.ministryTitle.toLocaleLowerCase().replace(/\s/g, '_');
+                                const img = `/images/${imageName}.${imageFormat}`;
+
                                 return (
                                     <SearchCard
                                         key={index}
-                                        img={`/images/${ministry.ministryTitle.toLocaleLowerCase().replace(/\s/g, '_')}.png`}
+                                        img={img}
                                         title1={ministry.cnMinistryTitle}
                                         title2={ministry.ministryTitle} />
                                 )
