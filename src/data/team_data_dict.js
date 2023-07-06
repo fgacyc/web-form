@@ -42,7 +42,7 @@ export  const team_data_dict = {
                     rate: [2, 3]
                 }, {
                     img: "/images/shuttle.jpg",
-                    cnMinistryTitle: "运送",
+                    cnMinistryTitle: "接驳服务",
                     ministryTitle: "Shuttle",
                     desc: ["由于教会的迅速发展，停车问题日益严重，导致会友和新朋友们有时不得不将车辆停放在较远的地方，然后步行到聚会地点。为了改善每个人来教会的体验，他们提供贴心的运送服务，确保每个人都能享受到愉快的教会体验。"],
                     rate: [3, 2]
