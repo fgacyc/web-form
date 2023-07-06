@@ -5,13 +5,11 @@ import MainCard from '../MainCard/MainCard'
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Pagination } from "swiper";
-import { handleScrollUp } from '../../js/scroll';
+import { handlerSectionScroll } from '../../js/scroll';
 import { useNavigate } from 'react-router-dom';
-import { useState, useRef } from 'react';
+import { useEffect } from 'react';
 
 export default function Main() {
-    const swiperRef = useRef(null);
-
     const team_data = [{
         team: "people",
         cnTeamTitle: "贵宾体验团队",
@@ -35,26 +33,29 @@ export default function Main() {
 
     const navigate = useNavigate();
 
-    const [startX, setStartX] = useState(null);
-    const [endX, setEndX] = useState(null);
+    // useEffect(() => {
+    //     document.body.classList.add('no-scroll');
+
+    //     return () => {
+    //         // document.body.classList.remove('no-scroll');
+    //     };
+    // }, []);
+
+    let startY;
 
     const handleTouchStart = (event) => {
         const touch = event.touches[0];
-        setStartX(touch.clientX);
+        startY = touch.clientY;
     };
 
     const handleTouchEnd = (event) => {
-        if (swiperRef.current && swiperRef.current.contains(event.target)) {
-            return;
-        }
+        const touch = event.changedTouches[event.changedTouches.length - 1];
+        const deltaY = touch.clientY - startY;
 
-        const touch = event.changedTouches[0];
-        setEndX(touch.clientX);
-
-        const distance = endX - startX;
-
-        if (distance > 50) {
-            handleScrollUp();
+        if (deltaY > 50) {
+            setTimeout(() => {
+                handlerSectionScroll(1);
+            }, 200);
         }
     };
 
@@ -77,7 +78,7 @@ export default function Main() {
                     <h2 id="explore">Explore</h2>
                 </div>
                 <Swiper
-                    ref={swiperRef}
+                    // ref={swiperRef}
                     style={{ width: "100vw" }}
                     slidesPerView={1}
                     centeredSlides={true}

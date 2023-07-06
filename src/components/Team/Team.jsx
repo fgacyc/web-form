@@ -43,7 +43,7 @@ export default function Team({ selected_team }) {
     }
 
     useEffect(() => {
-        document.body.style.overflow = 'auto';
+        // document.body.style.overflow = 'auto';
         window.scrollTo(0, 0);
     }, []);
 

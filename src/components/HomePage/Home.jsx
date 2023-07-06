@@ -1,6 +1,6 @@
 import './home.css'
 import '../../App.css'
-import  { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -9,6 +9,14 @@ import Main from '../MainPage/Main';
 import { handleScroll } from '../../js/scroll';
 export default function Home() {
     const [startX, setStartX] = useState(null);
+
+    useEffect(() => {
+        document.body.classList.add('no-scroll');
+
+        return () => {
+            document.body.classList.remove('no-scroll');
+        };
+    }, []);
 
     const handleClick = () => {
         handleScroll();

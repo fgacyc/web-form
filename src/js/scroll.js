@@ -14,7 +14,7 @@ export const handleScroll = (num = 1) => {
     });
 };
 
-export function handlerSectionScroll(num){
+export function handlerSectionScroll(num) {
     const sections = document.querySelectorAll('section');
     const targetSection = sections[num];
 

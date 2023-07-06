@@ -61,7 +61,7 @@ select {
     .btn-submit,
     .btn-submit:focus,
     .btn-submit:active {
-        height: 50px;
+        height: 75px;
         padding: 15px 0px;
     }
 

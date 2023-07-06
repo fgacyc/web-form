@@ -1,10 +1,10 @@
 import './submission.css'
 import SelectedMinistry from '../SelectedMinistry/SelectedMinistry'
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {findPastoralTeam} from "../../data/pastoral_team.js";
-import {findMinistry} from "../../data/organization_structure.js";
-import {hostURL} from "../../config.js";
+import { findPastoralTeam } from "../../data/pastoral_team.js";
+import { findMinistry } from "../../data/organization_structure.js";
+import { hostURL } from "../../config.js";
 
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
@@ -21,10 +21,10 @@ export default function Submission() {
     const [emailError, setEmailError] = useState("");
     const [pastoralTeamError, setPastoralTeamError] = useState("");
     const [selectedMinistry, setSelectedMinistry] = useState(null);
-    
+
     useEffect(() => {
         const selectedMinistry = JSON.parse(localStorage.getItem('cyc-department-selected'));
-        if(!selectedMinistry){
+        if (!selectedMinistry) {
             navigate("/");
             return;
         }
@@ -79,18 +79,18 @@ export default function Submission() {
 
     const validatePastoralTeam = () => {
         if (pastoralTeam.length === 0) {
-            setPastoralTeamError("Please select a pastoral team");
+            setPastoralTeamError("Pastoral team is required");
             return false;
         }
         setPastoralTeamError("");
         return true;
     };
 
-    function  pastoralTeamHandler(e) {
+    function pastoralTeamHandler(e) {
         setPastoralTeam(e.target.value)
     }
 
-    async function  postRecruiter(info){
+    async function postRecruiter(info) {
         let url = hostURL + "/recruiter";
         let options = {
             method: "POST",
@@ -103,7 +103,7 @@ export default function Submission() {
             let response = await fetch(url, options);
             let data = await response.json();
             console.log(data);
-            if(data.status === "success") return true;
+            if (data.status === "success") return true;
         } catch (error) {
             console.log(error);
             return false;
@@ -132,26 +132,26 @@ export default function Submission() {
         }
     };
 
-    function submitToServer(){
-            let pastoralTeamList = findPastoralTeam(pastoralTeam);
-            let ministryList = findMinistry(selectedMinistry);
-            let info = {
-                "name": name,
-                "phone": phone,
-                "email": email,
-                "pastoral_team": pastoralTeamList,
-                "ministry": ministryList
-            }
-            // console.log(info);
+    function submitToServer() {
+        let pastoralTeamList = findPastoralTeam(pastoralTeam);
+        let ministryList = findMinistry(selectedMinistry);
+        let info = {
+            "name": name,
+            "phone": phone,
+            "email": email,
+            "pastoral_team": pastoralTeamList,
+            "ministry": ministryList
+        }
+        // console.log(info);
 
-            postRecruiter(info).then((result) => {
-                if(result === true) {
-                    navigate("/complete");
-                    localStorage.setItem("cyc-submission", "true")
-                } else {
-                    alert("Something went wrong. Please try again.");
-                }
-            });
+        postRecruiter(info).then((result) => {
+            if (result === true) {
+                navigate("/complete");
+                localStorage.setItem("cyc-submission", "true")
+            } else {
+                alert("Something went wrong. Please try again.");
+            }
+        });
     }
 
     const options = {
@@ -170,11 +170,11 @@ export default function Submission() {
         closeOnEscape: true,
         closeOnClickOutside: true,
         keyCodeForClose: [8, 32],
-        willUnmount: () => {},
-        afterClose: () => {},
-        onClickOutside: () => {},
-        onKeypress: () => {},
-        onKeypressEscape: () => {},
+        willUnmount: () => { },
+        afterClose: () => { },
+        onClickOutside: () => { },
+        onKeypress: () => { },
+        onKeypressEscape: () => { },
         overlayClassName: "overlay-custom-class-name"
     };
 
@@ -184,56 +184,58 @@ export default function Submission() {
             className="flex flex-col justify-between"
         >
 
-            <div id="submission-container" className='flex' style={{ paddingTop: "25px" }}>
-                <img src="/icons/left.svg" alt="Back Icon" onClick={()=>{navigate(-1)}}/>
-                <h3 style={{
-                    color: "#21416d", fontSize: "1.125rem", fontFamily: "SF Pro Display",
-                    fontWeight: "600", marginLeft: "90px"
-                }}>
-                    Submission
-                </h3>
+            <div>
+                <div id="submission-container" className='flex' style={{ paddingTop: "25px" }}>
+                    <img src="/icons/left.svg" alt="Back Icon" onClick={() => { navigate(-1) }} />
+                    <h3 style={{
+                        color: "#21416d", fontSize: "1.125rem", fontFamily: "SF Pro Display",
+                        fontWeight: "600", marginLeft: "90px"
+                    }}>
+                        Submission
+                    </h3>
+                </div>
+                <form action="#" id="submission-form" className="flex flex-col" style={{ marginTop: "10px" }}>
+                    <label htmlFor="name" className="input-text">Full Name</label>
+                    <input type="text" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)} />
+                    {nameError && <div className="input-error">{nameError}</div>}
+
+                    <label htmlFor="phone" className="input-text">Phone</label>
+                    <input type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                    {phoneError && <div className="input-error">{phoneError}</div>}
+
+                    <label htmlFor="email" className="input-text">Email</label>
+                    <input type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    {emailError && <div className="input-error">{emailError}</div>}
+
+                    <label htmlFor="pastoral_team" className="input-text">Pastoral Team</label>
+                    <select name="pastoral_team" id="pastoral_team" value={pastoralTeam} onChange={pastoralTeamHandler}>
+                        <option value="" disabled hidden>Select a pastoral team</option>
+                        <optgroup label="Wonderkids">
+                            <option value="wonderkids">Wonderkids</option>
+                        </optgroup>
+                        <optgroup label="Young Warrior">
+                            <option value="heart">Heart</option>
+                            <option value="move">Move</option>
+                            <option value="force">Force</option>
+                            <option value="voice">Voice</option>
+                            <option value="mind">Mind</option>
+                        </optgroup>
+                        <optgroup label="General">
+                            <option value="yp_zone">YP Zone</option>
+                            <option value="pro_family">Pro Family</option>
+                            <option value="young_dreamer">Young Dreamer</option>
+                            <option value="joshua_zone">Joshua Zone</option>
+                        </optgroup>
+                        <optgroup label="Others">
+                            <option value="others">Others</option>
+                        </optgroup>
+                    </select>
+                    {pastoralTeamError && <div className="input-error">{pastoralTeamError}</div>}
+                </form>
             </div>
-            <form action="#" id="submission-form" className="flex flex-col" style={{ marginTop: "10px" }}>
-                <label htmlFor="name" className="input-text">Full Name</label>
-                <input type="text" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)} />
-                {nameError && <div className="input-error">{nameError}</div>}
-
-                <label htmlFor="phone" className="input-text">Phone</label>
-                <input type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
-                {phoneError && <div className="input-error">{phoneError}</div>}
-
-                <label htmlFor="email" className="input-text">Email</label>
-                <input type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                {emailError && <div className="input-error">{emailError}</div>}
-
-                <label htmlFor="pastoral_team" className="input-text">Pastoral Team</label>
-                <select name="pastoral_team" id="pastoral_team" value={pastoralTeam} onChange={pastoralTeamHandler}>
-                    <option value="" disabled hidden>Select a pastoral team</option>
-                    <optgroup label="Wonderkids">
-                        <option value="wonderkids">Wonderkids</option>
-                    </optgroup>
-                    <optgroup label="Young Warrior">
-                        <option value="heart">Heart</option>
-                        <option value="move">Move</option>
-                        <option value="force">Force</option>
-                        <option value="voice">Voice</option>
-                        <option value="mind">Mind</option>
-                    </optgroup>
-                    <optgroup label="General">
-                        <option value="yp_zone">YP Zone</option>
-                        <option value="pro_family">Pro Family</option>
-                        <option value="young_dreamer">Young Dreamer</option>
-                        <option value="joshua_zone">Joshua Zone</option>
-                    </optgroup>
-                    <optgroup label="Others">
-                        <option value="others">Others</option>
-                    </optgroup>
-                </select>
-                {pastoralTeamError && <div className="input-error">{pastoralTeamError}</div>}
-            </form>
             <div className='flex flex-col align-center'>
                 <h4 className="input-text" style={{ marginBottom: "10px 0px" }}>Your Ministry Selection</h4>
-                { selectedMinistry &&
+                {selectedMinistry &&
                     <SelectedMinistry ministry={selectedMinistry} />
                 }
             </div>

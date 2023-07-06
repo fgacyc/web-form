@@ -1,15 +1,14 @@
-
-.team-bg{
+.team-bg {
     color: #21416d;
     background-image: url('/images/KV_white_bg_long.png');
 }
 
-.w-full{
+.w-full {
     width: 100%;
 }
 
 #landing {
-    background-image: url('/images/KV_blue_bg.jpg');
+    background-image: url('/images/KV_blue_bg.png');
 }
 
 #landing-info-1 {
@@ -54,4 +53,8 @@
 
 .home-swiper {
     --swiper-pagination-bottom: 70px
+}
+
+.no-scroll {
+    overflow: hidden;
 }
