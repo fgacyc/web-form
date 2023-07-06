@@ -58,6 +58,11 @@ select {
         height: 30px;
     }
 
+    select,
+    select:focus {
+        height: 34px !important;
+    }
+
     .btn-submit,
     .btn-submit:focus,
     .btn-submit:active {
@@ -74,11 +79,11 @@ select {
     }
 }
 
-.react-confirm-alert-body{
-    width: 60vw  !important;
+.react-confirm-alert-body {
+    width: 60vw !important;
 }
 
-.react-confirm-alert-button-group{
+.react-confirm-alert-button-group {
     display: flex !important;
     flex-direction: row !important;
     justify-content: space-between !important;
