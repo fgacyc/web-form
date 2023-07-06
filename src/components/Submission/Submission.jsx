@@ -7,7 +7,8 @@ import { findMinistry } from "../../data/organization_structure.js";
 import { hostURL } from "../../config.js";
 
 import { confirmAlert } from 'react-confirm-alert'; // Import
-import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import {findMinistryNeeds} from "../../data/ministry_needs.js"; // Import css
 
 export default function Submission() {
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
@@ -101,6 +102,10 @@ export default function Submission() {
 
     async function postRecruiter(info) {
         let url = hostURL + "/recruiter";
+        let pastoral_team = info.pastoral_team[0]
+        let department = info.ministry[1]
+        let needs = findMinistryNeeds(pastoral_team ,department);
+
         let options = {
             method: "POST",
             headers: {
@@ -111,8 +116,17 @@ export default function Submission() {
         try {
             let response = await fetch(url, options);
             let data = await response.json();
-            // console.log(data);
-            if (data.status === "success") return true;
+
+            if (data.countdown[department] > needs){
+                localStorage.setItem("cyc-countdown-ifOver", "true");
+            }else{
+                localStorage.setItem("cyc-countdown-ifOver", "false");
+            }
+
+            if (data.status === "success") {
+                return true;
+            }
+
         } catch (error) {
             // console.log(error);
             return false;

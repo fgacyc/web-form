@@ -23,7 +23,7 @@ select:focus {
     font-weight: 400;
 }
 
-select {
+select:focus,select {
     width: 245px;
 }
 

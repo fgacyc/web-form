@@ -6,10 +6,14 @@ export default function Complete() {
     const navigate = useNavigate();
     const [isFull, setIsFull] = useState(false);
 
-    // useEffect(() => {
-    //     // add condition to check if the ministry is full
-    //     setIsFull(true)
-    // }, []);
+    useEffect(() => {
+        let ifFull = localStorage.getItem("cyc-countdown-ifOver");
+        if (ifFull === "true") {
+            //console.log("full")
+            setIsFull(true);
+        }
+        localStorage.removeItem("cyc-department-selected");
+    }, []);
 
     return (
         <section className="flex flex-col align-center justify-between"
