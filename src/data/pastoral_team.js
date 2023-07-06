@@ -15,7 +15,14 @@ let pastoral_team = {
         "young_dreamer",
         "joshua_zone"
     ],
-    "others": ["others"]
+    "others":[
+        "serdang",
+        "kepong",
+        "usj",
+        "setapak",
+        "sg_long",
+        "seremban",
+    ]
 }
 
 export function findPastoralTeam(name){

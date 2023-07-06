@@ -45,6 +45,7 @@ export default function Department({ team, sectionNum }) {
             }, 200);
         }
     };
+    // console.log(isHeightLessThan843)
 
     return (
         <div className='team-bg'>

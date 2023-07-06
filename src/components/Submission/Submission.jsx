@@ -243,7 +243,12 @@ export default function Submission() {
                             <option value="joshua_zone">Joshua Zone</option>
                         </optgroup>
                         <optgroup label="Others">
-                            <option value="others">Others</option>
+                            <option value="serdang">Serdang</option>
+                            <option value="kepong">Kepong</option>
+                            <option value="usj">USJ</option>
+                            <option value="setapak">Setapak</option>
+                            <option value="sg_long">Sg Long</option>
+                            <option value="seremban">Seremban</option>
                         </optgroup>
                     </select>
                     {pastoralTeamError && <div className="input-error">{pastoralTeamError}</div>}
