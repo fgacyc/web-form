@@ -142,7 +142,7 @@ export default function Submission() {
             return;
         }
 
-        const ifSubmitted = localStorage.getItem("cyc-submission");
+        const ifSubmitted ="false"
         if (ifSubmitted === "true") {
             alert("You have already submitted your application. Please wait for the response.");
             return;
