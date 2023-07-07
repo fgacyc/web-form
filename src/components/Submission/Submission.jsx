@@ -177,7 +177,7 @@ export default function Submission() {
                 navigate("/complete");
                 localStorage.setItem("cyc-submission", "true")
             } else {
-                alert("Something went wrong. Please try again.");
+                alert("Something went wrong, Please try again.");
             }
         });
     }
