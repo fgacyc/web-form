@@ -154,7 +154,7 @@ export  const team_data_dict = {
                         cnMinistryTitle: "音响",
                         ministryTitle: "Sound",
                         desc: ["若每周信息是我们的粮食，讲员就同等于厨师，那音响就如同餐具，少了他们，山珍海味都没办法送进我们的口中！音响组绝非仅仅调节音量，要让会众听到高音准、中音甜、低音稳，那可是一辈子的学习！"],
-                        rate: [3, 2],
+                        rate: [4, 3],
                     },
                     {
                         img: "/images/lighting.jpg",
