@@ -161,7 +161,7 @@ export  const team_data_dict = {
                         cnMinistryTitle: "灯光",
                         ministryTitle: "Lighting",
                         desc: ["灯光组专为冰冷的舞台涂上层层色彩，是一门不可或缺的艺术。在舞台灯光四射的氛围底下，人们能够更专注投入敬拜神。灯光组员从灯种、色彩温度、亮度到电路，可谓样样精通！"],
-                        rate: [4, 2],
+                        rate: [4, 3],
                     },
                     {
                         img: "/images/translation.jpg",
