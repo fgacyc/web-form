@@ -11,7 +11,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import {findMinistryNeeds} from "../../data/ministry_needs.js"; // Import css
 
 export default function Submission() {
-    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
     const navigate = useNavigate();
 
