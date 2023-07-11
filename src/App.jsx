@@ -1,4 +1,5 @@
 import './App.css'
+import { useEffect } from "react";
 import { Routes, Route } from 'react-router-dom';
 import Home from './components/HomePage/Home'
 import Team from './components/Team/Team'
@@ -6,17 +7,17 @@ import Search from './components/Search/Search';
 import Selection from './components/SelectionPage/Selection';
 import Complete from './components/Complete/Complete';
 import Submission from './components/Submission/Submission';
-import {useEffect} from "react";
+import Appointment from './components/AppointmentPage/Appointment';
 
 function clearDepartment() {
-    localStorage.removeItem('cyc-department-selected');
+  localStorage.removeItem('cyc-department-selected');
 }
 
 
 function App() {
-    useEffect(() => {
-        clearDepartment();
-    },[]);
+  useEffect(() => {
+    clearDepartment();
+  }, []);
 
   return (
     <Routes>
@@ -28,7 +29,7 @@ function App() {
       <Route path='/selection' element={<Selection />} />
       <Route path='/complete' element={<Complete />} />
       <Route path='/form' element={<Submission />} />
-
+      <Route path='/appointment' element={<Appointment />} />
     </Routes>
   )
 }

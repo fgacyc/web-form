@@ -7,6 +7,7 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper";
 import Main from '../MainPage/Main';
 import { handleScroll } from '../../js/scroll';
+
 export default function Home() {
     const [startX, setStartX] = useState(null);
 
@@ -40,6 +41,7 @@ export default function Home() {
 
     return (
         <>
+            {/* <Button>hii</Button> */}
             <section id='landing' className='flex flex-col justify-between align-center'>
                 <img src="/images/CYC_logo.png" alt="CYC Logo" id='cyc-logo' className='mt-45' />
                 <img src="/images/KV_title.png" alt="Landing Title" />

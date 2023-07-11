@@ -1,0 +1,45 @@
+.input-text {
+    color: #173965;
+    font-size: 1.125rem;
+    font-family: "SF Pro Display";
+    font-weight: 800;
+    /* margin: 0 !important; */
+    margin-top: 30px;
+    margin-right: 10px !important;
+}
+
+.div-text{
+    color: black;
+    opacity: 0.57;
+    font-size: 1.125rem;
+    font-family: "SF Pro Display";
+    font-weight: 400 !important;
+    margin-top: 10px;
+}
+
+@media (max-height: 843px) {
+    label,
+    .div-text {
+        font-size: 1rem !important;
+        /* margin-top: 0px; */
+    }
+
+    /* .input-text {
+        margin-top: 10px;
+    } */
+
+    .btn-submit,
+    .btn-submit:focus,
+    .btn-submit:active {
+        height: 75px;
+        padding: 15px 0px;
+    }
+
+    #submission-container {
+        padding-top: 15px;
+    }
+
+    #submission-form {
+        margin-top: 0px;
+    }
+}
