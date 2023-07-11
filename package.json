@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@arco-design/mobile-react": "^2.27.5",
     "pubsub-js": "^1.9.4",
     "react": "^18.2.0",
     "react-confirm-alert": "^3.0.6",
@@ -23,7 +22,6 @@
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react-swc": "^3.0.0",
-    "babel-plugin-import": "^1.13.6",
     "eslint": "^8.38.0",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",

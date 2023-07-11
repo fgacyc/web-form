@@ -1,27 +1,138 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import "../../App.css";
 import "./appointment.css"
 import { hostURL } from "../../config.js";
-import { Button as ArcoButton } from '@arco-design/mobile-react';
-import { DatePicker, Button, Cell } from '@arco-design/mobile-react';
-// import { getTimeStamp, getDateTimeStamp } from "../../tools/dateTime";
+import { capitalFirstLetter } from "../../js/string";
+import { postReq } from "../../js/requests";
+
+function AppointmentDatePicker({ ministry, appointmentTimes }) {
+    return (
+        <optgroup key={ministry} label={capitalFirstLetter(ministry)}>
+            {appointmentTimes[ministry].map((time) => (
+                <option key={time.value} value={time.value}>
+                    {time.label}
+                </option>
+            ))}
+        </optgroup>
+    );
+}
+
+function MusicButton({ content, color, link }) {
+    function handleAudio(link) {
+        window.open(link, "_blank");
+    };
+
+    return (
+        <div className="flex align-center justify-between mt-10">
+            <label className="input-text mt-0">{content}</label>
+            <button className="btn-audio" style={{ backgroundColor: color }}
+                onClick={() => { handleAudio(link) }}>Play</button>
+        </div>
+    )
+}
+
+function DanceInfo() {
+    return (
+        <>
+            <p className="appointment-p mt-30">
+                ✨AUDITION RULES:-✨<br /><br /><br />
+                1. Please pick a song from below and prepare a dance showcase (can be own choreography or dance cover) 🦖<br /><br />
+                - 7/11  (Beyoncé) - 0:22 to 0:51<br /><br />
+                - I like that (Houston ft. Chinggy, Nate Dog & I-20) - 1:12 to 1:48<br /><br />
+                - One & Only (Planetboom)- 1:30 to 2:00<br /><br /><br />
+
+                2. There will be a freestyle section too (song will be played randomly, you will just need to enjoy & show us what you have✨) !<br /><br /><br />
+
+                3. Kindly choose 1 of the interview date & time from below: 👇<br /><br />
+                - 22/07/2023 (Saturday) - 12pm & 7:30pm<br /><br />
+                - 23/07/2023 (Sunday) - 4pm<br /><br /><br />
+
+                4. Selected one will be announced by the end of July! 📢<br /><br />
+            </p>
+            <hr /><br />
+            <p className="appointment-p">
+                ✨面试规则：-✨<br /><br /><br />
+
+                1. 请选择以下一首歌准备舞蹈呈现 （舞蹈可以是原创编舞 或翻跳) 🦖<br /><br />
+                - 7/11  (Beyoncé) - 0:22 to 0:51<br /><br />
+                - I like that (Houston ft. Chinggy, Nate Dog & I-20) - 1:12 to 1:48<br /><br />
+                - One & Only (Planetboom)- 1:30 to 2:00<br /><br /><br />
+
+                2. 我们也会有freestyle环节喔！(歌曲会随机播放,你只需享受）😉<br /><br /><br />
+
+                3. 请选择以下的一个面试日期和时间：-<br /><br />
+                - 22/07/2023 (星期六) - 12pm & 7:30pm<br /><br />
+                - 23/07/2023 (星期日) - 4pm<br /><br /><br />
+
+                4.入选者将会在7月尾收到通知! 📣
+            </p>
+
+            <div className="flex flex-col">
+                <MusicButton
+                    content={"Music 1: 7/11"}
+                    color={"#336397"}
+                    link={"https://firebasestorage.googleapis.com/v0/b/cyc-ents.appspot.com/o/recruitment%2Fmusic%2FBeyonce%CC%81%20-%20711.mp4?alt=media&token=da68ec23-51e7-4c21-b979-8213c1eed8fc"}
+                />
+                <MusicButton
+                    content={"Music 2: I Like That"}
+                    color={"#00BB9E"}
+                    link={"https://firebasestorage.googleapis.com/v0/b/cyc-ents.appspot.com/o/recruitment%2Fmusic%2FHouston%20-%20I%20Like%20That.mp4?alt=media&token=2c833013-eb65-48c7-9f54-7a6aa29d1e0e"}
+                />
+                <MusicButton
+                    content={"Music 3: One & Only"}
+                    color={"#E46E48"}
+                    link={"https://firebasestorage.googleapis.com/v0/b/cyc-ents.appspot.com/o/recruitment%2Fmusic%2FOne%20And%20Only.mp4?alt=media&token=25dda039-777e-4257-b424-c527c3a4b21a"}
+                />
+            </div>
+        </>
+    )
+}
+
+function VocalInfo() {
+    return (
+        <p className="appointment-p mt-30 mb-0">
+            For P&W vocal, prepare one upbeat & one slow worship song for audition, kindly prepare your own lyrics on phone / memorise the lyrics. <br /><br /><br />
+
+            Songs you can select as below:<br /><br />
+            快歌 Upbeat<br /><br />
+            1. 坚定信靠 (FGA Worship)<br /><br />
+            2. So So Good To Me (FGA Worship)<br /><br />
+            3. 本伟大 Perkasa (GMS Live)<br /><br />
+            4. 喜乐欢笑 Tertawa (GMS Live)<br /><br />
+            5. Wake (Hillsong)<br /><br />
+            6. 或自选<br /><br /><br />
+
+            慢敬拜 Worship<br /><br />
+            1. 阿爸父 Abba Father (FGA Worship)<br /><br />
+            2. 此刻运行 Mengalirlah S’karang (GMS Live)<br /><br />
+            3. Goodness of God (Bethel) （中英皆可）<br /><br />
+            4. 或自选<br /><br />
+        </p>
+    )
+}
 
 export default function Appointment() {
     const [userDatas, setUserDatas] = useState(null);
-    const [appoinmentTime, setAppoinmentTime] = useState(null);
+    const [ministry, setMinistry] = useState("general");
+    const [appoinmentTime, setAppoinmentTime] = useState("");
 
-    const [picker1Visible, setPicker1Visible] = useState(true);
-    const [picker1Value, setPicker1Value] = useState(new Date('2020-02-21 10:10:08'.replace(/-/g, "/")).getTime());
-
-    console.log(picker1Value);
-
-    const RID = useParams().RID || '64a792fae3a86cdad7522bd6';
+    // const RID = useParams().RID || '64a792fae3a86cdad7522bd6';
+    const RID = useParams().RID || '64a792fae3a86cdad7522bd7';
+    // const RID = useParams().RID || '64a792fae3a86cdad7522bde';
 
     const url = hostURL;
 
-    const style = {
-        width: 220,
-        marginLeft: 10,
+    const appointmentTimes = {
+        general: [
+            { value: "1689418800", label: "15/7/2023 (Sat) 7pm" },
+            { value: "1689492600", label: "16/7/2023 (Sun) 3.30pm" },
+            { value: "1690018200", label: "22/7/2023 (Sat) 5.30pm" },
+        ],
+        dance: [
+            { value: "1689998400", label: "22/7/2023 (Sat) 12pm" },
+            { value: "1690099200", label: "23/7/2023 (Sun) 4pm" },
+        ],
     };
 
     useEffect(() => {
@@ -29,149 +140,82 @@ export default function Appointment() {
             .then(res => res.json())
             .then(data => {
                 setUserDatas(data);
-                console.log(data);
+                data.info.ministry[2] === "dance" ? setMinistry("dance") : null;
             });
-    }, [])
+    }, []);
 
-    function onChange(dateString, date, ministry) {
-        // if (ministry === "ministry1") {
-        //     setAppoinmentTime1(getDateTimeStamp(dateString));
-        // } else if (ministry === "ministry2") {
-        //     setAppoinmentTime2(getDateTimeStamp(dateString));
-        // }
-    }
+    function appoinmentTimeHandler(e) {
+        setAppoinmentTime(e.target.value);
+    };
 
-    async function putAppointment() {
-        // const router = "/appointment"
-        // const data = {
-        //     "timestamp": getTimeStamp(),
-        //     "ministry1": {
-        //         "appointment": {
-        //             "status": true,
-        //             "appointment_time": appoinmentTime1
-        //         },
-        //         "interviewers": [],
-        //         "questions": {}
-        //     },
-        //     "ministry2": {
-        //         "appointment": {
-        //             "status": false,
-        //             "timestamp": appoinmentTime2 ? appoinmentTime2 : null
-        //         },
-        //         "interviewers": [],
-        //         "questions": {}
-        //     },
-        //     "transfer": {
-        //         "appointment": {
-        //             "status": false,
-        //             "timestamp": null
-        //         },
-        //         "interviewers": [],
-        //         "questions": {}
-        //     }
-        // }
-        // console.log(data);
-        // let options = {
-        //     method: 'PUT',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(data)
-        // }
-        // let res = await fetch(url + router + "/" + formId, options)
-        // let result = await res.json()
+    async function createAppointment() {
+        let appointment = {
+            appointment_time: appoinmentTime,
+        }
 
-        // if (result.status === "success") {
-        //     alert("Appointment successfully set.")
-        // } else {
-        //     alert("Appointment failed to set. Please try again.")
-        // }
+        let data = await postReq(`/appointment/${RID}`, appointment);
+        console.log(data);
     }
 
     function handleSubmit(e) {
-        // e.preventDefault();
+        e.preventDefault();
 
-        // if (userDatas.info.ministry1.ministry && !appoinmentTime1) {
-        //     alert('Please select a date for the interview of your chosen ministry 1.')
-        // } else if (userDatas.info.ministry2.ministry && !appoinmentTime2) {
-        //     alert('Please select a date for the interview of your chosen ministry 2.')
-        // } else {
-        //     putAppointment();
-        // }
+        if (appoinmentTime === "") {
+            alert('Please select a date for the interview')
+        } else {
+            createAppointment();
+        }
     }
 
     return (
-        <section
-            style={{ backgroundColor: '#f5f5f8', padding: "0 35px" }}
-            className="flex flex-col justify-between"
+        <div
+            className="flex flex-col justify-between appointment-container"
         >
             <div>
-                <DatePicker
-                    visible={picker1Visible}
-                    maskClosable
-                    disabled={false}
-                    minTs={new Date('2020-02-22 18:00:00'.replace(/-/g, "/")).getTime()}
-                    currentTs={picker1Value}
-                    title="year/month/day/hour/minute/second"
-                    onHide={() => {
-                        setPicker1Visible(false);
-                    }}
-                    onChange={(timestamp, obj) => {
-                        console.info('---demo on change index', timestamp);
-                        setPicker1Value(timestamp);
-                    }}
-                    touchToStop={true}
-                />
-            </div>
-            <div>
-                <div id="submission-container" className='flex' style={{ paddingTop: "25px" }}>
-                    <img src="/icons/left.svg" alt="Back Icon" onClick={() => { navigate(-1) }} />
-                    <h3 style={{
-                        color: "#21416d", fontSize: "1.125rem", fontFamily: "SF Pro Display",
-                        fontWeight: "600", marginLeft: "90px"
-                    }}>
-                        Appointment
-                    </h3>
-                </div>
-                <form action="#" id="submission-form" className="flex flex-col" style={{ marginTop: "10px" }}>
+                <h3 className="appointment-h3">
+                    Appointment
+                </h3>
 
-                    <label className="input-text">Name</label>
-                    <div className="div-text">Name</div>
+                {
+                    ministry === "dance" && <DanceInfo />
+                }
 
-                    <label className="input-text">Selected Ministry</label>
-                    <div className="div-text">Selected Ministry</div>
+                {
+                    userDatas && userDatas.info.ministry[2] === "vocal" && <VocalInfo />
+                }
 
-                    <label className="input-text">Appointment Date</label>
-                    <div className="div-text">Appointment Date</div>
+                {
+                    userDatas && (
+                        <form action="#" className="flex flex-col submission-form">
+                            <label className="input-text">Name</label>
+                            <div className="div-text">{userDatas.info.name}</div>
 
-                    {/* {
-                userDatas &&
-                <div>
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                        <h3>Ministry 1: {userDatas.info.ministry1.ministry}</h3>
-                        <DatePicker
-                            showTime
-                            disabledDate={(current) => current.isBefore(dayjs())}
-                            onSelect={onSelect}
-                            onChange={(dateString, date) =>
-                                onChange(dateString, date, "ministry1")
-                            }
-                            style={style}
-                        />
-                    </div>
-                    }
-                </div>
-            } */}
+                            <label className="input-text">Selected Ministry</label>
+                            <div className="div-text">{capitalFirstLetter(userDatas.info.ministry[2])}</div>
 
-                </form>
-            </div>
+                            <label className="input-text">Appointment Date</label>
+                            <select
+                                className="appointment-select"
+                                value={appoinmentTime}
+                                onChange={appoinmentTimeHandler}
+                            >
+                                <option value="" disabled hidden>Select an appointment date</option>
+
+                                <AppointmentDatePicker
+                                    ministry={ministry}
+                                    appointmentTimes={appointmentTimes}
+                                />
+                            </select>
+                        </form>
+                    )
+                }
+            </div >
             <button
                 className="btn-submit"
-                style={{ backgroundColor: "#173965", color: "white", marginBottom: "35px" }}
                 onClick={handleSubmit}
             >
                 Submit
             </button>
-        </section>
+        </div >
     )
 }

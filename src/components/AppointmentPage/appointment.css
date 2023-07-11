@@ -1,45 +1,95 @@
-.input-text {
-    color: #173965;
+.input-text,
+.div-text,
+.appointment-h3 {
     font-size: 1.125rem;
     font-family: "SF Pro Display";
+}
+
+.input-text {
+    color: #173965;
     font-weight: 800;
-    /* margin: 0 !important; */
     margin-top: 30px;
     margin-right: 10px !important;
 }
 
-.div-text{
+.div-text {
     color: black;
     opacity: 0.57;
-    font-size: 1.125rem;
-    font-family: "SF Pro Display";
     font-weight: 400 !important;
     margin-top: 10px;
 }
 
+.appointment-container {
+    background-color: #f5f5f8;
+    padding: 0 35px;
+}
+
+.appointment-h3 {
+    color: #21416d;
+    font-weight: 600;
+    padding-top: 25px;
+    text-align: center;
+}
+
+.appointment-select {
+    margin-top: 10px;
+    height: 64px;
+}
+
+.btn-submit,
+.btn-audio {
+    background-color: #173965;
+    color: white !important;
+}
+
+.btn-submit {
+    margin: 35px 0px;
+}
+
+.btn-audio {
+    padding: 15px 45px !important;
+}
+
+.appointment-p {
+    color: black;
+    opacity: 0.57;
+    font-weight: 400 !important;
+    font-size: 0.875rem;
+}
+
+.mt-0 {
+    margin-top: 0px;
+}
+
+.mt-10 {
+    margin-top: 10px;
+}
+
+.mt-30 {
+    margin-top: 30px;
+}
+
+.mb-0 {
+    margin-bottom: 0px;
+}
+
 @media (max-height: 843px) {
+
     label,
     .div-text {
         font-size: 1rem !important;
-        /* margin-top: 0px; */
     }
-
-    /* .input-text {
-        margin-top: 10px;
-    } */
 
     .btn-submit,
     .btn-submit:focus,
     .btn-submit:active {
+        background-color: #173965 !important;
+        color: white;
         height: 75px;
         padding: 15px 0px;
     }
 
     #submission-container {
         padding-top: 15px;
-    }
-
-    #submission-form {
-        margin-top: 0px;
     }
 }
