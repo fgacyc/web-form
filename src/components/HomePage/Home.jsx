@@ -41,7 +41,6 @@ export default function Home() {
 
     return (
         <>
-            {/* <Button>hii</Button> */}
             <section id='landing' className='flex flex-col justify-between align-center'>
                 <img src="/images/CYC_logo.png" alt="CYC Logo" id='cyc-logo' className='mt-45' />
                 <img src="/images/KV_title.png" alt="Landing Title" />
@@ -107,10 +106,6 @@ export default function Home() {
                 </SwiperSlide>
             </Swiper>
             <Main />
-            {/* <Team selected_team={"people"} />
-            <Team selected_team={"communication"} />
-            <Team selected_team={"creative"} />
-            <Team selected_team={"wonderkids"} /> */}
         </>
     )
 }

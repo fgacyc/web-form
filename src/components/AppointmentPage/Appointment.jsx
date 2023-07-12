@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../../App.css";
 import "./appointment.css"
 import { hostURL } from "../../config.js";
@@ -50,7 +51,7 @@ function DanceInfo() {
 
                 4. Selected one will be announced by the end of July! 📢<br /><br />
             </p>
-            <hr /><br />
+            <hr />
             <p className="appointment-p">
                 ✨面试规则：-✨<br /><br /><br />
 
@@ -67,7 +68,7 @@ function DanceInfo() {
 
                 4.入选者将会在7月尾收到通知! 📣
             </p>
-
+            <hr />
             <div className="flex flex-col">
                 <MusicButton
                     content={"Music 1: 7/11"}
@@ -84,7 +85,8 @@ function DanceInfo() {
                     color={"#E46E48"}
                     link={"https://firebasestorage.googleapis.com/v0/b/cyc-ents.appspot.com/o/recruitment%2Fmusic%2FOne%20And%20Only.mp4?alt=media&token=25dda039-777e-4257-b424-c527c3a4b21a"}
                 />
-            </div>
+            </div><br />
+            <hr />
         </>
     )
 }
@@ -113,6 +115,8 @@ function VocalInfo() {
 }
 
 export default function Appointment() {
+    const navigate = useNavigate();
+
     const [userDatas, setUserDatas] = useState(null);
     const [ministry, setMinistry] = useState("general");
     const [appoinmentTime, setAppoinmentTime] = useState("");
@@ -150,11 +154,11 @@ export default function Appointment() {
 
     async function createAppointment() {
         let appointment = {
-            appointment_time: appoinmentTime,
+            appointment_time: parseInt(appoinmentTime),
         }
 
         let data = await postReq(`/appointment/${RID}`, appointment);
-        console.log(data);
+        navigate(`/milestone/${RID}`);
     }
 
     function handleSubmit(e) {
@@ -169,7 +173,7 @@ export default function Appointment() {
 
     return (
         <div
-            className="flex flex-col justify-between appointment-container"
+            className="flex flex-col justify-between appointment-container align-center"
         >
             <div>
                 <h3 className="appointment-h3">

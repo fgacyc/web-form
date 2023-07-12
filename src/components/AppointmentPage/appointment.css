@@ -31,22 +31,26 @@
     text-align: center;
 }
 
-.appointment-select {
-    margin-top: 10px;
-    height: 64px;
-}
-
-.btn-submit,
-.btn-audio {
-    background-color: #173965;
-    color: white !important;
+.appointment-select,
+.appointment-select:focus {
+    width: 100% !important;
+    margin-top: 10px !important;
+    height: 64px !important;
 }
 
 .btn-submit {
+    cursor: pointer;
     margin: 35px 0px;
+    background-color: #173965 !important;
+    color: white !important;
+    width: 100%;
 }
 
-.btn-audio {
+.btn-audio,
+.btn-audio:focus,
+.btn-audio:active {
+    cursor: pointer;
+    color: white !important;
     padding: 15px 45px !important;
 }
 
@@ -71,25 +75,4 @@
 
 .mb-0 {
     margin-bottom: 0px;
-}
-
-@media (max-height: 843px) {
-
-    label,
-    .div-text {
-        font-size: 1rem !important;
-    }
-
-    .btn-submit,
-    .btn-submit:focus,
-    .btn-submit:active {
-        background-color: #173965 !important;
-        color: white;
-        height: 75px;
-        padding: 15px 0px;
-    }
-
-    #submission-container {
-        padding-top: 15px;
-    }
 }

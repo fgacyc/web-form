@@ -1,0 +1,55 @@
+.timeline {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5px;
+    padding-top: 15px;
+}
+
+.timeline-event {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.bullet {
+    width: 6px;
+    height: 6px;
+    background-color: #1f436c;
+    border-radius: 100%;
+    position: absolute;
+    left: -2px;
+    top: -5px;
+}
+
+.line {
+    margin-top: 5px;
+    height: 64px;
+    border-left: 2px solid #f2f3f5;
+    filter: brightness(95%);
+}
+
+.event-content {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    margin-top: -9px;
+}
+
+.timeline-h3,
+.timeline-p {
+    color: black;
+    font-family: "SF Pro Display";
+    font-style: normal;
+    font-weight: lighter;
+}
+
+.timeline-h3 {
+    margin: 0;
+    font-size: 0.875rem;
+}
+
+.timeline-p {
+    margin: 7px 0 0;
+    font-size: 0.75rem;
+    opacity: 0.57;
+}
