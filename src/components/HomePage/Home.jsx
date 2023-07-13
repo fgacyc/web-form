@@ -12,6 +12,7 @@ export default function Home() {
     const [startX, setStartX] = useState(null);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         document.body.classList.add('no-scroll');
 
         return () => {
