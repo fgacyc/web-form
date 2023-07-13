@@ -156,7 +156,7 @@ const ministry_name_map ={
 
 export function findMinistry(name){
     // return team name, department name, ministry name
-    if (name ==="Fashion & Image") return ["creative", "arts", "fashion&image"];
+    if (name ==="fashion & image") return ["creative", "arts", "fashion&image"];
     name = name.toLowerCase();
 
     let ministry = "";
