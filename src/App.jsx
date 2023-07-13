@@ -31,7 +31,7 @@ function App() {
       <Route path='/complete' element={<Complete />} />
       <Route path='/form' element={<Submission />} />
       <Route path='/appointment' element={<Appointment />} />
-      <Route path='/appointment/:RID' element={<Appointment />} />
+      <Route path='/appointment/:date/:RID' element={<Appointment />} />
       <Route path='milestone' element={<Milestone />} />
       <Route path='milestone/:RID' element={<Milestone />} />
     </Routes>
