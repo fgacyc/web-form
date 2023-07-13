@@ -144,9 +144,8 @@ export default function Appointment() {
             appointment_time: parseInt(date),
         }
 
-        // console.log(appointment);
+        console.log(appointment);
         let data = await postReq(`/appointment/${RID}`, appointment);
-        // console.log(data)
         navigate(`/milestone/${RID}`);
     }
 
@@ -172,6 +171,13 @@ export default function Appointment() {
             alert('Please answer all the general questions.');
             return;
         }
+
+        // console.log(newFormData);
+        postReq(`/interview/answers/candidate/${RID}`, {"answers":newFormData}).then(res => {
+            if(res.status ==="failed"){
+                alert("You have already submitted your answers");
+            }
+        })
 
         // console.log(newFormData);
         setFormData(newFormData);
