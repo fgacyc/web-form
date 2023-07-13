@@ -1,10 +1,10 @@
 
 // cloud prod
-// export  const hostURL = "https://api.enjoycoding.me"
+export  const hostURL = "https://api.enjoycoding.me"
 
 
 // cloud dev
-export  const hostURL = "https://api.enjoycoding.me/dev";
+//export  const hostURL = "https://api.enjoycoding.me/dev";
 
 
 // local dev
