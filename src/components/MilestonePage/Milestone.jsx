@@ -61,6 +61,7 @@ export default function Milestone() {
         };
 
         fetchData();
+        alert("Please take a screenshot of your QR code and show it to the interviewer during your interview.");
     }, []);
 
 
