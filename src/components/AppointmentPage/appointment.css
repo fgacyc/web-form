@@ -22,6 +22,7 @@
 .appointment-container {
     background-color: #f5f5f8;
     padding: 0 35px;
+    min-height: 100vh;
 }
 
 .appointment-h3 {

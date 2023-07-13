@@ -6,18 +6,7 @@ import "./appointment.css"
 import { hostURL } from "../../config.js";
 import { capitalFirstLetter } from "../../js/string";
 import { postReq } from "../../js/requests";
-
-function AppointmentDatePicker({ ministry, appointmentTimes }) {
-    return (
-        <optgroup key={ministry} label={capitalFirstLetter(ministry)}>
-            {appointmentTimes[ministry].map((time) => (
-                <option key={time.value} value={time.value}>
-                    {time.label}
-                </option>
-            ))}
-        </optgroup>
-    );
-}
+import { generalQuestions } from "./generalQuestions";
 
 function MusicButton({ content, color, link }) {
     function handleAudio(link) {
@@ -118,45 +107,44 @@ export default function Appointment() {
     const navigate = useNavigate();
 
     const [userDatas, setUserDatas] = useState(null);
-    const [ministry, setMinistry] = useState("general");
-    const [appoinmentTime, setAppoinmentTime] = useState("");
+    const [song, setSong] = useState("");
+    const [instrument, setInstrument] = useState("");
+    const [others, setOthers] = useState("");
+    const [formData, setFormData] = useState([]);
 
     // const RID = useParams().RID || '64a792fae3a86cdad7522bd6';
     const RID = useParams().RID || '64a792fae3a86cdad7522bd7';
     // const RID = useParams().RID || '64a792fae3a86cdad7522bde';
+    const date = useParams().date || 1689228232;
 
     const url = hostURL;
-
-    const appointmentTimes = {
-        general: [
-            { value: "1689418800", label: "15/7/2023 (Sat) 7pm" },
-            { value: "1689492600", label: "16/7/2023 (Sun) 3.30pm" },
-            { value: "1690018200", label: "22/7/2023 (Sat) 5.30pm" },
-        ],
-        dance: [
-            { value: "1689998400", label: "22/7/2023 (Sat) 12pm" },
-            { value: "1690099200", label: "23/7/2023 (Sun) 4pm" },
-        ],
-    };
 
     useEffect(() => {
         fetch(url + `/recruiter/${RID}`)
             .then(res => res.json())
             .then(data => {
                 setUserDatas(data);
-                data.info.ministry[2] === "dance" ? setMinistry("dance") : null;
             });
     }, []);
 
-    function appoinmentTimeHandler(e) {
-        setAppoinmentTime(e.target.value);
-    };
+    function handleSong(e) {
+        setSong(e.target.value);
+    }
+
+    function handleInstrument(e) {
+        setInstrument(e.target.value);
+    }
+
+    function handleOthers(e) {
+        setOthers(e.target.value);
+    }
 
     async function createAppointment() {
         let appointment = {
-            appointment_time: parseInt(appoinmentTime),
+            appointment_time: parseInt(date),
         }
 
+        console.log(appointment);
         let data = await postReq(`/appointment/${RID}`, appointment);
         navigate(`/milestone/${RID}`);
     }
@@ -164,11 +152,29 @@ export default function Appointment() {
     function handleSubmit(e) {
         e.preventDefault();
 
-        if (appoinmentTime === "") {
-            alert('Please select a date for the interview')
-        } else {
-            createAppointment();
+        const inputs = Array.from(document.querySelectorAll('.submission-form textarea, .submission-form select'));
+        const newFormData = inputs.map((input, index) => ({
+            type: index === 5 ? userDatas.info.ministry[2] : "general",
+            question: generalQuestions[index] || (userDatas.info.ministry[2] === "dance" ? "Pick a Song" : "Pick an Instrument"),
+            candidate: input.value === "others" ? others : input.value,
+            interviewer: null,
+        }));
+
+        if (instrument === "others" && others === "") {
+            alert('Please specific your instrument.');
+            return;
         }
+
+
+        const hasEmptyField = newFormData.some(data => data.candidate.trim() === '');
+        if (hasEmptyField) {
+            alert('Please answer all the general questions.');
+            return;
+        }
+
+        console.log(newFormData);
+        setFormData(newFormData);
+        createAppointment();
     }
 
     return (
@@ -181,7 +187,7 @@ export default function Appointment() {
                 </h3>
 
                 {
-                    ministry === "dance" && <DanceInfo />
+                    userDatas && userDatas.info.ministry[2] === "dance" && <DanceInfo />
                 }
 
                 {
@@ -190,7 +196,7 @@ export default function Appointment() {
 
                 {
                     userDatas && (
-                        <form action="#" className="flex flex-col submission-form">
+                        <div className="flex flex-col">
                             <label className="input-text">Name</label>
                             <div className="div-text">{userDatas.info.name}</div>
 
@@ -198,21 +204,82 @@ export default function Appointment() {
                             <div className="div-text">{capitalFirstLetter(userDatas.info.ministry[2])}</div>
 
                             <label className="input-text">Appointment Date</label>
-                            <select
-                                className="appointment-select"
-                                value={appoinmentTime}
-                                onChange={appoinmentTimeHandler}
-                            >
-                                <option value="" disabled hidden>Select an appointment date</option>
+                            <div className="div-text">{`${new Date(parseInt(date) * 1000).toLocaleDateString([], { year: 'numeric', month: 'long', day: 'numeric' })} 
+                            ${new Date(parseInt(date) * 1000).toLocaleTimeString([], { hour: 'numeric', minute: 'numeric' })}`}</div>
+                        </div>
 
-                                <AppointmentDatePicker
-                                    ministry={ministry}
-                                    appointmentTimes={appointmentTimes}
-                                />
-                            </select>
-                        </form>
                     )
                 }
+
+                <h3 className="appointment-h3">
+                    General Questions
+                </h3>
+
+                <form action="#" className="flex flex-col submission-form">
+                    {
+                        generalQuestions.map((question, index) => {
+                            return (
+                                <div key={index} className="flex flex-col">
+                                    <label className="input-text">{question}</label>
+                                    <textarea
+                                        className="div-text"
+                                        cols="30"
+                                        rows="5"
+                                        name={`answer-${index}`}>
+                                    </textarea>
+                                </div>
+                            )
+                        })
+                    }
+
+                    {
+                        userDatas && userDatas.info.ministry[2] === "dance" && (
+                            <div key={5} className="flex flex-col">
+                                <label className="input-text">Pick a song</label>
+                                <select
+                                    className="appointment-select"
+                                    value={song}
+                                    name={`answer-5`}
+                                    onChange={(e) => { handleSong(e) }}
+                                >
+                                    <option value="" disabled hidden>Select a song</option>
+                                    <option value="7/11">7/11  (Beyoncé)</option>
+                                    <option value="I like that">I like that (Houston ft. Chinggy, Nate Dog & I-20)</option>
+                                    <option value="One & Only">One & Only (Planetboom)</option>
+                                </select>
+                            </div>
+                        )
+                    }
+
+                    {
+                        userDatas && userDatas.info.ministry[2] === "vocal" && (
+                            <div key={5} className="flex flex-col">
+                                <label className="input-text">Pick an instrument</label>
+                                <select
+                                    className="appointment-select"
+                                    value={instrument}
+                                    name={`answer-5`}
+                                    onChange={(e) => { handleInstrument(e) }}
+                                >
+                                    <option value="" disabled hidden>Select an instrument</option>
+                                    <option value="Bass">Bass</option>
+                                    <option value="Drum">Drum</option>
+                                    <option value="Keyboard">Keyboard</option>
+                                    <option value="Guitar">Guitar</option>
+                                    <option value="others">Others</option>
+                                </select>
+                                {instrument === 'others' && (
+                                    <input
+                                        style={{width: "100"}}
+                                        type="text"
+                                        onChange={(e) => {handleOthers(e)}}
+                                        placeholder="Specify your instrument"
+                                    />
+                                )}
+                            </div>
+                        )
+                    }
+                </form>
             </div >
             <button
                 className="btn-submit"
