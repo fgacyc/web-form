@@ -1,6 +1,7 @@
 .milestone-container {
     background-color: #f5f5f8;
     padding: 0 35px;
+    min-height: 100vh;
 }
 
 .milestone-h3,
@@ -38,4 +39,8 @@
 .icons{
     margin-right: 5px;
     cursor: pointer;
+}
+
+.qrCode-container{
+    padding: 15px 0px;
 }

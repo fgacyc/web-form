@@ -144,8 +144,9 @@ export default function Appointment() {
             appointment_time: parseInt(date),
         }
 
-        console.log(appointment);
+        // console.log(appointment);
         let data = await postReq(`/appointment/${RID}`, appointment);
+        // console.log(data)
         navigate(`/milestone/${RID}`);
     }
 
@@ -172,7 +173,7 @@ export default function Appointment() {
             return;
         }
 
-        console.log(newFormData);
+        // console.log(newFormData);
         setFormData(newFormData);
         createAppointment();
     }
