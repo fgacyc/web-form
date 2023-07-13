@@ -7,10 +7,12 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper";
 import Main from '../MainPage/Main';
 import { handleScroll } from '../../js/scroll';
+
 export default function Home() {
     const [startX, setStartX] = useState(null);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         document.body.classList.add('no-scroll');
 
         return () => {
@@ -105,10 +107,6 @@ export default function Home() {
                 </SwiperSlide>
             </Swiper>
             <Main />
-            {/* <Team selected_team={"people"} />
-            <Team selected_team={"communication"} />
-            <Team selected_team={"creative"} />
-            <Team selected_team={"wonderkids"} /> */}
         </>
     )
 }

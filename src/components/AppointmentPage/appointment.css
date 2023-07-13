@@ -1,0 +1,79 @@
+.input-text,
+.div-text,
+.appointment-h3 {
+    font-size: 1.125rem;
+    font-family: "SF Pro Display";
+}
+
+.input-text {
+    color: #173965;
+    font-weight: 800;
+    margin-top: 30px;
+    margin-right: 10px !important;
+}
+
+.div-text {
+    color: black;
+    opacity: 0.57;
+    font-weight: 400 !important;
+    margin-top: 10px;
+}
+
+.appointment-container {
+    background-color: #f5f5f8;
+    padding: 0 35px;
+    min-height: 100vh;
+}
+
+.appointment-h3 {
+    color: #21416d;
+    font-weight: 600;
+    padding-top: 25px;
+    text-align: center;
+}
+
+.appointment-select,
+.appointment-select:focus {
+    width: 100% !important;
+    margin-top: 10px !important;
+    height: 64px !important;
+}
+
+.btn-submit {
+    cursor: pointer;
+    margin: 35px 0px;
+    background-color: #173965 !important;
+    color: white !important;
+    width: 100%;
+}
+
+.btn-audio,
+.btn-audio:focus,
+.btn-audio:active {
+    cursor: pointer;
+    color: white !important;
+    padding: 15px 45px !important;
+}
+
+.appointment-p {
+    color: black;
+    opacity: 0.57;
+    font-weight: 400 !important;
+    font-size: 0.875rem;
+}
+
+.mt-0 {
+    margin-top: 0px;
+}
+
+.mt-10 {
+    margin-top: 10px;
+}
+
+.mt-30 {
+    margin-top: 30px;
+}
+
+.mb-0 {
+    margin-bottom: 0px;
+}

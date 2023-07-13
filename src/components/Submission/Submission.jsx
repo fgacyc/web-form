@@ -8,7 +8,7 @@ import { hostURL } from "../../config.js";
 
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import {findMinistryNeeds} from "../../data/ministry_needs.js"; // Import css
+import { findMinistryNeeds } from "../../data/ministry_needs.js"; // Import css
 
 export default function Submission() {
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
@@ -33,11 +33,13 @@ export default function Submission() {
         }
         setSelectedMinistry(selectedMinistry[0]);
 
-        const targetTimestamp = 1688826600;
-        const currentTimestamp = Math.floor(Date.now() / 1000);
+        const closeDate = new Date('16 July 2023 18:00:00');
+        const currentDate = new Date();
+        // const targetTimestamp = 1688826600;
+        // const currentTimestamp = Math.floor(Date.now() / 1000);
 
-        if (currentTimestamp >= targetTimestamp) {
-            setIsButtonDisabled(false);
+        if (currentDate > closeDate) {
+            setIsButtonDisabled(true);
         }
     }, []);
 
@@ -104,7 +106,7 @@ export default function Submission() {
         let url = hostURL + "/recruiter";
         let pastoral_team = info.pastoral_team[0]
         let department = info.ministry[1]
-        let needs = findMinistryNeeds(pastoral_team ,department);
+        let needs = findMinistryNeeds(pastoral_team, department);
 
         let options = {
             method: "POST",
@@ -117,9 +119,13 @@ export default function Submission() {
             let response = await fetch(url, options);
             let data = await response.json();
 
-            if (data.countdown[department] > needs){
+            if (data.status === "failed" && data.error === "email already exist") {
+                return "failed";
+            }
+
+            if (data.countdown[department] > needs) {
                 localStorage.setItem("cyc-countdown-ifOver", "true");
-            }else{
+            } else {
                 localStorage.setItem("cyc-countdown-ifOver", "false");
             }
 
@@ -149,11 +155,11 @@ export default function Submission() {
             return;
         }
 
-        const ifSubmitted = localStorage.getItem("cyc-submission");
-        if (ifSubmitted === "true") {
-            alert("You have already submitted your application. Please wait for the response.");
-            return;
-        }
+        // const ifSubmitted = "false"
+        // if (ifSubmitted === "true") {
+        //     alert("You have already submitted your application. Please wait for the response.");
+        //     return;
+        // }
 
         const isNameValid = validateName();
         const isPhoneValid = validatePhone();
@@ -183,6 +189,9 @@ export default function Submission() {
             if (result === true) {
                 navigate("/complete");
                 localStorage.setItem("cyc-submission", "true")
+            } else if (result === "failed") {
+                alert("You have already submitted your application. Please wait for the response.")
+                navigate("/");
             } else {
                 alert("Something went wrong, Please try again.");
             }
@@ -214,22 +223,16 @@ export default function Submission() {
     };
 
     return (
-        <section
-            style={{ backgroundColor: '#f5f5f8', padding: "0 35px" }}
-            className="flex flex-col justify-between"
-        >
+        <div className="flex flex-col justify-between submission-container">
 
             <div>
-                <div id="submission-container" className='flex' style={{ paddingTop: "25px" }}>
+                <div className='flex submission-back-container'>
                     <img src="/icons/left.svg" alt="Back Icon" onClick={() => { navigate(-1) }} />
-                    <h3 style={{
-                        color: "#21416d", fontSize: "1.125rem", fontFamily: "SF Pro Display",
-                        fontWeight: "600", marginLeft: "90px"
-                    }}>
+                    <h3 className="submission-h3">
                         Submission
                     </h3>
                 </div>
-                <form action="#" id="submission-form" className="flex flex-col" style={{ marginTop: "10px" }}>
+                <form action="#" className="flex flex-col submission-form">
                     <label htmlFor="name" className="input-text">Full Name</label>
                     <input type="text" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)} />
                     {nameError && <div className="input-error">{nameError}</div>}
@@ -243,9 +246,13 @@ export default function Submission() {
                     {emailError && <div className="input-error">{emailError}</div>}
 
                     <label htmlFor="pastoral_team" className="input-text">Pastoral Team</label>
-                    <select name="pastoral_team" id="pastoral_team"
-                        style={{ height: "64px" }}
-                        value={pastoralTeam} onChange={pastoralTeamHandler}>
+                    <select
+                        className="submission-select"
+                        name="pastoral_team"
+                        id="pastoral_team"
+                        value={pastoralTeam}
+                        onChange={pastoralTeamHandler}
+                    >
                         <option value="" disabled hidden>Select a pastoral team</option>
                         <optgroup label="Wonderkids">
                             <option value="wonderkids">Wonderkids</option>
@@ -276,18 +283,17 @@ export default function Submission() {
                 </form>
             </div>
             <div className='flex flex-col align-center'>
-                <h4 className="input-text" style={{ marginBottom: "10px 0px" }}>Your Ministry Selection</h4>
+                <h4 className="input-text submission-h4">Your Ministry Selection</h4>
                 {selectedMinistry &&
                     <SelectedMinistry ministry={selectedMinistry} />
                 }
             </div>
             <button
                 className="btn-submit"
-                style={{ backgroundColor: "#173965", color: "white", marginBottom: "35px" }}
                 onClick={handleSubmit}
             >
                 Submit
             </button>
-        </section>
+        </div>
     )
 }
