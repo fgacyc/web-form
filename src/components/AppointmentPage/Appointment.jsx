@@ -174,7 +174,7 @@ export default function Appointment() {
 
         // console.log(newFormData);
         postReq(`/interview/answers/candidate/${RID}`, {"answers":newFormData}).then(res => {
-            //console.log(res)
+            console.log(res)
             if(res.status ==="failed"){
                 alert("You have already submitted your answers");
             }
