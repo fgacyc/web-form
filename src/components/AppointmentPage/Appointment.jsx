@@ -177,12 +177,15 @@ export default function Appointment() {
             console.log(res)
             if(res.status ==="failed"){
                 alert("You have already submitted your answers");
+                navigate(`/milestone/${RID}`);
+            }else{
+                // console.log(newFormData);
+                setFormData(newFormData);
+                createAppointment();
             }
         })
 
-        // console.log(newFormData);
-        setFormData(newFormData);
-        createAppointment();
+
     }
 
     return (
