@@ -263,7 +263,7 @@ export default function Appointment() {
                     }
 
                     {
-                        userDatas && userDatas.info.ministry[2] === "vocal" && (
+                        userDatas && userDatas.info.ministry[2] === "musician" && (
                             <div key={5} className="flex flex-col">
                                 <label className="input-text">Pick an instrument</label>
                                 <select
