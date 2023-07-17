@@ -143,7 +143,7 @@ export default function Submission() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        let ifStop = false;
+        let ifStop = true;
 
         if (ifStop) {
             alert("Submission is finished. Please wait for the announcement.");
