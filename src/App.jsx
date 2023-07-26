@@ -10,6 +10,7 @@ import Submission from './components/Submission/Submission';
 import Appointment from './components/AppointmentPage/Appointment';
 import Milestone from './components/MilestonePage/Milestone';
 import InterviewerDetail from './components/InterviewerDetail/InterviewerDetail';
+import Attendance from './components/Attendance/Attendance';
 
 function clearDepartment() {
   localStorage.removeItem('cyc-department-selected');
@@ -37,6 +38,7 @@ function App() {
       <Route path='milestone/:RID' element={<Milestone />} />
       <Route path='recruiter' element={<InterviewerDetail />} />
       <Route path='recruiter/:RID' element={<InterviewerDetail />} />
+      <Route path='attendance' element={<Attendance />}/>
     </Routes>
   )
 }
