@@ -1,3 +1,4 @@
+import '../AppointmentPage/appointment.css'
 import { useEffect, useState } from "react";
 import { organization_structure } from "../../data/organization_structure";
 import { pastoral_team, formatOption } from "../../data/pastoral_team";
@@ -240,7 +241,7 @@ export default function Attendance() {
             <div>
                 <h3 className="appointment-h3">Orientation Attendance</h3>
 
-                <div action="#" className="flex flex-col">
+                <div className="flex flex-col">
                     <label className="input-text">Pastoral Team</label>
                     <PastoralTeamPicker onSelect={(selectedValue) => { handleSelect(selectedValue, setPastoral, setPastoralError) }} />
                     {pastoralError && <div className="input-error">{pastoralError}</div>}
