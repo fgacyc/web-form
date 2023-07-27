@@ -1,4 +1,4 @@
-const organization_structure = {
+export const organization_structure = {
     "people_experience": {
         "people": [
             "usher",

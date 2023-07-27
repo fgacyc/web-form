@@ -1,4 +1,4 @@
-let pastoral_team = {
+export let pastoral_team = {
     "wonderkids": [
         "wonderkids"
     ],
@@ -15,7 +15,7 @@ let pastoral_team = {
         "young_dreamer",
         "joshua_zone"
     ],
-    "others":[
+    "others": [
         "serdang",
         "kepong",
         "usj",
@@ -25,13 +25,20 @@ let pastoral_team = {
     ]
 }
 
-export function findPastoralTeam(name){
+export function formatOption(name) {
+    return name
+        .toLowerCase()
+        .replace(/_/g, ' ')
+        .replace(/\b\w/g, match => match.toUpperCase());
+}
+
+export function findPastoralTeam(name) {
     name = name.toLowerCase();
     let team = "";
     let zone = "";
 
-    for (let key in pastoral_team){
-        if (pastoral_team[key].includes(name)){
+    for (let key in pastoral_team) {
+        if (pastoral_team[key].includes(name)) {
             team = key;
             zone = name;
             break;
