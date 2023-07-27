@@ -14,6 +14,7 @@ import Attendance from './components/Attendance/Attendance';
 import LeaderRegistration from './components/Registration/LeaderRegistration/LeaderRegistration';
 import LeaderRegistrationSuccess from './components/Registration/LeaderRegistration/LeaderRegistrationSuccess';
 import MemberRegistration from './components/Registration/MemberRegistration/MemberRegistration';
+import OrientationConfirmation from "./components/orientation/OrientationConfirmation.jsx";
 
 function clearDepartment() {
   localStorage.removeItem('cyc-department-selected');
@@ -42,6 +43,7 @@ function App() {
       <Route path='recruiter' element={<InterviewerDetail />} />
       <Route path='recruiter/:RID' element={<InterviewerDetail />} />
       <Route path='attendance' element={<Attendance />}/>
+      <Route path='orientation_confirmation/:RID' element={<OrientationConfirmation />}/>
       <Route path='leader_registration' element={<LeaderRegistration />} />
       <Route path='leader_reg_success' element={<LeaderRegistrationSuccess />} />
       <Route path='member_registration' element={<MemberRegistration />} />
