@@ -50,7 +50,8 @@ export default function OrientationConfirmation() {
                     <div>
                         <div style={textStyle}>{`Hi, ${userData.info.name}`},</div>
                         <div style={textStyle}>Congratulations!</div>
-                        <div style={textStyle}>You nailed the interview!</div>
+                        <div style={textStyle}>You passed the interview,</div>
+                        <div style={textStyle}>Welcome to {userData.info.ministry[2]} Ministry!</div>
                         <div style={textStyle}>Looking forward to meeting you on Sunday!</div>
                     </div>
                 }
