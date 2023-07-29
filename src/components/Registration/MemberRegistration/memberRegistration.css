@@ -1,0 +1,57 @@
+/* member card */
+.mem-card-con {
+    width: 100%;
+    overflow: auto;
+    max-width: 400px;
+}
+
+.mem-card-h4 {
+    color: white;
+    font-size: 1rem;
+    font-family: 'FZChaoCuHei';
+    font-weight: 400;
+}
+
+.mem-card-h2 {
+    color: white;
+    font-size: 1.875rem;
+    font-family: 'SF Pro Display';
+    font-weight: 800;
+}
+
+/* member registration */
+.mem-reg-con {
+    background-image: url('/images/KV_white_bg.png');
+    min-height: 100vh;
+    padding: 0px 35px;
+}
+
+.h3-mem-reg-con {
+    color: #21416D;
+    font-size: 1.125rem;
+    font-family: "SF Pro Display";
+    font-weight: 600;
+    text-align: center;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.square-add-button,
+.square-add-button:hover {
+    width: 80px;
+    height: 80px;
+    background-color: #193a66;
+    border: none;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 15px 0px;
+}
+
+.square-add-button:hover {
+    opacity: 0.8;
+}

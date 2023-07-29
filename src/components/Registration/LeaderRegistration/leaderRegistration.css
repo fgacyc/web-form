@@ -1,0 +1,48 @@
+/* leader registration */
+
+.transparent-background {
+    background-color: transparent;
+}
+
+.mt-35 {
+    margin-top: 35px;
+}
+
+.close-button {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    background-color: #6c5c5c;
+    border-radius: 100%;
+    padding: 8px;
+    cursor: pointer;
+}
+
+/* leader registration success */
+.led-reg-success-con {
+    background-image: url('/images/KV_white_bg.png');
+    padding: 0px 35px;
+    min-height: 100vh;
+}
+
+.led-reg-success-con-h3 {
+    color: #21416d;
+    font-size: 1.125rem;
+    font-family: 'SF Pro Display';
+    font-weight: 600;
+    margin-top: 60px;
+}
+
+.mt-10 {
+    margin-top: 10px;
+}
+
+.break-all {
+    word-break: break-all;
+}
+
+.mem-reg-qr {
+    width: 250px;
+    height: 250px;
+    padding: 15px 0px;
+}

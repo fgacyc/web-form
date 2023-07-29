@@ -58,3 +58,12 @@ export const validateID = (id, setField) => {
     setField("");
     return true;
 };
+
+export const validateField = (field, setFieldError, errorMsg) => {
+    if (field === "") {
+        setFieldError(errorMsg);
+        return false;
+    }
+    setFieldError("");
+    return true;
+};
