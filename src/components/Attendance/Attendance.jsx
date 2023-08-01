@@ -6,6 +6,7 @@ import { hostURL } from "../../config";
 import { postReq } from "../../js/requests";
 import { education_data } from "../../data/education_data";
 import { getTimeStamp } from "../../js/dateTime";
+import { validateField } from '../../js/form';
 
 function PastoralTeamPicker({ onSelect }) {
     const [showInitialOption, setShowInitialOption] = useState(true);
@@ -159,15 +160,6 @@ export default function Attendance() {
     const handleSelect = (selectedValue, setField, setFieldError) => {
         setField(selectedValue);
         setFieldError("");
-    };
-
-    const validateField = (field, setFieldError, errorMsg) => {
-        if (field === "") {
-            setFieldError(errorMsg);
-            return false;
-        }
-        setFieldError("");
-        return true;
     };
 
     const updateMsj = (value) => {

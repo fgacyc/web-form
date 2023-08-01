@@ -1,0 +1,19 @@
+/* leader registration */
+
+.transparent-background {
+    background-color: transparent;
+}
+
+.mt-35 {
+    margin-top: 35px;
+}
+
+.close-button {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    background-color: #6c5c5c;
+    border-radius: 100%;
+    padding: 8px;
+    cursor: pointer;
+}

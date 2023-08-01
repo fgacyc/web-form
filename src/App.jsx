@@ -12,7 +12,7 @@ import Milestone from './components/MilestonePage/Milestone';
 import InterviewerDetail from './components/InterviewerDetail/InterviewerDetail';
 import Attendance from './components/Attendance/Attendance';
 import LeaderRegistration from './components/Registration/LeaderRegistration/LeaderRegistration';
-import LeaderRegistrationSuccess from './components/Registration/LeaderRegistration/LeaderRegistrationSuccess';
+import LeaderRegistrationSuccess from './components/Registration/LeaderRegistrationSuccess/LeaderRegistrationSuccess';
 import MemberRegistration from './components/Registration/MemberRegistration/MemberRegistration';
 import OrientationConfirmation from "./components/orientation/OrientationConfirmation.jsx";
 
