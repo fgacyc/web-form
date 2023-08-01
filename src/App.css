@@ -18,6 +18,11 @@
     src: url('./fonts/SF-Pro-Display-Black.otf');
 }
 
+@font-face {
+    font-family: Sorren Black;
+    src: url('./fonts/Sorren Black.otf');
+}
+
 ::-webkit-scrollbar {
     width: 0;
     background-color: transparent;
