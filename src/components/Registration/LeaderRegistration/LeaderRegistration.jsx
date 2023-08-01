@@ -1,12 +1,13 @@
 import '../../AppointmentPage/appointment.css'
 import './leaderRegistration.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PubSub from 'pubsub-js';
 import { role_data } from './role_data';
 import { Input } from '../../Form/Input/Input';
-import { validateEmail, validateField, validateID, validateName, validatePhone } from '../../../js/form';
+import { getRandomSixDigitPassword, validateEmail, validateField, validateID, validateName, validatePhone } from '../../../js/form';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { set } from 'idb-keyval';
+import { postReq } from '../../../js/requests';
 
 function CloseIcon({ onClose }) {
     return (
@@ -16,6 +17,28 @@ function CloseIcon({ onClose }) {
             className='close-button'
             onClick={onClose}
         />
+    )
+}
+
+function GenderPicker({ onSelect }) {
+    const [showInitialOption, setShowInitialOption] = useState(true);
+
+    const handleSelect = (event) => {
+        const selectedValue = event.target.value;
+        onSelect(selectedValue);
+        setShowInitialOption(false);
+    };
+
+    return (
+        <select
+            className='appointment-select'
+            value={showInitialOption ? '' : undefined}
+            onChange={handleSelect}
+        >
+            <option value='' disabled hidden>Select a gender</option>
+            <option value={'male'}>Male</option>
+            <option value={'female'}>Female</option>
+        </select>
     )
 }
 
@@ -46,16 +69,21 @@ function RolePicker({ onSelect }) {
     )
 }
 
-export default function LeaderRegistration({ onClose }) {
-    const [name, setName] = useState('');
+export default function LeaderRegistration({ onClose, leader }) {
+    const [fname, setFname] = useState('');
+    const [lname, setLname] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('')
     const [id, setId] = useState('')
+    const [gender, setGender] = useState('')
     const [role, setRole] = useState('')
-    const [nameError, setNameError] = useState('');
+    const [cg, setCg] = useState(leader || '')
+    const [fnameError, setFnameError] = useState('');
+    const [lnameError, setLnameError] = useState('');
     const [phoneError, setPhoneError] = useState('');
     const [emailError, setEmailError] = useState('')
     const [idError, setIdError] = useState('')
+    const [genderError, setGenderError] = useState('')
     const [roleError, setRoleError] = useState('')
 
     const navigate = useNavigate();
@@ -77,17 +105,30 @@ export default function LeaderRegistration({ onClose }) {
         PubSub.publish('memberlist', member_data)
     }
 
-    const handleData = () => {
-        if (role === '') {
-            setRole('member');
+    const getCgId = async () => {
+        const leaderData = {
+            name: "Kris Mok",
+            user_id: 33,
         }
 
+        let data = await postReq('/cg', leaderData)
+        console.log(data)
+    }
+
+    const handleData = () => {
         const member_data = {
-            full_name: name,
-            phone,
             email,
-            id,
-            role
+            password: `${getRandomSixDigitPassword()}@Aa`,
+            username: `${fname.toLowerCase()}${lname.toLowerCase()}`,
+            given_name: fname,
+            family_name: lname,
+            name: `${fname} ${lname}`,
+            gender,
+            ic_number: id,
+            phone_number: phone,
+            nickname: null,
+            picture: null,
+            cg_id: null,
         }
 
         if (pathname === '/leader_registration') {
@@ -95,8 +136,9 @@ export default function LeaderRegistration({ onClose }) {
         } else {
             handleMemberList(member_data);
         }
+        console.log(JSON.stringify(member_data));
 
-        // console.log(member_data);
+        return member_data;
     }
 
     const handleNavigate = () => {
@@ -107,18 +149,31 @@ export default function LeaderRegistration({ onClose }) {
         }
     }
 
+    const postLeaderData = async (member_data) => {
+        try {
+            let data = await postReq('/signup', member_data);
+            console.log(data);
+        } catch (error) {
+            console.error('Error during postLeaderData:', error);
+        }
+    };
+
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        const isNameValid = validateName(name, setNameError);
+        const isFnameValid = validateName(fname, setFnameError);
+        const isLnameValid = validateName(lname, setLnameError);
         const isPhoneValid = validatePhone(phone, setPhoneError);
         const isEmailValid = validateEmail(email, setEmailError);
         const isIdValid = validateID(id, setIdError);
-        const isRoleValid = pathname === '/leader_registration' ?
-            validateField(role, setRoleError) : true;
+        const isRoleValid = pathname === '/member_registration' ?
+            validateField(role, setRoleError, "Member's role is required") : true;
 
-        if (isNameValid && isPhoneValid && isEmailValid && isIdValid && isRoleValid) {
-            handleData();
+        if (isFnameValid && isLnameValid && isPhoneValid && isEmailValid && isIdValid && isRoleValid) {
+            const member_data = handleData();
+            console.log(member_data)
+            postLeaderData(member_data);
+
             handleNavigate();
         }
     }
@@ -145,10 +200,17 @@ export default function LeaderRegistration({ onClose }) {
                 <div className={`flex flex-col 
                 ${pathname === '/leader_registration' ? '' : 'mt-35'}`}>
                     <Input
-                        label={'Full Name'}
-                        value={name}
-                        onChange={(event) => { handleChange(event, setName, setNameError) }}
-                        error={nameError}
+                        label={'First Name'}
+                        value={fname}
+                        onChange={(event) => { handleChange(event, setFname, setFnameError) }}
+                        error={fnameError}
+                    />
+
+                    <Input
+                        label={'Last Name'}
+                        value={lname}
+                        onChange={(event) => { handleChange(event, setLname, setLnameError) }}
+                        error={lnameError}
                     />
 
                     <Input
@@ -172,8 +234,14 @@ export default function LeaderRegistration({ onClose }) {
                         error={idError}
                     />
 
+                    <>
+                        <label className='input-text' value={gender}>Gender</label>
+                        <GenderPicker onSelect={(selectedValue) => { handleSelect(selectedValue, setGender, setGenderError) }} />
+                        {genderError && <div className='input-error'>{genderError}</div>}
+                    </>
+
                     {
-                        pathname === '/leader_registration' && (
+                        pathname === '/member_registration' && (
                             <>
                                 <label className='input-text' value={role}>Role</label>
                                 <RolePicker onSelect={(selectedValue) => { handleSelect(selectedValue, setRole, setRoleError) }} />

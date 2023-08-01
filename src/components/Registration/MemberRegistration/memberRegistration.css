@@ -37,7 +37,9 @@
 }
 
 .square-add-button,
-.square-add-button:hover {
+.square-add-button:hover,
+.square-add-button:focus,
+.square-add-button:active {
     width: 80px;
     height: 80px;
     background-color: #193a66;
@@ -53,5 +55,5 @@
 }
 
 .square-add-button:hover {
-    opacity: 0.8;
+    opacity: 0.95;
 }

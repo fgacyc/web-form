@@ -42,10 +42,13 @@ export default function MemberRegistration() {
 
     const colors = ['#336397', '#00bb9e', '#e46e48']
 
+    const [leaderData, setLeaderData] = useState({})
+
     useEffect(() => {
         const fetchLeaderData = async () => {
             let leader_data = await get('leader_data');
-            console.log(leader_data);
+            setLeaderData(leader_data);
+            // console.log(leader_data);
         };
 
         fetchLeaderData();
@@ -62,7 +65,7 @@ export default function MemberRegistration() {
             customUI: ({ onClose }) => {
                 return (
                     <Router>
-                        <LeaderRegistration onClose={onClose} />
+                        <LeaderRegistration onClose={onClose} leader={leaderData.full_name}/>
                     </Router>
                 );
             }

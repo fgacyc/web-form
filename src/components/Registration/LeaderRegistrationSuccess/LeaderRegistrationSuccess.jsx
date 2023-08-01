@@ -1,3 +1,5 @@
+import './leaderRegistrationSuccess.css'
+
 export default function LeaderRegistrationSuccess() {
     return (
         <div className='flex flex-col align-center justify-between led-reg-success-con'>
@@ -9,7 +11,7 @@ export default function LeaderRegistrationSuccess() {
                 <label className='input-text'>Your Default Password</label>
                 <div className='div-text'>123456</div>
                 <label className='input-text'>Member Registration</label>
-                <div className='div-text break-all'>https://fgacyc.com/serve/member_registration</div>
+                <a href="/member_registration" className='div-text break-all deco-none'>https://fgacyc.com/serve/member_registration</a>
             </div>
             <div className='flex flex-col align-center'>
                 <img
