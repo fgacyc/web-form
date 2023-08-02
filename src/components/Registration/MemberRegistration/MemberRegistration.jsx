@@ -232,6 +232,9 @@ export default function MemberRegistration() {
     useEffect(() => {
         const fetchLeaderData = async () => {
             let leader_data = await get('leader_data');
+            if(!leader_data){
+                window.location.href = '/login';
+            }
             setLeaderData(leader_data);
             // console.log(leader_data);
         };
