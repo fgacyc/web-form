@@ -14,6 +14,7 @@ export function capitalizeAndReplace(inputString) {
 }
 
 export function removeCycFromString(inputString) {
-    const resultString = inputString.toLowerCase().replace('cyc', '');
+    const str = String(inputString);
+    const resultString = str.toLowerCase().replace('cyc', '');
     return resultString;
 }

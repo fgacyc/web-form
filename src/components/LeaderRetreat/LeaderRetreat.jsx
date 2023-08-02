@@ -1,11 +1,8 @@
 import './leaderRetreat.css'
 import { useState, useEffect } from 'react';
 import { faq_data } from './leader_retreat_data';
-// import { handlerSectionScroll, handleScrollMostBottom } from '../../js/scroll';
 import { putReq } from "../../js/requests.js";
 import ReactFullpage from '@fullpage/react-fullpage'
-import { handlerSectionScroll, handleScrollMostBottom } from '../../js/scroll';
-import {putReq} from "../../js/requests.js";
 import { removeCycFromString } from '../../js/string';
 
 const LeaderRetreat1 = ({onSignUpClick}) => {
@@ -169,10 +166,10 @@ export default function LeaderRetreat() {
             return;
         }
 
-        const CYC_ID = cycid.trim().substring(3, cycid.trim().length);
+        // const CYC_ID = cycid.trim().substring(3, cycid.trim().length);
 
         let data = {
-            CYC_ID: parseInt(CYC_ID),
+            CYC_ID: parseInt(removeCycFromString(cycid)),
             leader_retreat: {
                 year: 2023,
                 status: "registered"

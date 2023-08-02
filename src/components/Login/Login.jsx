@@ -6,8 +6,8 @@ import { getReq } from '../../js/requests';
 import { removeCycFromString } from '../../js/string';
 
 export default function Login() {
-    const [cycid, setCycid] = useState();
-    const [pwd, setPwd] = useState();
+    const [cycid, setCycid] = useState('');
+    const [pwd, setPwd] = useState('');
     const [cycidError, setCycidError] = useState('');
     const [pwdError, setPwdError] = useState('');
 

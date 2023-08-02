@@ -73,7 +73,7 @@ export const validateField = (field, setFieldError, errorMsg) => {
 export const validateCycId = (cycid, setCycidError) => {
     const regex = /^\d{1,6}$/;
 
-    if (!cycid || cycid.trim() === '') {
+    if (!cycid || cycid === '') {
         setCycidError('CYC ID cannot be empty.');
         return false;
     }
