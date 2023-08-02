@@ -229,11 +229,17 @@ export default function MemberRegistration() {
 
     const [leaderData, setLeaderData] = useState({})
 
+
+
     useEffect(() => {
         const fetchLeaderData = async () => {
             let leader_data = await get('leader_data');
-            if(!leader_data){
+            if(!leader_data){ // if indexDB has no leader data
                 window.location.href = '/login';
+            }else{ // if indexDB has leader data
+                if(leader_data.new_members){ // if there are new members
+                    setMemberlist(leader_data.new_members);
+                }
             }
             setLeaderData(leader_data);
             // console.log(leader_data);
@@ -246,6 +252,10 @@ export default function MemberRegistration() {
 
             return () => PubSub.unsubscribe('memberlist')
         })
+    }, [])
+
+    useEffect(() => {
+
     }, [memberlist])
 
     const addMember = () => {
