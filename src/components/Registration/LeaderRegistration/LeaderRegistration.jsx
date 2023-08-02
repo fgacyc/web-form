@@ -72,7 +72,7 @@ export default function LeaderRegistration({ onClose, leader }) {
             cg_id: null,
         }
 
-        set('leader_data', member_data);
+
 
         return member_data;
     }
@@ -82,9 +82,13 @@ export default function LeaderRegistration({ onClose, leader }) {
             let res = await postReq('/cgl', member_data);
             if (res.status === true) {
                 setCreatedLeaderData(res.data);
-                alert("Please screenshot this page for your reference")
+                await set('leader_data', res.data);
+                setTimeout(() => {
+                    alert("Please screenshot this page for your reference");
+                }, 2000);
+            }else{
+                alert("Error: " + res.error)
             }
-            console.log(res);
         } catch (error) {
             console.error('Error during postLeaderData:', error);
         }
@@ -124,6 +128,7 @@ export default function LeaderRegistration({ onClose, leader }) {
                                 value={fname}
                                 onChange={(event) => { handleChange(event, setFname, setFnameError) }}
                                 error={fnameError}
+                                type='text'
                             />
 
                             <Input
@@ -131,6 +136,7 @@ export default function LeaderRegistration({ onClose, leader }) {
                                 value={lname}
                                 onChange={(event) => { handleChange(event, setLname, setLnameError) }}
                                 error={lnameError}
+                                type='text'
                             />
 
                             <Input
@@ -138,6 +144,7 @@ export default function LeaderRegistration({ onClose, leader }) {
                                 value={phone}
                                 onChange={(event) => { handleChange(event, setPhone, setPhoneError) }}
                                 error={phoneError}
+                                type='number'
                             />
 
                             <Input
@@ -145,6 +152,7 @@ export default function LeaderRegistration({ onClose, leader }) {
                                 value={email}
                                 onChange={(event) => { handleChange(event, setEmail, setEmailError) }}
                                 error={emailError}
+                                type='email'
                             />
 
                             <Input
