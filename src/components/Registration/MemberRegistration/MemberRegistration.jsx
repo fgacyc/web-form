@@ -8,6 +8,7 @@ import { GenderPicker } from '../LeaderRegistration/LeaderRegistration';
 import { role_data } from './role_data';
 import { getRandomSixDigitPassword, validateEmail, validateID, validateName, validatePhone, validateField } from '../../../js/form';
 import { capitalFirstLetter, capitalizeAndReplace } from "../../../js/string.js";
+import { putReq } from '../../../js/requests';
 
 function MemberCard({ name, role, onDelete, color }) {
     const handleDelete = () => {
@@ -99,10 +100,6 @@ function Registration({ onClose }) {
         setFieldError('');
     };
 
-    const handleMemberList = (member_data) => {
-        PubSub.publish('memberlist', member_data)
-    }
-
     const handleData = () => {
         const capitalName = capitalFirstLetter(fname) + ' ' + capitalFirstLetter(lname);
 
@@ -121,9 +118,8 @@ function Registration({ onClose }) {
             cg_id: null,
             role,
         }
-        handleMemberList(member_data);
 
-        return member_data;
+        PubSub.publish('memberlist', member_data)
     }
 
     // const postLeaderData = async (member_data) => {
@@ -149,13 +145,18 @@ function Registration({ onClose }) {
         const isIdValid = validateID(id, setIdError);
         const isRoleValid = validateField(role, setRoleError, "Member's role is required");
 
-        if (isFnameValid && isLnameValid && isPhoneValid && isEmailValid && isIdValid && isRoleValid) {
-            const member_data = handleData();
-            console.log(member_data)
-            // postLeaderData(member_data);
+        // if (isFnameValid && isLnameValid && isPhoneValid && isEmailValid && isIdValid && isRoleValid) {
+        //     const member_data = handleData();
+        //     console.log(member_data)
+        //     // postLeaderData(member_data);
 
-            onClose();
-        }
+        //     onClose();
+        // }
+        handleData();
+        //console.log(member_data)
+        // postLeaderData(member_data);
+
+        onClose();
     }
 
     return (
@@ -234,10 +235,10 @@ export default function MemberRegistration() {
     useEffect(() => {
         const fetchLeaderData = async () => {
             let leader_data = await get('leader_data');
-            if(!leader_data){ // if indexDB has no leader data
+            if (!leader_data) { // if indexDB has no leader data
                 window.location.href = '/login';
-            }else{ // if indexDB has leader data
-                if(leader_data.new_members){ // if there are new members
+            } else { // if indexDB has leader data
+                if (leader_data.new_members) { // if there are new members
                     setMemberlist(leader_data.new_members);
                 }
             }
@@ -247,16 +248,34 @@ export default function MemberRegistration() {
 
         fetchLeaderData();
 
-        PubSub.subscribe('memberlist', (_, member_data) => {
-            setMemberlist([...memberlist, member_data])
 
+
+        PubSub.subscribe('memberlist', (_, member_data) => {
+            addNewMember(member_data)
             return () => PubSub.unsubscribe('memberlist')
         })
     }, [])
 
-    useEffect(() => {
 
+
+    useEffect(() => {
+        //console.log("111", memberlist);
+
+        const new_members = {
+            cg_id: leaderData.cg_id,
+            new_members: memberlist
+        }
+
+        console.log(new_members);
+
+        putReq('/new_members', new_members).then((res) => {
+            console.log(res)
+        })
     }, [memberlist])
+
+    function addNewMember(member) {
+        setMemberlist([...memberlist, member])
+    }
 
     const addMember = () => {
         confirmAlert({
