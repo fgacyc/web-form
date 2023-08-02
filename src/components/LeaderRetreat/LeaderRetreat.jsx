@@ -2,6 +2,7 @@ import './leaderRetreat.css'
 import { useState, useEffect } from 'react';
 import { faq_data } from './leader_retreat_data';
 import { handlerSectionScroll, handleScrollMostBottom } from '../../js/scroll';
+import {putReq} from "../../js/requests.js";
 
 const LeaderRetreat1 = ({ handleTouchStart, handleTouchEnd }) => {
     return (
@@ -153,11 +154,29 @@ export default function LeaderRetreat() {
     const handleSubmit = () => {
         const regex = /^cyc[0-9]{3}$/i;
 
-        if (regex.test(cycid.trim())) {
-            alert('Thank you for registering!');
-        } else {
+        if (!regex.test(cycid.trim())) {
             alert('Please enter a valid CYC ID.');
+            return;
         }
+
+        const CYC_ID = cycid.trim().substring(3, cycid.trim().length);
+
+        let data = {
+            CYC_ID: parseInt(CYC_ID),
+            leader_retreat:{
+                year: 2023,
+                status: "registered"
+            }
+        }
+
+        putReq("/leader_retreat",data).then((res) => {
+            console.log(res)
+            if(res.status){
+                alert('Thank you for registering!');
+            }else{
+                alert(res.error);
+            }
+        });
     }
 
     return (

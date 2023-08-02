@@ -268,7 +268,7 @@ export default function LeaderRegistration({ onClose, leader }) {
                     <img src='/images/completed.png' alt='Complete Icon' className='mt-10' />
                     <div className='flex flex-col'>
                         <label className='input-text'>Your CYC ID</label>
-                        <div className='div-text'>{createdUserData.CYC_ID}</div>
+                        <div className='div-text'>CYC{createdUserData.CYC_ID}</div>
                         <label className='input-text'>Your Default Password</label>
                         <div className='div-text'>{createdUserData.password}</div>
                         <label className='input-text'>Member Registration</label>
