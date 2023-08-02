@@ -10,8 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "party-js": "^2.2.0",
+    "@fullpage/react-fullpage": "^0.1.40",
     "idb-keyval": "^6.2.1",
+    "party-js": "^2.2.0",
     "pubsub-js": "^1.9.4",
     "react": "^18.2.0",
     "react-confirm-alert": "^3.0.6",

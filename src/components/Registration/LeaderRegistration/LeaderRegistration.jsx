@@ -56,6 +56,9 @@ export default function LeaderRegistration({ onClose, leader }) {
 
     const handleData = () => {
         const capitalName = capitalFirstLetter(fname) + ' ' + capitalFirstLetter(lname);
+        if(email ===""){
+            setEmail(`${phone}@fgacyc.com`);
+        }
 
         const member_data = {
             email,
@@ -101,6 +104,7 @@ export default function LeaderRegistration({ onClose, leader }) {
         const isLnameValid = validateName(lname, setLnameError);
         const isPhoneValid = validatePhone(phone, setPhoneError);
         const isEmailValid = validateEmail(email, setEmailError);
+
         const isIdValid = validateID(id, setIdError);
         const isGenderValid = validateField(gender, setGenderError, 'Gender is required')
 
@@ -116,7 +120,7 @@ export default function LeaderRegistration({ onClose, leader }) {
             {!createdUserData
                 ? <form
                     className='flex flex-col justify-between appointment-container align-center relative'
-                    style={{ overflow: "auto", height: "100vh" }}
+                    style={{ overflow: "auto" }}
                     onSubmit={handleSubmit}
                 >
                     <div>
@@ -182,7 +186,8 @@ export default function LeaderRegistration({ onClose, leader }) {
                         <div className='div-text'>{createdUserData.password}</div>
                         <label className='input-text'>Member Registration</label>
                         <a href="/member_registration" className='div-text break-all deco-none'>https://fgacyc.com/serve/member_registration
-                        <img src="/images/launch.png" alt="launch icon" style={{ width: 16, marginLeft: 10 }} /></a>
+                            <img src="/images/launch.png" alt="launch icon" style={{ width: 16, marginLeft: 10 }} />
+                        </a>
                     </div>
                     <div className='flex flex-col align-center'>
                         <img
