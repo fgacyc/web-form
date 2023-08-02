@@ -5,15 +5,18 @@ import { set, get } from 'idb-keyval';
 import { getReq } from '../../js/requests';
 
 export default function Login() {
-    const [cycid, setCycid] = useState(get('cycid') || '');
-    const [pwd, setPwd] = useState(get('pwd') || '');
+    const [cycid, setCycid] = useState();
+    const [pwd, setPwd] = useState();
     const [cycidError, setCycidError] = useState('');
     const [pwdError, setPwdError] = useState('');
 
     useEffect(() => {
-        // if (cycid && pwd) {
-        //     window.location.href = '/member_registration';
-        // }
+        get("leader_data").then((data) => {
+            if(data){
+                setCycid(data.CYC_ID)
+                setPwd(data.password)
+            }
+        });
     }, []);
 
     const handleChange = (event, setField, setFieldError) => {
@@ -28,21 +31,20 @@ export default function Login() {
         const isPwdValid = validateField(pwd, setPwdError, 'Password is required.');
 
         if (isCycidValid && isPwdValid) {
-            set('cycid', cycid);
-            set('pwd', pwd);
-
-            console.log('cycid', cycid);
-            console.log('pwd', pwd);
-
             getReq(`/cgl/login?CYC_ID=${cycid}&password=${pwd}`)
                 .then((res) => {
                     if (!res.status) {
                         alert(res.error)
                     }
                     else {
-                        window.location.href = '/member_registration';
+                        set("leader_data",res.data).then(() => {
+                            window.location.href = '/member_registration';
+                        });
                     }
                 })
+        }
+        else{
+            alert('Please fill in the required fields.')
         }
     }
 
