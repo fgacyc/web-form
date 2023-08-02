@@ -11,7 +11,11 @@ export default function LeaderRegistrationSuccess() {
                 <label className='input-text'>Your Default Password</label>
                 <div className='div-text'>123456</div>
                 <label className='input-text'>Member Registration</label>
-                <a href="/member_registration" className='div-text break-all deco-none'>https://fgacyc.com/serve/member_registration</a>
+                <div>
+                    <a href="/member_registration" className='div-text break-all deco-none'>https://fgacyc.com/serve/member_registration</a>
+                    <img src="src/assets/launch.png" alt="launch icon"/>
+                </div>
+
             </div>
             <div className='flex flex-col align-center'>
                 <img

@@ -86,7 +86,7 @@ export default function LeaderRegistration({ onClose, leader }) {
     const [idError, setIdError] = useState('')
     const [genderError, setGenderError] = useState('')
     const [roleError, setRoleError] = useState('')
-    const [createdUserData, setCreatedUserData] = useState(null)
+    const [createdUserData, setCreatedLeaderData] = useState(null)
 
     const navigate = useNavigate();
 
@@ -156,7 +156,7 @@ export default function LeaderRegistration({ onClose, leader }) {
         try {
             let res = await postReq('/cgl', member_data);
             if(res.status === true){
-                setCreatedUserData(res.data);
+                setCreatedLeaderData(res.data);
                 alert("Please screenshot this page for your reference")
             }
             console.log(res);
@@ -190,7 +190,8 @@ export default function LeaderRegistration({ onClose, leader }) {
             { !createdUserData
                 ? <form
                     className={`flex flex-col justify-between appointment-container align-center relative
-            ${pathname !== '/leader_registration' ? 'transparent-background' : ''}`}
+                                ${pathname !== '/leader_registration' ? 'transparent-background' : ''}`}
+                    style={{overflow:"auto",height:"100vh"}}
                     onSubmit={handleSubmit}
                 >
                     {
@@ -271,7 +272,7 @@ export default function LeaderRegistration({ onClose, leader }) {
                         <label className='input-text'>Your Default Password</label>
                         <div className='div-text'>{createdUserData.password}</div>
                         <label className='input-text'>Member Registration</label>
-                        <a href="/member_registration" className='div-text break-all deco-none'>https://fgacyc.com/serve/member_registration</a>
+                        <a href="/member_registration" className='div-text break-all deco-none'>https://fgacyc.com/serve/member_registration <img src="src/assets/launch.png" alt="launch icon" style={{width:16,marginLeft:10}}/></a>
                     </div>
                     <div className='flex flex-col align-center'>
                         <img
