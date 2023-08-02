@@ -2,7 +2,7 @@ import './memberRegistration.css'
 import { useEffect, useState } from 'react';
 import PubSub from 'pubsub-js';
 import { confirmAlert } from 'react-confirm-alert';
-import {get, set} from 'idb-keyval'
+import { get, set } from 'idb-keyval'
 import { Input } from '../../Form/Input/Input';
 import { GenderPicker } from '../LeaderRegistration/LeaderRegistration';
 import { role_data } from './role_data';
@@ -122,19 +122,6 @@ function Registration({ onClose }) {
         PubSub.publish('memberlist', member_data)
     }
 
-    // const postLeaderData = async (member_data) => {
-    //     try {
-    //         let res = await postReq('/cgl', member_data);
-    //         if (res.status === true) {
-    //             setCreatedLeaderData(res.data);
-    //             alert("Please screenshot this page for your reference")
-    //         }
-    //         console.log(res);
-    //     } catch (error) {
-    //         console.error('Error during postLeaderData:', error);
-    //     }
-    // };
-
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -145,18 +132,10 @@ function Registration({ onClose }) {
         const isIdValid = validateID(id, setIdError);
         const isRoleValid = validateField(role, setRoleError, "Member's role is required");
 
-        // if (isFnameValid && isLnameValid && isPhoneValid && isEmailValid && isIdValid && isRoleValid) {
-        //     const member_data = handleData();
-        //     console.log(member_data)
-        //     // postLeaderData(member_data);
-
-        //     onClose();
-        // }
-        handleData();
-        //console.log(member_data)
-        // postLeaderData(member_data);
-
-        onClose();
+        if (isFnameValid && isLnameValid && isPhoneValid && isEmailValid && isIdValid && isRoleValid) {
+            handleData();
+            onClose();
+        }
     }
 
     return (
@@ -230,8 +209,6 @@ export default function MemberRegistration() {
 
     const [leaderData, setLeaderData] = useState({})
 
-
-
     useEffect(() => {
         const fetchLeaderData = async () => {
             let leader_data = await get('leader_data');
@@ -243,40 +220,32 @@ export default function MemberRegistration() {
                 }
             }
             setLeaderData(leader_data);
-            // console.log(leader_data);
         };
 
         fetchLeaderData();
-
-
-
-        PubSub.subscribe('memberlist', (_, member_data) => {
-            addNewMember(member_data)
-            return () => PubSub.unsubscribe('memberlist')
-        })
     }, [])
 
-
-
     useEffect(() => {
-        const new_members = {
-            cg_id: leaderData.cg_id,
-            new_members: memberlist
-        }
-        if(memberlist.length === 0) return;
-
-        putReq('/new_members', new_members).then((res) => {
-            if(res.status === true) {
-                set('leader_data', res.data)
-            }else{
-                alert(res.error)
-            }
+        PubSub.subscribe('memberlist', (_, member_data) => {
+            setMemberlist([...memberlist, member_data])
+            return () => PubSub.unsubscribe('memberlist')
         })
-    }, [memberlist])
 
-    function addNewMember(member) {
-        setMemberlist([...memberlist, member])
-    }
+        if (leaderData.cg_id) {
+            const new_members = {
+                cg_id: leaderData.cg_id,
+                new_members: memberlist
+            }
+
+            putReq('/new_members', new_members).then((res) => {
+                if (res.status === true) {
+                    set('leader_data', res.data)
+                } else {
+                    alert(res.error)
+                }
+            })
+        }
+    }, [memberlist])
 
     const addMember = () => {
         confirmAlert({
