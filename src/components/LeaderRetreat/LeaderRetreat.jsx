@@ -5,7 +5,7 @@ import { faq_data } from './leader_retreat_data';
 import { putReq } from "../../js/requests.js";
 import ReactFullpage from '@fullpage/react-fullpage'
 
-const LeaderRetreat1 = () => {
+const LeaderRetreat1 = ({onSignUpClick}) => {
     return (
         <section
             className='flex flex-col justify-between align-center retreat-bg-1 relative section'
@@ -18,12 +18,12 @@ const LeaderRetreat1 = () => {
                 <img src="/images/retreat_title.png" alt="Leader's Retreat Title" />
                 <div className='retreat-date'>28 - 29 OCT 2023</div>
             </div>
-            <button className='btn-retreat mb-75 relative' onClick={() => { }}>SIGN UP</button>
+            <button className='btn-retreat mb-75 relative' onClick={onSignUpClick}>SIGN UP</button>
         </section>
     )
 }
 
-const LeaderRetreat2 = () => {
+const LeaderRetreat2 = ({onSignUpClick}) => {
     return (
         <section
             className='flex flex-col justify-between align-center retreat-bg-2 section'
@@ -34,7 +34,7 @@ const LeaderRetreat2 = () => {
                 <div className='retreat-2-text-1'>BAYOU LAGOON PARK RESORT</div>
                 <div className='retreat-2-text-2'>MELAKA</div>
             </div>
-            <button className='btn-retreat mb-75 relative' onClick={() => { }}>SIGN UP</button>
+            <button className='btn-retreat mb-75 relative' onClick={onSignUpClick}>SIGN UP</button>
         </section>
     )
 }
@@ -109,9 +109,9 @@ export default function LeaderRetreat() {
     const [cycid, setCycid] = useState('');
 
     useEffect(()=> {
-        const d =
+       
         document.querySelector(".fp-watermark").classList.add("d-none")
-        console.log(d)
+  
     },[])
 
     // useEffect(() => {
