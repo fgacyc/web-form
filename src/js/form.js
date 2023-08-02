@@ -68,6 +68,17 @@ export const validateField = (field, setFieldError, errorMsg) => {
     return true;
 };
 
+export const validateCycId = (cycid, setCycidError) => {
+    const regex = /^cyc[0-9]{3}$/i;
+
+    if (!regex.test(cycid.trim())) {
+        setCycidError('Invalid CYC ID. (e.g. CYC001)');
+        return false;
+    }
+
+    return true;
+}
+
 export const getRandomSixDigitPassword = () => {
     const passwordLength = 6;
     let password = '';

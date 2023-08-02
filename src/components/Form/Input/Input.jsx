@@ -1,8 +1,8 @@
-export function Input({ label, value, onChange, error }) {
+export function Input({ label, value, type, onChange, error }) {
     return (
         <>
             <label className="input-text">{label}</label>
-            <input type="text" value={value} onChange={onChange} />
+            <input type={type || "text"} value={value} onChange={onChange} />
             {error && <div className="input-error">{error}</div>}
         </>
     );

@@ -6,9 +6,9 @@
 
 
 //cloud dev
-//export  const hostURL = "https://api.enjoycoding.me/dev";
+export  const hostURL = "https://api.enjoycoding.me/dev";
 
 //dev
-export const hostURL = "http://localhost:6023/dev";
+// export const hostURL = "http://localhost:6023/dev";
 
 //export const hostURL = "https://auth.fgacyc.com";

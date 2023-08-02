@@ -16,6 +16,7 @@ import LeaderRegistrationSuccess from './components/Registration/LeaderRegistrat
 import MemberRegistration from './components/Registration/MemberRegistration/MemberRegistration';
 import LeaderRetreat from './components/LeaderRetreat/LeaderRetreat';
 import OrientationConfirmation from "./components/orientation/OrientationConfirmation.jsx";
+import Login from './components/Login/Login';
 
 function clearDepartment() {
   localStorage.removeItem('cyc-department-selected');
@@ -49,6 +50,7 @@ function App() {
       <Route path='leader_reg_success' element={<LeaderRegistrationSuccess />} />
       <Route path='member_registration' element={<MemberRegistration />} />
       <Route path='leader_retreat' element={<LeaderRetreat />} />
+      <Route path='login' element={<Login />} />
     </Routes>
   )
 }
