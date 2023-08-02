@@ -128,7 +128,11 @@ function Registration({ onClose }) {
         const isFnameValid = validateName(fname, setFnameError);
         const isLnameValid = validateName(lname, setLnameError);
         const isPhoneValid = validatePhone(phone, setPhoneError);
-        const isEmailValid = validateEmail(email, setEmailError);
+        let isEmailValid = validateEmail(email, setEmailError);
+        if(email === ""){
+            setEmail(`${fname}@fgacyc.com`)
+            isEmailValid = true
+        }
         const isIdValid = validateID(id, setIdError);
         const isRoleValid = validateField(role, setRoleError, "Member's role is required");
 
