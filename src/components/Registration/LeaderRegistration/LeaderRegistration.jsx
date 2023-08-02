@@ -2,7 +2,7 @@ import '../../AppointmentPage/appointment.css'
 import './leaderRegistration.css'
 import { useState } from 'react';
 import { Input } from '../../Form/Input/Input';
-import { getRandomSixDigitPassword, validateEmail, validateID, validateName, validatePhone } from '../../../js/form';
+import { getRandomSixDigitPassword, validateEmail, validateField, validateID, validateName, validatePhone } from '../../../js/form';
 import { set } from 'idb-keyval';
 import { postReq } from '../../../js/requests';
 import { capitalFirstLetter } from "../../../js/string.js";
@@ -102,8 +102,9 @@ export default function LeaderRegistration({ onClose, leader }) {
         const isPhoneValid = validatePhone(phone, setPhoneError);
         const isEmailValid = validateEmail(email, setEmailError);
         const isIdValid = validateID(id, setIdError);
+        const isGenderValid = validateField(gender, setGenderError, 'Gender is required')
 
-        if (isFnameValid && isLnameValid && isPhoneValid && isEmailValid && isIdValid) {
+        if (isFnameValid && isLnameValid && isPhoneValid && isEmailValid && isIdValid && isGenderValid) {
             const member_data = handleData();
             console.log(member_data)
             postLeaderData(member_data);

@@ -10,7 +10,8 @@ import { getRandomSixDigitPassword, validateEmail, validateID, validateName, val
 import { capitalFirstLetter, capitalizeAndReplace } from "../../../js/string.js";
 import { putReq } from '../../../js/requests';
 
-function MemberCard({ name, role, onDelete, color }) {
+function MemberCard({ data, onDelete, color }) {
+    console.log(data)
     const handleDelete = () => {
         onDelete();
     };
@@ -22,7 +23,7 @@ function MemberCard({ name, role, onDelete, color }) {
                 style={{ backgroundColor: color }}
             >
                 <div className='selection-card-upper'>
-                    <h4 className='mem-card-h4'>{capitalizeAndReplace(role)}</h4>
+                    <h4 className='mem-card-h4'>{capitalizeAndReplace(data.role)}</h4>
                     <div
                         className='selection-card-delete-con'
                         onClick={handleDelete}
@@ -30,7 +31,10 @@ function MemberCard({ name, role, onDelete, color }) {
                         <img src='/icons/delete.svg' alt='delete' className='selection-card-delete' />
                     </div>
                 </div>
-                <h2 className='mem-card-h2'>{name}</h2>
+                <h2 className='mem-card-h2'>{`${capitalizeAndReplace(data.given_name)} ${capitalizeAndReplace(data.family_name)}`}</h2>
+                <h5 className='mem-card-h5'>{`Phone: ${data.phone_number}`}</h5>
+                <h5 className='mem-card-h5'>{`Email: ${data.email}`}</h5>
+                <h5 className='mem-card-h5'>{`IC: ${data.ic_number}`}</h5>
             </div>
         </div>
     )
@@ -237,13 +241,13 @@ export default function MemberRegistration() {
                 new_members: memberlist
             }
 
-            putReq('/new_members', new_members).then((res) => {
-                if (res.status === true) {
-                    set('leader_data', res.data)
-                } else {
-                    alert(res.error)
-                }
-            })
+            // putReq('/new_members', new_members).then((res) => {
+            //     if (res.status === true) {
+            //         set('leader_data', res.data)
+            //     } else {
+            //         alert(res.error)
+            //     }
+            // })
         }
     }, [memberlist])
 
@@ -275,8 +279,9 @@ export default function MemberRegistration() {
 
                     return <MemberCard
                         key={index}
-                        role={member.role}
-                        name={capitalFirstLetter(member.given_name) + ' ' + capitalFirstLetter(member.family_name)}
+                        data={member}
+                        // role={member.role}
+                        // name={capitalFirstLetter(member.given_name) + ' ' + capitalFirstLetter(member.family_name)}
                         onDelete={() => handleDeleteMember(index)}
                         color={colors[colorIndex]}
                     />

@@ -5,11 +5,16 @@
     max-width: 400px;
 }
 
-.mem-card-h4 {
+.mem-card-h4,
+.mem-card-h5 {
     color: white;
     font-size: 1rem;
     font-family: 'FZChaoCuHei';
     font-weight: 400;
+}
+
+.mem-card-h5{
+    font-size: 0.875rem;
 }
 
 .mem-card-h2 {
