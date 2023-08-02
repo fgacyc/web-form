@@ -8,6 +8,7 @@ import { getRandomSixDigitPassword, validateEmail, validateField, validateID, va
 import { useNavigate, useLocation } from 'react-router-dom';
 import { set } from 'idb-keyval';
 import { postReq } from '../../../js/requests';
+import {capitalFirstLetter} from "../../../js/string.js";
 
 function CloseIcon({ onClose }) {
     return (
@@ -85,6 +86,7 @@ export default function LeaderRegistration({ onClose, leader }) {
     const [idError, setIdError] = useState('')
     const [genderError, setGenderError] = useState('')
     const [roleError, setRoleError] = useState('')
+    const [createdUserData, setCreatedUserData] = useState(null)
 
     const navigate = useNavigate();
 
@@ -116,17 +118,19 @@ export default function LeaderRegistration({ onClose, leader }) {
     }
 
     const handleData = () => {
+        const capitalName  = capitalFirstLetter(fname)+ ' ' + capitalFirstLetter(lname);
+
         const member_data = {
             email,
             password: `${getRandomSixDigitPassword()}@Aa`,
-            username: `${fname.toLowerCase()}${lname.toLowerCase()}`,
+            username: `${fname.toLowerCase()}_${lname.toLowerCase()}`,
             given_name: fname,
             family_name: lname,
-            name: `${fname} ${lname}`,
+            name: capitalName,
             gender,
             ic_number: id,
             phone_number: phone,
-            nickname: null,
+            nickname: capitalName,
             picture: null,
             cg_id: null,
         }
@@ -136,7 +140,6 @@ export default function LeaderRegistration({ onClose, leader }) {
         } else {
             handleMemberList(member_data);
         }
-        console.log(JSON.stringify(member_data));
 
         return member_data;
     }
@@ -151,8 +154,12 @@ export default function LeaderRegistration({ onClose, leader }) {
 
     const postLeaderData = async (member_data) => {
         try {
-            let data = await postReq('/signup', member_data);
-            console.log(data);
+            let res = await postReq('/cgl', member_data);
+            if(res.status === true){
+                setCreatedUserData(res.data);
+                alert("Please screenshot this page for your reference")
+            }
+            console.log(res);
         } catch (error) {
             console.error('Error during postLeaderData:', error);
         }
@@ -174,84 +181,111 @@ export default function LeaderRegistration({ onClose, leader }) {
             console.log(member_data)
             postLeaderData(member_data);
 
-            handleNavigate();
+            //handleNavigate();
         }
     }
 
     return (
-        <form
-            className={`flex flex-col justify-between appointment-container align-center relative
+        <>
+            { !createdUserData
+                ? <form
+                    className={`flex flex-col justify-between appointment-container align-center relative
             ${pathname !== '/leader_registration' ? 'transparent-background' : ''}`}
-            onSubmit={handleSubmit}
-        >
-            {
-                pathname !== '/leader_registration' && (
-                    <CloseIcon onClose={onClose} />
-                )
-            }
-
-            <div>
-                {
-                    pathname === '/leader_registration' && (
-                        <h3 className='appointment-h3'>Registration</h3>
-                    )
-                }
-
-                <div className={`flex flex-col 
-                ${pathname === '/leader_registration' ? '' : 'mt-35'}`}>
-                    <Input
-                        label={'First Name'}
-                        value={fname}
-                        onChange={(event) => { handleChange(event, setFname, setFnameError) }}
-                        error={fnameError}
-                    />
-
-                    <Input
-                        label={'Last Name'}
-                        value={lname}
-                        onChange={(event) => { handleChange(event, setLname, setLnameError) }}
-                        error={lnameError}
-                    />
-
-                    <Input
-                        label={'Contact No.'}
-                        value={phone}
-                        onChange={(event) => { handleChange(event, setPhone, setPhoneError) }}
-                        error={phoneError}
-                    />
-
-                    <Input
-                        label={'Email Address'}
-                        value={email}
-                        onChange={(event) => { handleChange(event, setEmail, setEmailError) }}
-                        error={emailError}
-                    />
-
-                    <Input
-                        label={'Identity Card/ Passport No.'}
-                        value={id}
-                        onChange={(event) => { handleChange(event, setId, setIdError) }}
-                        error={idError}
-                    />
-
-                    <>
-                        <label className='input-text' value={gender}>Gender</label>
-                        <GenderPicker onSelect={(selectedValue) => { handleSelect(selectedValue, setGender, setGenderError) }} />
-                        {genderError && <div className='input-error'>{genderError}</div>}
-                    </>
-
+                    onSubmit={handleSubmit}
+                >
                     {
-                        pathname === '/member_registration' && (
-                            <>
-                                <label className='input-text' value={role}>Role</label>
-                                <RolePicker onSelect={(selectedValue) => { handleSelect(selectedValue, setRole, setRoleError) }} />
-                                {roleError && <div className='input-error'>{roleError}</div>}
-                            </>
+                        pathname !== '/leader_registration' && (
+                            <CloseIcon onClose={onClose} />
                         )
                     }
+
+                    <div>
+                        {
+                            pathname === '/leader_registration' && (
+                                <h3 className='appointment-h3'>Registration</h3>
+                            )
+                        }
+
+                        <div className={`flex flex-col 
+                ${pathname === '/leader_registration' ? '' : 'mt-35'}`}>
+                            <Input
+                                label={'First Name'}
+                                value={fname}
+                                onChange={(event) => { handleChange(event, setFname, setFnameError) }}
+                                error={fnameError}
+                            />
+
+                            <Input
+                                label={'Last Name'}
+                                value={lname}
+                                onChange={(event) => { handleChange(event, setLname, setLnameError) }}
+                                error={lnameError}
+                            />
+
+                            <Input
+                                label={'Contact No.'}
+                                value={phone}
+                                onChange={(event) => { handleChange(event, setPhone, setPhoneError) }}
+                                error={phoneError}
+                            />
+
+                            <Input
+                                label={'Email Address'}
+                                value={email}
+                                onChange={(event) => { handleChange(event, setEmail, setEmailError) }}
+                                error={emailError}
+                            />
+
+                            <Input
+                                label={'Identity Card/ Passport No.'}
+                                value={id}
+                                onChange={(event) => { handleChange(event, setId, setIdError) }}
+                                error={idError}
+                            />
+
+                            <>
+                                <label className='input-text' value={gender}>Gender</label>
+                                <GenderPicker onSelect={(selectedValue) => { handleSelect(selectedValue, setGender, setGenderError) }} />
+                                {genderError && <div className='input-error'>{genderError}</div>}
+                            </>
+
+                            {
+                                pathname === '/member_registration' && (
+                                    <>
+                                        <label className='input-text' value={role}>Role</label>
+                                        <RolePicker onSelect={(selectedValue) => { handleSelect(selectedValue, setRole, setRoleError) }} />
+                                        {roleError && <div className='input-error'>{roleError}</div>}
+                                    </>
+                                )
+                            }
+                        </div>
+                        <button type='submit' className='btn-submit'>Submit</button>
+                    </div>
+                </form >
+                : <div className='flex flex-col align-center justify-between led-reg-success-con'>
+                    <h3 className='led-reg-success-con-h3'>Completed</h3>
+                    <img src='/images/completed.png' alt='Complete Icon' className='mt-10' />
+                    <div className='flex flex-col'>
+                        <label className='input-text'>Your CYC ID</label>
+                        <div className='div-text'>{createdUserData.CYC_ID}</div>
+                        <label className='input-text'>Your Default Password</label>
+                        <div className='div-text'>{createdUserData.password}</div>
+                        <label className='input-text'>Member Registration</label>
+                        <a href="/member_registration" className='div-text break-all deco-none'>https://fgacyc.com/serve/member_registration</a>
+                    </div>
+                    <div className='flex flex-col align-center'>
+                        <img
+                            className='mem-reg-qr'
+                            src='/images/member_registration_qr.png'
+                            alt='Member Registration QR Code'
+                        />
+                    </div>
+                    <div>
+                        <h4 className='complete-h4'>© 2023 FGACYC.</h4>
+                        <h4 className='complete-h4' style={{ marginBottom: '45px' }}>All Rights Reserved</h4>
+                    </div>
                 </div>
-                <button type='submit' className='btn-submit'>Submit</button>
-            </div>
-        </form >
+            }
+        </>
     )
 }

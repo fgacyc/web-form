@@ -45,7 +45,6 @@ function App() {
       <Route path='attendance' element={<Attendance />}/>
       <Route path='orientation_confirmation/:RID' element={<OrientationConfirmation />}/>
       <Route path='leader_registration' element={<LeaderRegistration />} />
-      <Route path='leader_reg_success' element={<LeaderRegistrationSuccess />} />
       <Route path='member_registration' element={<MemberRegistration />} />
     </Routes>
   )
