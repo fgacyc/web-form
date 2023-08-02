@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Input } from "../Form/Input/Input"
-import { validateField } from '../../js/form';
+import { validateCycId, validateField } from '../../js/form';
 import { set, get } from 'idb-keyval';
 import { getReq } from '../../js/requests';
+import { removeCycFromString } from '../../js/string';
 
 export default function Login() {
     const [cycid, setCycid] = useState();
@@ -12,7 +13,7 @@ export default function Login() {
 
     useEffect(() => {
         get("leader_data").then((data) => {
-            if(data){
+            if (data) {
                 setCycid(data.CYC_ID)
                 setPwd(data.password)
             }
@@ -27,24 +28,21 @@ export default function Login() {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        const isCycidValid = validateField(cycid, setCycidError, 'CYC ID is required. eg. 001');
+        const isCycidValid = validateCycId(cycid, setCycidError);
         const isPwdValid = validateField(pwd, setPwdError, 'Password is required.');
 
         if (isCycidValid && isPwdValid) {
-            getReq(`/cgl/login?CYC_ID=${cycid}&password=${pwd}`)
+            getReq(`/cgl/login?CYC_ID=${removeCycFromString(cycid)}&password=${pwd}`)
                 .then((res) => {
                     if (!res.status) {
                         alert(res.error)
                     }
                     else {
-                        set("leader_data",res.data).then(() => {
+                        set("leader_data", res.data).then(() => {
                             window.location.href = '/member_registration';
                         });
                     }
                 })
-        }
-        else{
-            alert('Please fill in the required fields.')
         }
     }
 

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { faq_data } from './leader_retreat_data';
 import { handlerSectionScroll, handleScrollMostBottom } from '../../js/scroll';
 import {putReq} from "../../js/requests.js";
+import { removeCycFromString } from '../../js/string';
 
 const LeaderRetreat1 = ({ handleTouchStart, handleTouchEnd }) => {
     return (
@@ -152,9 +153,9 @@ export default function LeaderRetreat() {
     }
 
     const handleSubmit = () => {
-        const regex = /^cyc[0-9]{3}$/i;
+        const regex = /^\d{1,6}$/;
 
-        if (!regex.test(cycid.trim())) {
+        if (!regex.test(removeCycFromString(cycid.trim()))) {
             alert('Please enter a valid CYC ID.');
             return;
         }

@@ -181,7 +181,7 @@ export default function LeaderRegistration({ onClose, leader }) {
                         <label className='input-text'>Your Default Password</label>
                         <div className='div-text'>{createdUserData.password}</div>
                         <label className='input-text'>Member Registration</label>
-                        <a href="/member_registration" className='div-text break-all deco-none'>https://fgacyc.com/serve/member_registration ]
+                        <a href="/member_registration" className='div-text break-all deco-none'>https://fgacyc.com/serve/member_registration
                         <img src="/images/launch.png" alt="launch icon" style={{ width: 16, marginLeft: 10 }} /></a>
                     </div>
                     <div className='flex flex-col align-center'>

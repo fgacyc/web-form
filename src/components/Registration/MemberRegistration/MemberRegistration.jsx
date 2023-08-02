@@ -134,9 +134,11 @@ function Registration({ onClose }) {
         const isPhoneValid = validatePhone(phone, setPhoneError);
         const isEmailValid = validateEmail(email, setEmailError);
         const isIdValid = validateID(id, setIdError);
+        const isGenderValid = validateField(gender, setGenderError, 'Gender is required');
         const isRoleValid = validateField(role, setRoleError, "Member's role is required");
 
-        if (isFnameValid && isLnameValid && isPhoneValid && isEmailValid && isIdValid && isRoleValid) {
+        if (isFnameValid && isLnameValid && isPhoneValid && isEmailValid
+            && isIdValid && isGenderValid && isRoleValid) {
             handleData();
             onClose();
         }
@@ -152,7 +154,7 @@ function Registration({ onClose }) {
             <CloseIcon onClose={onClose} />
 
             <div>
-                <div className='flex flex-col mt-35'>
+                <div className='flex flex-col mt-75'>
                     <Input
                         label={'First Name'}
                         value={fname}
@@ -241,13 +243,13 @@ export default function MemberRegistration() {
                 new_members: memberlist
             }
 
-            // putReq('/new_members', new_members).then((res) => {
-            //     if (res.status === true) {
-            //         set('leader_data', res.data)
-            //     } else {
-            //         alert(res.error)
-            //     }
-            // })
+            putReq('/new_members', new_members).then((res) => {
+                if (res.status === true) {
+                    set('leader_data', res.data)
+                } else {
+                    alert(res.error)
+                }
+            })
         }
     }, [memberlist])
 

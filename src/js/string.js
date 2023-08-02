@@ -12,3 +12,8 @@ export function capitalizeAndReplace(inputString) {
 
     return capitalizedWords.join(' ');
 }
+
+export function removeCycFromString(inputString) {
+    const resultString = inputString.toLowerCase().replace('cyc', '');
+    return resultString;
+}

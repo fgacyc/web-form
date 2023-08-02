@@ -1,15 +1,19 @@
 export const role_data = [
     // {
-    //     label: "CGL",
-    //     value: "cgl",
+    //     label: "Pastor",
+    //     value: "pastor",
+    // },
+    // {
+    //     label: "Team Leader",
+    //     value: "team_leader",
     // },
     // {
     //     label: "Senior CGL",
     //     value: "senior_cgl",
     // },
     // {
-    //     label: "Team Leader",
-    //     value: "team_leader",
+    //     label: "CGL",
+    //     value: "cgl",
     // },
     {
         label: "Host",

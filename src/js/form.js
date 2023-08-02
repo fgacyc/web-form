@@ -1,3 +1,5 @@
+import { removeCycFromString } from "./string";
+
 export const validateName = (name, setField) => {
     if (name.trim() === "") {
         setField("Name is required");
@@ -60,7 +62,7 @@ export const validateID = (id, setField) => {
 };
 
 export const validateField = (field, setFieldError, errorMsg) => {
-    if (field === "") {
+    if (!field || field === "") {
         setFieldError(errorMsg);
         return false;
     }
@@ -69,15 +71,20 @@ export const validateField = (field, setFieldError, errorMsg) => {
 };
 
 export const validateCycId = (cycid, setCycidError) => {
-    const regex = /^cyc[0-9]{3}$/i;
+    const regex = /^\d{1,6}$/;
 
-    if (!regex.test(cycid.trim())) {
-        setCycidError('Invalid CYC ID. (e.g. CYC001)');
+    if (!cycid || cycid.trim() === '') {
+        setCycidError('CYC ID cannot be empty.');
+        return false;
+    }
+
+    if (!regex.test(removeCycFromString(cycid))) {
+        setCycidError('Invalid CYC ID. (e.g. 000001)');
         return false;
     }
 
     return true;
-}
+};
 
 export const getRandomSixDigitPassword = () => {
     const passwordLength = 6;
