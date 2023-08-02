@@ -56,6 +56,9 @@ export default function LeaderRegistration({ onClose, leader }) {
 
     const handleData = () => {
         const capitalName = capitalFirstLetter(fname) + ' ' + capitalFirstLetter(lname);
+        if(email ===""){
+            setEmail(`${phone}@fgacyc.com`);
+        }
 
         const member_data = {
             email,
@@ -101,12 +104,10 @@ export default function LeaderRegistration({ onClose, leader }) {
         const isLnameValid = validateName(lname, setLnameError);
         const isPhoneValid = validatePhone(phone, setPhoneError);
         const isEmailValid = validateEmail(email, setEmailError);
-        if(!isEmailValid &&email==="" ){
-            setEmail(`${phone}@fgacyc.com`)
-        }
+
         const isIdValid = validateID(id, setIdError);
 
-        if (isFnameValid && isLnameValid && isPhoneValid && isEmailValid && isIdValid) {
+        if (isFnameValid && isLnameValid && isPhoneValid  && isIdValid) {
             const member_data = handleData();
             console.log(member_data)
             postLeaderData(member_data);
