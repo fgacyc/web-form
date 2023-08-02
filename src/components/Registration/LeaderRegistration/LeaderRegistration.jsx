@@ -115,7 +115,7 @@ export default function LeaderRegistration({ onClose, leader }) {
             {!createdUserData
                 ? <form
                     className='flex flex-col justify-between appointment-container align-center relative'
-                    style={{ overflow: "auto", height: "100vh" }}
+                    style={{ overflow: "auto" }}
                     onSubmit={handleSubmit}
                 >
                     <div>
