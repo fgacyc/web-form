@@ -101,6 +101,9 @@ export default function LeaderRegistration({ onClose, leader }) {
         const isLnameValid = validateName(lname, setLnameError);
         const isPhoneValid = validatePhone(phone, setPhoneError);
         const isEmailValid = validateEmail(email, setEmailError);
+        if(!isEmailValid &&email==="" ){
+            setEmail(`${phone}@fgacyc.com`)
+        }
         const isIdValid = validateID(id, setIdError);
 
         if (isFnameValid && isLnameValid && isPhoneValid && isEmailValid && isIdValid) {
