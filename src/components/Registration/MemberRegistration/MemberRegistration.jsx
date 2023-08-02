@@ -2,7 +2,7 @@ import './memberRegistration.css'
 import { useEffect, useState } from 'react';
 import PubSub from 'pubsub-js';
 import { confirmAlert } from 'react-confirm-alert';
-import { get } from 'idb-keyval'
+import {get, set} from 'idb-keyval'
 import { Input } from '../../Form/Input/Input';
 import { GenderPicker } from '../LeaderRegistration/LeaderRegistration';
 import { role_data } from './role_data';
@@ -259,17 +259,18 @@ export default function MemberRegistration() {
 
 
     useEffect(() => {
-        //console.log("111", memberlist);
-
         const new_members = {
             cg_id: leaderData.cg_id,
             new_members: memberlist
         }
-
-        console.log(new_members);
+        if(memberlist.length === 0) return;
 
         putReq('/new_members', new_members).then((res) => {
-            console.log(res)
+            if(res.status === true) {
+                set('leader_data', res.data)
+            }else{
+                alert(res.error)
+            }
         })
     }, [memberlist])
 
