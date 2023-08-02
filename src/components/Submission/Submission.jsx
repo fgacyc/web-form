@@ -143,6 +143,13 @@ export default function Submission() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        let ifStop = true;
+
+        if (ifStop) {
+            alert("Submission is finished. Please wait for the announcement.");
+            return;
+        }
+
         if (isButtonDisabled) {
             alert("Submission is not open yet. Please wait for the announcement.");
             return;
@@ -186,7 +193,7 @@ export default function Submission() {
                 alert("You have already submitted your application. Please wait for the response.")
                 navigate("/");
             } else {
-                alert("Something went wrong. Please try again.");
+                alert("Something went wrong, Please try again.");
             }
         });
     }

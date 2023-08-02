@@ -174,14 +174,18 @@ export default function Appointment() {
 
         // console.log(newFormData);
         postReq(`/interview/answers/candidate/${RID}`, {"answers":newFormData}).then(res => {
+            console.log(res)
             if(res.status ==="failed"){
                 alert("You have already submitted your answers");
+                navigate(`/milestone/${RID}`);
+            }else{
+                // console.log(newFormData);
+                setFormData(newFormData);
+                createAppointment();
             }
         })
 
-        // console.log(newFormData);
-        setFormData(newFormData);
-        createAppointment();
+
     }
 
     return (
@@ -259,7 +263,7 @@ export default function Appointment() {
                     }
 
                     {
-                        userDatas && userDatas.info.ministry[2] === "vocal" && (
+                        userDatas && userDatas.info.ministry[2] === "musician" && (
                             <div key={5} className="flex flex-col">
                                 <label className="input-text">Pick an instrument</label>
                                 <select

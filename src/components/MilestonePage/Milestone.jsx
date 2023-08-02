@@ -61,6 +61,7 @@ export default function Milestone() {
         };
 
         fetchData();
+        alert("Please take a screenshot of your QR code and show it to the interviewer during your interview.");
     }, []);
 
 
@@ -79,7 +80,12 @@ export default function Milestone() {
                     {/* <h4 className="milestone-h4 ">Your Serve Journey</h4> */}
                     {userDatas && <Timeline events={events} />}
                 </div>
-                {qrCode && (<img className="qrCode-container" src={qrCode} alt="QR Code" />)}
+                <div className="qrCode-con">
+                    {qrCode && (
+                        <img className="qrCode-container" src={qrCode} alt="QR Code" />
+                    )}
+                </div>
+
             </div >
             <div className="flex flex-col align-center icons-box">
                 <div className="fga-div">FGACYC</div>

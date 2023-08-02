@@ -42,7 +42,7 @@ export  const team_data_dict = {
                     rate: [2, 3]
                 }, {
                     img: "/images/shuttle.jpg",
-                    cnMinistryTitle: "运送",
+                    cnMinistryTitle: "接驳服务",
                     ministryTitle: "Shuttle",
                     desc: ["由于教会的迅速发展，停车问题日益严重，导致会友和新朋友们有时不得不将车辆停放在较远的地方，然后步行到聚会地点。为了改善每个人来教会的体验，他们提供贴心的运送服务，确保每个人都能享受到愉快的教会体验。"],
                     rate: [3, 2]
@@ -154,14 +154,14 @@ export  const team_data_dict = {
                         cnMinistryTitle: "音响",
                         ministryTitle: "Sound",
                         desc: ["若每周信息是我们的粮食，讲员就同等于厨师，那音响就如同餐具，少了他们，山珍海味都没办法送进我们的口中！音响组绝非仅仅调节音量，要让会众听到高音准、中音甜、低音稳，那可是一辈子的学习！"],
-                        rate: [3, 2],
+                        rate: [4, 3],
                     },
                     {
                         img: "/images/lighting.jpg",
                         cnMinistryTitle: "灯光",
                         ministryTitle: "Lighting",
                         desc: ["灯光组专为冰冷的舞台涂上层层色彩，是一门不可或缺的艺术。在舞台灯光四射的氛围底下，人们能够更专注投入敬拜神。灯光组员从灯种、色彩温度、亮度到电路，可谓样样精通！"],
-                        rate: [4, 2],
+                        rate: [4, 3],
                     },
                     {
                         img: "/images/translation.jpg",

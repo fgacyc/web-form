@@ -43,4 +43,12 @@
 
 .qrCode-container{
     padding: 15px 0px;
+    width: 80%;
+}
+
+.qrCode-con{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }

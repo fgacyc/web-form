@@ -42,7 +42,7 @@ export const  ministry_search_data_list = [{
     team:"people"
 }, {
     img: "/images/shuttle.png",
-    cnMinistryTitle: "运送",
+    cnMinistryTitle: "接驳服务",
     ministryTitle: "Shuttle",
     department: "general_affair",
     cnDepartment: "总务部",

@@ -78,7 +78,7 @@ const ministry_name_map ={
     },
     "shuttle": {
         "en": "Shuttle",
-        "cn": "运送"
+        "cn": "接驳服务"
     },
     "software development": {
         "en": "Software Development",
