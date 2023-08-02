@@ -1,27 +1,13 @@
 import '../../AppointmentPage/appointment.css'
 import './leaderRegistration.css'
-import { useEffect, useState } from 'react';
-import PubSub from 'pubsub-js';
-import { role_data } from './role_data';
+import { useState } from 'react';
 import { Input } from '../../Form/Input/Input';
-import { getRandomSixDigitPassword, validateEmail, validateField, validateID, validateName, validatePhone } from '../../../js/form';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { getRandomSixDigitPassword, validateEmail, validateID, validateName, validatePhone } from '../../../js/form';
 import { set } from 'idb-keyval';
 import { postReq } from '../../../js/requests';
-import {capitalFirstLetter} from "../../../js/string.js";
+import { capitalFirstLetter } from "../../../js/string.js";
 
-function CloseIcon({ onClose }) {
-    return (
-        <img
-            src='/icons/cross.png'
-            alt='Cross Icon'
-            className='close-button'
-            onClick={onClose}
-        />
-    )
-}
-
-function GenderPicker({ onSelect }) {
+export function GenderPicker({ onSelect }) {
     const [showInitialOption, setShowInitialOption] = useState(true);
 
     const handleSelect = (event) => {
@@ -43,33 +29,6 @@ function GenderPicker({ onSelect }) {
     )
 }
 
-function RolePicker({ onSelect }) {
-    const [showInitialOption, setShowInitialOption] = useState(true);
-
-    const handleSelect = (event) => {
-        const selectedValue = event.target.value;
-        onSelect(selectedValue);
-        setShowInitialOption(false);
-    };
-
-    return (
-        <select
-            className='appointment-select'
-            value={showInitialOption ? '' : undefined}
-            onChange={handleSelect}
-        >
-            <option value='' disabled hidden>Select a role</option>
-            {
-                role_data.map((option, index) => {
-                    return (
-                        <option key={index} value={option.value}>{option.label}</option>
-                    )
-                })
-            }
-        </select>
-    )
-}
-
 export default function LeaderRegistration({ onClose, leader }) {
     const [fname, setFname] = useState('');
     const [lname, setLname] = useState('');
@@ -77,21 +36,13 @@ export default function LeaderRegistration({ onClose, leader }) {
     const [email, setEmail] = useState('')
     const [id, setId] = useState('')
     const [gender, setGender] = useState('')
-    const [role, setRole] = useState('')
-    const [cg, setCg] = useState(leader || '')
     const [fnameError, setFnameError] = useState('');
     const [lnameError, setLnameError] = useState('');
     const [phoneError, setPhoneError] = useState('');
     const [emailError, setEmailError] = useState('')
     const [idError, setIdError] = useState('')
     const [genderError, setGenderError] = useState('')
-    const [roleError, setRoleError] = useState('')
     const [createdUserData, setCreatedLeaderData] = useState(null)
-
-    const navigate = useNavigate();
-
-    const location = useLocation();
-    const pathname = location.pathname;
 
     const handleChange = (event, setField, setFieldError) => {
         setField(event.target.value);
@@ -103,22 +54,8 @@ export default function LeaderRegistration({ onClose, leader }) {
         setFieldError('');
     };
 
-    const handleMemberList = (member_data) => {
-        PubSub.publish('memberlist', member_data)
-    }
-
-    const getCgId = async () => {
-        const leaderData = {
-            name: "Kris Mok",
-            user_id: 33,
-        }
-
-        let data = await postReq('/cg', leaderData)
-        console.log(data)
-    }
-
     const handleData = () => {
-        const capitalName  = capitalFirstLetter(fname)+ ' ' + capitalFirstLetter(lname);
+        const capitalName = capitalFirstLetter(fname) + ' ' + capitalFirstLetter(lname);
 
         const member_data = {
             email,
@@ -135,27 +72,15 @@ export default function LeaderRegistration({ onClose, leader }) {
             cg_id: null,
         }
 
-        if (pathname === '/leader_registration') {
-            set('leader_data', member_data);
-        } else {
-            handleMemberList(member_data);
-        }
+        set('leader_data', member_data);
 
         return member_data;
-    }
-
-    const handleNavigate = () => {
-        if (pathname === '/leader_registration') {
-            navigate('/leader_reg_success');
-        } else {
-            onClose();
-        }
     }
 
     const postLeaderData = async (member_data) => {
         try {
             let res = await postReq('/cgl', member_data);
-            if(res.status === true){
+            if (res.status === true) {
                 setCreatedLeaderData(res.data);
                 alert("Please screenshot this page for your reference")
             }
@@ -173,42 +98,27 @@ export default function LeaderRegistration({ onClose, leader }) {
         const isPhoneValid = validatePhone(phone, setPhoneError);
         const isEmailValid = validateEmail(email, setEmailError);
         const isIdValid = validateID(id, setIdError);
-        const isRoleValid = pathname === '/member_registration' ?
-            validateField(role, setRoleError, "Member's role is required") : true;
 
-        if (isFnameValid && isLnameValid && isPhoneValid && isEmailValid && isIdValid && isRoleValid) {
+        if (isFnameValid && isLnameValid && isPhoneValid && isEmailValid && isIdValid) {
             const member_data = handleData();
             console.log(member_data)
             postLeaderData(member_data);
-
-            //handleNavigate();
         }
     }
 
     return (
         <>
-            { !createdUserData
+            {!createdUserData
                 ? <form
-                    className={`flex flex-col justify-between appointment-container align-center relative
-                                ${pathname !== '/leader_registration' ? 'transparent-background' : ''}`}
-                    style={{overflow:"auto",height:"100vh"}}
+                    className='flex flex-col justify-between appointment-container align-center relative'
+                    style={{ overflow: "auto", height: "100vh" }}
                     onSubmit={handleSubmit}
                 >
-                    {
-                        pathname !== '/leader_registration' && (
-                            <CloseIcon onClose={onClose} />
-                        )
-                    }
-
                     <div>
-                        {
-                            pathname === '/leader_registration' && (
-                                <h3 className='appointment-h3'>Registration</h3>
-                            )
-                        }
+                        <h3 className='appointment-h3'>Registration</h3>
 
-                        <div className={`flex flex-col 
-                ${pathname === '/leader_registration' ? '' : 'mt-35'}`}>
+
+                        <div className='flex flex-col'>
                             <Input
                                 label={'First Name'}
                                 value={fname}
@@ -249,16 +159,6 @@ export default function LeaderRegistration({ onClose, leader }) {
                                 <GenderPicker onSelect={(selectedValue) => { handleSelect(selectedValue, setGender, setGenderError) }} />
                                 {genderError && <div className='input-error'>{genderError}</div>}
                             </>
-
-                            {
-                                pathname === '/member_registration' && (
-                                    <>
-                                        <label className='input-text' value={role}>Role</label>
-                                        <RolePicker onSelect={(selectedValue) => { handleSelect(selectedValue, setRole, setRoleError) }} />
-                                        {roleError && <div className='input-error'>{roleError}</div>}
-                                    </>
-                                )
-                            }
                         </div>
                         <button type='submit' className='btn-submit'>Submit</button>
                     </div>
@@ -268,11 +168,11 @@ export default function LeaderRegistration({ onClose, leader }) {
                     <img src='/images/completed.png' alt='Complete Icon' className='mt-10' />
                     <div className='flex flex-col'>
                         <label className='input-text'>Your CYC ID</label>
-                        <div className='div-text'>{createdUserData.CYC_ID}</div>
+                        <div className='div-text'>CYC{createdUserData.CYC_ID}</div>
                         <label className='input-text'>Your Default Password</label>
                         <div className='div-text'>{createdUserData.password}</div>
                         <label className='input-text'>Member Registration</label>
-                        <a href="/member_registration" className='div-text break-all deco-none'>https://fgacyc.com/serve/member_registration <img src="src/assets/launch.png" alt="launch icon" style={{width:16,marginLeft:10}}/></a>
+                        <a href="/member_registration" className='div-text break-all deco-none'>https://fgacyc.com/serve/member_registration <img src="src/assets/launch.png" alt="launch icon" style={{ width: 16, marginLeft: 10 }} /></a>
                     </div>
                     <div className='flex flex-col align-center'>
                         <img
