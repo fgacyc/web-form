@@ -12,9 +12,11 @@ import Milestone from './components/MilestonePage/Milestone';
 import InterviewerDetail from './components/InterviewerDetail/InterviewerDetail';
 import Attendance from './components/Attendance/Attendance';
 import LeaderRegistration from './components/Registration/LeaderRegistration/LeaderRegistration';
-import LeaderRegistrationSuccess from './components/Registration/LeaderRegistration/LeaderRegistrationSuccess';
+import LeaderRegistrationSuccess from './components/Registration/LeaderRegistrationSuccess/LeaderRegistrationSuccess';
 import MemberRegistration from './components/Registration/MemberRegistration/MemberRegistration';
+import LeaderRetreat from './components/LeaderRetreat/LeaderRetreat';
 import OrientationConfirmation from "./components/orientation/OrientationConfirmation.jsx";
+import Login from './components/Login/Login';
 
 function clearDepartment() {
   localStorage.removeItem('cyc-department-selected');
@@ -47,6 +49,8 @@ function App() {
       <Route path='leader_registration' element={<LeaderRegistration />} />
       <Route path='leader_reg_success' element={<LeaderRegistrationSuccess />} />
       <Route path='member_registration' element={<MemberRegistration />} />
+      <Route path='leader_retreat' element={<LeaderRetreat />} />
+      <Route path='login' element={<Login />} />
     </Routes>
   )
 }

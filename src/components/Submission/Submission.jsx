@@ -277,6 +277,8 @@ export default function Submission() {
                             <option value="setapak">Setapak</option>
                             <option value="sg_long">Sg Long</option>
                             <option value="seremban">Seremban</option>
+                            <option value="the_blessing">The Blessing</option>
+                            <option value="to_be_confirmed">To Be Confirmed</option>
                         </optgroup>
                     </select>
                     {pastoralTeamError && <div className="input-error">{pastoralTeamError}</div>}

@@ -5,3 +5,4 @@ export const generalQuestions = [
     "What skills do you possess which are related to this ministry?",
     "What is your expectation of this ministry?",
 ];
+
