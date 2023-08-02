@@ -72,7 +72,7 @@ export default function LeaderRegistration({ onClose, leader }) {
             cg_id: null,
         }
 
-        set('leader_data', member_data);
+
 
         return member_data;
     }
@@ -81,7 +81,8 @@ export default function LeaderRegistration({ onClose, leader }) {
         try {
             let res = await postReq('/cgl', member_data);
             if (res.status === true) {
-                setCreatedLeaderData(res.data);
+                set('leader_data', res.data)
+                setCreatedLeaderData(res.data)
                 alert("Please screenshot this page for your reference")
             }
             console.log(res);
