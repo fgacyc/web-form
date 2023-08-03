@@ -1,11 +1,12 @@
 import './leaderRetreat.css'
 import { useState, useEffect } from 'react';
 import { faq_data } from './leader_retreat_data';
-import { putReq } from "../../js/requests.js";
+import { getReq, putReq } from "../../js/requests.js";
 import ReactFullpage from '@fullpage/react-fullpage'
 import { removeCycFromString } from '../../js/string';
+import { get } from 'idb-keyval';
 
-const LeaderRetreat1 = ({onSignUpClick}) => {
+const LeaderRetreat1 = ({ onSignUpClick }) => {
     return (
         <section
             className='flex flex-col justify-between align-center retreat-bg-1 relative section'
@@ -23,7 +24,7 @@ const LeaderRetreat1 = ({onSignUpClick}) => {
     )
 }
 
-const LeaderRetreat2 = ({onSignUpClick}) => {
+const LeaderRetreat2 = ({ onSignUpClick }) => {
     return (
         <section
             className='flex flex-col justify-between align-center retreat-bg-2 section'
@@ -108,11 +109,11 @@ export default function LeaderRetreat() {
     const [openCollapse, setOpenCollapse] = useState(null);
     const [cycid, setCycid] = useState('');
 
-    useEffect(()=> {
-       
+    useEffect(() => {
+
         document.querySelector(".fp-watermark").classList.add("d-none")
-  
-    },[])
+
+    }, [])
 
     // useEffect(() => {
     //     document.body.classList.add('no-scroll');
@@ -158,16 +159,17 @@ export default function LeaderRetreat() {
         setCycid(e.target.value);
     }
 
-    const handleSubmit = () => {
-        const regex = /^\d{1,6}$/;
+    const handleGetName = async () => {
+        const res = await getReq(`/auth/names?CYC_ID=${removeCycFromString(cycid)}`);
 
-        if (!regex.test(removeCycFromString(cycid.trim()))) {
-            alert('Please enter a valid CYC ID.');
-            return;
+        if (res.status) {
+            return res.data.full_name;
+        } else {
+            return false;
         }
+    };
 
-        // const CYC_ID = cycid.trim().substring(3, cycid.trim().length);
-
+    const handlePutReq = () => {
         let data = {
             CYC_ID: parseInt(removeCycFromString(cycid)),
             leader_retreat: {
@@ -177,7 +179,6 @@ export default function LeaderRetreat() {
         }
 
         putReq("/leader_retreat", data).then((res) => {
-            console.log(res)
             if (res.status) {
                 alert('Thank you for registering!');
             } else {
@@ -186,15 +187,40 @@ export default function LeaderRetreat() {
         });
     }
 
+    const handleConfirmRegister = (name) => {
+        if (confirm(`Are you sure you want to register for ${name}?`) === true) {
+            handlePutReq();
+        } else {
+            alert('Registration cancelled.');
+        }
+    }
+
+    const handleSubmit = async () => {
+        const regex = /^\d{1,6}$/;
+
+        if (!regex.test(removeCycFromString(cycid.trim()))) {
+            alert('Please enter a valid CYC ID.');
+            return;
+        }
+
+        let name = await handleGetName();
+
+        if (name) {
+            handleConfirmRegister(name);
+        } else {
+            alert('CYC ID not found.');
+        }
+    }
+
     return (
-        <ReactFullpage credits={{ enabled: false, label:"" }} render={({  fullpageApi }) => <ReactFullpage.Wrapper>
+        <ReactFullpage credits={{ enabled: false, label: "" }} render={({ fullpageApi }) => <ReactFullpage.Wrapper>
             <LeaderRetreat1
-        onSignUpClick={()=> fullpageApi.moveSectionDown()}
-        />
+                onSignUpClick={() => fullpageApi.moveSectionDown()}
+            />
             <LeaderRetreat2
-            // handleTouchStart={handleTouchStart}
-            // handleTouchEnd={handleTouchEnd(1)}
-            onSignUpClick={()=> fullpageApi.moveSectionDown()}
+                // handleTouchStart={handleTouchStart}
+                // handleTouchEnd={handleTouchEnd(1)}
+                onSignUpClick={() => fullpageApi.moveSectionDown()}
             />
             <LeaderRetreat3
                 openCollapse={openCollapse}
