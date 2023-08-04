@@ -5,6 +5,7 @@ import { getReq, putReq } from "../../js/requests.js";
 import ReactFullpage from '@fullpage/react-fullpage'
 import { removeCycFromString } from '../../js/string';
 import { get } from 'idb-keyval';
+import {getTimeStamp} from "../../js/dateTime.js";
 
 const LeaderRetreat1 = ({ onSignUpClick }) => {
     return (
@@ -174,7 +175,8 @@ export default function LeaderRetreat() {
             CYC_ID: parseInt(removeCycFromString(cycid)),
             leader_retreat: {
                 year: 2023,
-                status: "registered"
+                status: "registered",
+                created:  getTimeStamp()
             }
         }
 
