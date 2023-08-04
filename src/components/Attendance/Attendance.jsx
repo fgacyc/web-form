@@ -44,7 +44,7 @@ function PastoralTeamPicker({ onSelect }) {
     )
 }
 
-function MinistryPicker({ onSelect }) {
+export function MinistryPicker({ onSelect }) {
     const [showInitialOption, setShowInitialOption] = useState(true);
 
     const handleSelect = (event) => {
@@ -74,6 +74,68 @@ function MinistryPicker({ onSelect }) {
                                 })
                             }
                         </optgroup>
+                    )
+                })
+            }
+        </select>
+    )
+}
+
+export function DepartmentPicker({ onSelect }) {
+    const [showInitialOption, setShowInitialOption] = useState(true);
+
+    const handleSelect = (event) => {
+        const selectedValue = event.target.value;
+        onSelect(selectedValue);
+        setShowInitialOption(false);
+    };
+
+    return (
+        <select
+            className="appointment-select"
+            value={showInitialOption ? "" : undefined}
+            onChange={handleSelect}
+        >
+            <option value="" disabled hidden>Select a ministry</option>
+            {
+                Object.entries(organization_structure).map(([team, department], index) => {
+                    return (
+                        <optgroup key={index} label={formatOption(team)}>
+                            {
+                                Object.entries(department).map(([dep, ministry], index) => {
+                                    return (
+                                        <option key={index} value={dep}>{formatOption(dep)}</option>
+                                    )
+                                })
+                            }
+                        </optgroup>
+                    )
+                })
+            }
+        </select>
+    )
+}
+
+export function TeamPicker({ onSelect }) {
+    const [showInitialOption, setShowInitialOption] = useState(true);
+
+    const handleSelect = (event) => {
+        const selectedValue = event.target.value;
+        onSelect(selectedValue);
+        setShowInitialOption(false);
+    };
+
+    return (
+        <select
+            className="appointment-select"
+            value={showInitialOption ? "" : undefined}
+            onChange={handleSelect}
+        >
+            <option value="" disabled hidden>Select a ministry</option>
+            {
+                Object.entries(organization_structure).map(([team, department], index) => {
+                    return (
+                        <option key={index} value={team}>{formatOption(team)}</option>
                     )
                 })
             }

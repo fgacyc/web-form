@@ -4,7 +4,7 @@ import PubSub from 'pubsub-js';
 import { confirmAlert } from 'react-confirm-alert';
 import { get, set } from 'idb-keyval'
 import { Input } from '../../Form/Input/Input';
-import { GenderPicker } from '../LeaderRegistration/LeaderRegistration';
+import FieldPicker from '../../Form/FieldPicker/FieldPicker';
 import { role_data } from './role_data';
 import { getRandomSixDigitPassword, validateEmail, validateID, validateName, validatePhone, validateField } from '../../../js/form';
 import { capitalFirstLetter, capitalizeAndReplace } from "../../../js/string.js";
@@ -133,7 +133,7 @@ function Registration({ onClose }) {
         const isLnameValid = validateName(lname, setLnameError);
         const isPhoneValid = validatePhone(phone, setPhoneError);
         let isEmailValid = validateEmail(email, setEmailError);
-        if(email === ""){
+        if (email === "") {
             setEmail(`${fname}@fgacyc.com`)
             isEmailValid = true
         }
@@ -194,11 +194,13 @@ function Registration({ onClose }) {
                         error={idError}
                     />
 
-                    <>
-                        <label className='input-text' value={gender}>Gender</label>
-                        <GenderPicker onSelect={(selectedValue) => { handleSelect(selectedValue, setGender, setGenderError) }} />
-                        {genderError && <div className='input-error'>{genderError}</div>}
-                    </>
+                    <label className='input-text' value={gender}>Gender</label>
+                    <FieldPicker
+                        onSelect={(selectedValue) => { handleSelect(selectedValue, setGender, setGenderError) }}
+                        title={'Select a gender'}
+                        data={gender_data}
+                    />
+                    {genderError && <div className='input-error'>{genderError}</div>}
 
                     <>
                         <label className='input-text' value={role}>Role</label>

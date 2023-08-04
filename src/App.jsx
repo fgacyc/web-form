@@ -51,6 +51,7 @@ function App() {
       <Route path='member_registration' element={<MemberRegistration />} />
       <Route path='leader_retreat' element={<LeaderRetreat />} />
       <Route path='login' element={<Login />} />
+      <Route path='ministry_registration' element={<LeaderRegistration />} />
     </Routes>
   )
 }
