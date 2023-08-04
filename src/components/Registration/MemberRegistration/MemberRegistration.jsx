@@ -9,6 +9,7 @@ import { role_data } from './role_data';
 import { getRandomSixDigitPassword, validateEmail, validateID, validateName, validatePhone, validateField } from '../../../js/form';
 import { capitalFirstLetter, capitalizeAndReplace } from "../../../js/string.js";
 import { putReq } from '../../../js/requests';
+import {getTimeStamp} from "../../../js/dateTime.js";
 
 function MemberCard({ data, onDelete, color }) {
     console.log(data)
@@ -121,6 +122,7 @@ function Registration({ onClose }) {
             picture: null,
             cg_id: null,
             role,
+            created: getTimeStamp()
         }
 
         PubSub.publish('memberlist', member_data)
