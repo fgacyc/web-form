@@ -10,6 +10,7 @@ import { getRandomSixDigitPassword, validateEmail, validateID, validateName, val
 import { capitalFirstLetter, capitalizeAndReplace } from "../../../js/string.js";
 import { putReq } from '../../../js/requests';
 import {getTimeStamp} from "../../../js/dateTime.js";
+import {gender_data} from "../../Form/picker_data.js";
 
 function MemberCard({ data, onDelete, color }) {
     console.log(data)
