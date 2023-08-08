@@ -113,7 +113,7 @@ button:active {
 }
 
 .relative {
-    position: relative !important;
+    position: relative;
 }
 
 .text-center {
