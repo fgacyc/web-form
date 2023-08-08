@@ -25,7 +25,9 @@
     margin-top: 10px;
 }
 
-.submission-select {
+.submission-select,
+.submission-select:focus,
+.submission-select:active {
     height: 64px;
 }
 
@@ -126,4 +128,19 @@ select {
     display: flex !important;
     flex-direction: row !important;
     justify-content: space-between !important;
+}
+
+.child-checkbox,
+.child-checkbox:focus,
+.child-checkbox:active {
+    width: 20px;
+    height: 20px;
+}
+
+.child-register {
+    color: #21416D;
+    margin-left: 5px;
+    padding-top: 5px;
+    font-family: SF Pro Display;
+    font-size: 0.875rem;
 }
