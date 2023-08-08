@@ -11,6 +11,10 @@ export const gender_data = [
 
 export const ministry_role = [
     {
+        label: 'Crew',
+        value: 'crew'
+    },
+    {
         label: 'Ministry PIC',
         value: 'ministry_pic'
     },
