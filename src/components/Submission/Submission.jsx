@@ -158,17 +158,17 @@ export default function Submission() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // let ifStop = true;
+        let ifStop = true;
 
-        // if (ifStop) {
-        //     alert("Submission is finished. Please wait for the announcement.");
-        //     return;
-        // }
+        if (ifStop) {
+            alert("Submission is finished. Please wait for the announcement.");
+            return;
+        }
 
-        // if (isButtonDisabled) {
-        //     alert("Submission is not open yet. Please wait for the announcement.");
-        //     return;
-        // }
+        if (isButtonDisabled) {
+            alert("Submission is not open yet. Please wait for the announcement.");
+            return;
+        }
 
         // const ifSubmitted = "false"
         // if (ifSubmitted === "true") {
@@ -232,17 +232,17 @@ export default function Submission() {
 
         console.log(info);
 
-        // postRecruiter(info).then((result) => {
-        //     if (result === true) {
-        //         navigate("/complete");
-        //         localStorage.setItem("cyc-submission", "true")
-        //     } else if (result === "failed") {
-        //         alert("You have already submitted your application. Please wait for the response.")
-        //         navigate("/");
-        //     } else {
-        //         alert("Something went wrong, Please try again.");
-        //     }
-        // });
+        postRecruiter(info).then((result) => {
+            if (result === true) {
+                navigate("/complete");
+                localStorage.setItem("cyc-submission", "true")
+            } else if (result === "failed") {
+                alert("You have already submitted your application. Please wait for the response.")
+                navigate("/");
+            } else {
+                alert("Something went wrong, Please try again.");
+            }
+        });
     }
 
     const options = {
