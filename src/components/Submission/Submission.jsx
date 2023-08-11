@@ -186,13 +186,14 @@ export default function Submission() {
         let isInstrumentValid = true;
 
         if (registerForChild) {
+            if (selectedMinistry === 'vocal') {
+                setInstrument("none");
+            }
+
             isGuardianValid = validateField(guardian, setGuardianError, "Guardian is required");
             isLeaderValid = validateField(leader, setLeaderError, "Leader is required");
             isInstrumentValid = validateField(instrument, setInstrumentError, "Instrument is required");
             setPastoralTeam("wonderkids");
-            if (selectedMinistry === 'vocal') {
-                setInstrument("none");
-            }
         } else {
             isPastoralTeamValid = validatePastoralTeam();
         }
