@@ -158,17 +158,17 @@ export default function Submission() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        let ifStop = true;
+        // let ifStop = true;
 
-        if (ifStop) {
-            alert("Submission is finished. Please wait for the announcement.");
-            return;
-        }
+        // if (ifStop) {
+        //     alert("Submission is finished. Please wait for the announcement.");
+        //     return;
+        // }
 
-        if (isButtonDisabled) {
-            alert("Submission is not open yet. Please wait for the announcement.");
-            return;
-        }
+        // if (isButtonDisabled) {
+        //     alert("Submission is not open yet. Please wait for the announcement.");
+        //     return;
+        // }
 
         // const ifSubmitted = "false"
         // if (ifSubmitted === "true") {
