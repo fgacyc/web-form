@@ -231,7 +231,7 @@ export default function Submission() {
             }
         }
 
-        console.log(info);
+        // console.log(info);
 
         postRecruiter(info).then((result) => {
             if (result === true) {
@@ -320,17 +320,7 @@ export default function Submission() {
                         registerForChild ?
                             <>
                                 <label htmlFor="leader" className="input-text">Leader</label>
-                                <select
-                                    className="submission-select"
-                                    name="leader"
-                                    id="leader"
-                                    value={leader}
-                                    onChange={(e) => setLeader(e.target.value)}
-                                >
-                                    <option value="" disabled hidden>Select a leader</option>
-                                    <option value="leaderOne">Leader 1</option>
-                                    <option value="leaderTwo">Leader 2</option>
-                                </select>
+                                <input type="text" name="leader" id="leader" value={leader} onChange={(e) => setLeader(e.target.value)} />
                                 {leaderError && <div className="input-error">{leaderError}</div>}
                             </>
                             :
