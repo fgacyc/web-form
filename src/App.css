@@ -97,13 +97,25 @@ h6 {
   font-family: Microsoft JhengHei;
   font-weight: 300;
 }
+button {
+  cursor: pointer !important;
+}
 
-button,
+/* button,
 button:hover,
 button:focus,
 button:active {
   cursor: pointer;
 }
+    border: none;
+    border-radius: 30px;
+    background-color: #fff;
+    color: #193a66;
+    padding: 25px 70px;
+    font-size: 1.3rem;
+    font-family: FZChaoCuHei;
+    cursor: pointer;
+} */
 
 .FZChaoCuHei {
   font-family: FZChaoCuHei;
@@ -184,6 +196,7 @@ button:active {
 .font-weight-400 {
   font-weight: 400;
 }
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 *::-webkit-scrollbar {
   display: none;
