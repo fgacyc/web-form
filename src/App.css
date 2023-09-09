@@ -207,3 +207,34 @@ button:active {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+.field {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.capitalize {
+  color: #303030;
+  font-size: 14px;
+  font-family: SF Pro Display;
+  text-transform: capitalize;
+}
+
+.register-field {
+  outline: none;
+  border-bottom: 2px solid #303030 !important;
+  border: 0px;
+  margin-top: 3px;
+  font-size: 18px;
+  font-family: SF Pro Display;
+  letter-spacing: 0.5px;
+  width: 100%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}

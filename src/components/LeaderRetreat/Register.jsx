@@ -1,32 +1,30 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import { useAPI } from "../../lib/openapi";
-import { useEffect } from "react";
+/* eslint-disable react/prop-types */
+import { Field, Formik, Form } from "formik";
+
+const FormField = ({ name }) => {
+  return (
+    <div className="field">
+      <label className="capitalize" htmlFor={name}>
+        {name.replaceAll("_", " ")}
+      </label>
+      <Field type="text" className="register-field" name={name} />
+    </div>
+  );
+};
 
 const Register = () => {
-  const { user } = useAuth0();
-
-  const api = useAPI();
-
-  useEffect(() => {
-    if (!user?.sub) return;
-    api
-      .GET("/users/{id}", {
-        params: {
-          path: {
-            id: user?.sub,
-          },
-        },
-      })
-      .then((v) => console.log(v.data));
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user?.sub]);
-
-  console.log(user);
   return (
-    <section className="retreat-bg-2 full flex flex-col justify-center align-center">
-      <div className="popup">s</div>
+    <section className="retreat-bg-3 full flex flex-col justify-center align-center">
+      <div className="popup">
+        <Formik>
+          <Form className="form">
+            <FormField name={"full_name_(en)"} />
+            <FormField name={"name"} />
+          </Form>
+        </Formik>
+      </div>
     </section>
   );
 };
+
 export default Register;

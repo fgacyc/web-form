@@ -2,8 +2,8 @@
 import { useState, useEffect } from "react";
 import { faq_data } from "./leader_retreat_data";
 import ReactFullpage from "@fullpage/react-fullpage";
-import { useAuth0 } from "@auth0/auth0-react";
 import "./leaderRetreat.css";
+import { useNavigate } from "react-router-dom";
 
 const LeaderRetreat1 = ({ onClick }) => {
   return (
@@ -123,7 +123,7 @@ const Collapse = ({ title, content, isOpen, onToggle }) => {
 
 export default function LeaderRetreat() {
   const [openCollapse, setOpenCollapse] = useState();
-  const { loginWithRedirect, isAuthenticated, user } = useAuth0();
+  const navigate = useNavigate();
   useEffect(() => {
     document.querySelector(".fp-watermark")?.classList.add("d-none");
   }, []);
@@ -148,8 +148,7 @@ export default function LeaderRetreat() {
             handleToggle={handleToggle}
             // handleTouchStart={handleTouchStart}
             // handleTouchEnd={handleTouchEnd(2)}
-            handleSubmit={!isAuthenticated ? loginWithRedirect : undefined}
-            user={user}
+            handleSubmit={() => navigate("/register")}
           />
         </ReactFullpage.Wrapper>
       )}
