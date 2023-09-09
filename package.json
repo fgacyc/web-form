@@ -10,11 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@auth0/auth0-react": "^2.2.1",
     "@fullpage/react-fullpage": "^0.1.40",
     "formik": "^2.4.4",
     "idb-keyval": "^6.2.1",
-    "openapi-fetch": "^0.7.6",
     "party-js": "^2.2.0",
     "pubsub-js": "^1.9.4",
     "react": "^18.2.0",
