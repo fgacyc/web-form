@@ -1,128 +1,145 @@
 .retreat-bg-1 {
-    background-image: url('/images/retreat_bg_1.png');
- 
+  background-image: url("/images/retreat_bg_1.png");
 }
 
 .retreat-bg-2 {
-    background-image: url('/images/retreat_bg_2.png');
- 
+  background-image: url("/images/retreat_bg_2.png");
 }
 
 .retreat-bg-3 {
-    background-image: url('/images/retreat_bg_3.png');
-    min-height: 100vh;
-    height: auto;
+  background-image: url("/images/retreat_bg_3.png");
+  min-height: 100vh;
+  height: auto;
 }
 
 .retreat-overlay {
-    position: absolute;
-    top: -100px;
-    left: 0;
-    width: 100%;
-    height: calc(100% + 100px);
-    background: linear-gradient(180deg, rgba(23, 23, 23, 0.00) 2.60%, rgba(0, 0, 0, 0.74) 58.85%);
+  position: absolute;
+  top: -100px;
+  left: 0;
+  width: 100%;
+  height: calc(100% + 100px);
+  background: linear-gradient(
+    180deg,
+    rgba(23, 23, 23, 0) 2.6%,
+    rgba(0, 0, 0, 0.74) 58.85%
+  );
 }
 
 .retreat-date {
-    color: #fff;
-    font-family: 'SF Pro Display';
-    font-size: 1.5rem;
-    margin-top: 15px;
+  color: #fff;
+  font-family: "SF Pro Display";
+  font-size: 1.5rem;
+  margin-top: 15px;
+  text-align: center;
 }
 
-.btn-retreat,
-.btn-retreat:hover,
-.btn-retreat:active,
-.btn-retreat:focus {
-    border-radius: 40px;
-    border: 1px solid #fff;
-    background: #000;
-    color: #fff;
-    font-family: 'SF Pro Display';
-    font-size: 1.25rem;
-    padding: 15px 45px;
+.btn-retreat {
+  border-radius: 40px;
+  border: 1px solid #fff;
+  background: #000;
+  color: #fff;
+  font-family: "SF Pro Display";
+  font-size: 1.25rem;
+  padding: 15px 45px;
 }
 
 .retreat-2-text-1,
 .retreat-3-text-1 {
-    color: #000;
-    font-family: 'Sorren Black';
-    font-size: 3.75rem;
-    text-align: center;
-    margin-top: 90px;
+  color: #000;
+  font-family: "Sorren Black";
+  font-size: 3.75rem;
+  text-align: center;
+  margin-top: 90px;
 }
 
 .retreat-2-text-2 {
-    color: #000;
-    font-family: 'SF Pro Display';
-    font-size: 1.063rem;
+  color: #000;
+  font-family: "SF Pro Display";
+  font-size: 1.063rem;
+  text-align: center;
 }
 
 .retreat-3-text-1 {
-    color: #fff;
-    margin-top: 60px;
-    margin-bottom: 40px;
+  color: #fff;
+  margin-top: 60px;
+  margin-bottom: 40px;
 }
 
 .collapse-container {
-    border-radius: 8px;
-    background: #fff;
+  border-radius: 8px;
+  background: #fff;
 }
 
 .collapse-container {
-    margin: 0px 35px;
+  margin: 0px 35px;
 }
 
 .collapse-header {
-    border-radius: 8px;
-    border: 1px solid #d3d3d3;
-    background: #fff;
-    box-shadow: 0px 20px 50px 0px rgba(0, 0, 0, 0.12);
-    display: flex;
-    justify-content: space-between;
-    padding: 30px;
-    margin-bottom: 20px;
-    color: #000;
-    font-family: 'SF Pro Display';
-    font-size: 1.063rem;
+  border-radius: 8px;
+  border: 1px solid #d3d3d3;
+  background: #fff;
+  box-shadow: 0px 20px 50px 0px rgba(0, 0, 0, 0.12);
+  display: flex;
+  justify-content: space-between;
+  padding: 30px;
+  margin-bottom: 20px;
+  color: #000;
+  font-family: "SF Pro Display";
+  font-size: 1.063rem;
 }
 
 .collapse-content {
-    color: #000;
-    font-family: 'SF Pro Display';
-    font-size: 0.938rem;
-    padding: 30px;
-    padding-top: 10px;
-    margin-bottom: 20px;
+  color: #000;
+  font-family: "SF Pro Display";
+  font-size: 0.938rem;
+  padding: 30px;
+  padding-top: 10px;
+  margin-bottom: 20px;
 }
 
 .cycid-text {
-    color: #fff;
-    font-family: 'SF Pro Display';
-    font-size: 0.875rem;
-    margin-top: 36px;
+  color: #fff;
+  font-family: "SF Pro Display";
+  font-size: 0.875rem;
+  margin-top: 36px;
 }
 
 .input-cycid,
 .input-cycid:focus,
 .input-cycid:active,
 .input-cycid:hover {
-    margin-top: 16px;
-    margin-bottom: 32px;
-    width: 250px;
-    border-radius: 5px;
-    border: 1px solid #e6e6e6;
-    background: #f9f9f9;
-    color: #737373;
-    font-family: 'SF Pro Display';
-    font-size: 0.875rem;
-    padding-left: 20px;
+  margin-top: 16px;
+  margin-bottom: 32px;
+  width: 250px;
+  border-radius: 5px;
+  border: 1px solid #e6e6e6;
+  background: #f9f9f9;
+  color: #737373;
+  font-family: "SF Pro Display";
+  font-size: 0.875rem;
+  padding-left: 20px;
 }
 
 .mt-75 {
-    margin-top: 75px;
+  margin-top: 75px;
 }
 
 .mb-75 {
-    margin-bottom: 75px;
+  margin-bottom: 75px;
+}
+
+.full {
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.popup {
+  max-width: calc(100vw - 30px);
+  border-radius: 40px;
+  width: 100%;
+  height: 80vh;
+  background: #fff;
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
+    0 8px 10px -6px rgb(0 0 0 / 0.1);
 }

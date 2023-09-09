@@ -1,59 +1,28 @@
-import './App.css'
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import LeaderRetreat from "./components/LeaderRetreat/LeaderRetreat";
+import LeaderRetreatRegister from "./components/LeaderRetreat/Register";
+import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect } from "react";
-import { Routes, Route } from 'react-router-dom';
-import Home from './components/HomePage/Home'
-import Team from './components/Team/Team'
-import Search from './components/Search/Search';
-import Selection from './components/SelectionPage/Selection';
-import Complete from './components/Complete/Complete';
-import Submission from './components/Submission/Submission';
-import Appointment from './components/AppointmentPage/Appointment';
-import Milestone from './components/MilestonePage/Milestone';
-import InterviewerDetail from './components/InterviewerDetail/InterviewerDetail';
-import Attendance from './components/Attendance/Attendance';
-import LeaderRegistration from './components/Registration/LeaderRegistration/LeaderRegistration';
-import LeaderRegistrationSuccess from './components/Registration/LeaderRegistrationSuccess/LeaderRegistrationSuccess';
-import MemberRegistration from './components/Registration/MemberRegistration/MemberRegistration';
-import LeaderRetreat from './components/LeaderRetreat/LeaderRetreat';
-import OrientationConfirmation from "./components/orientation/OrientationConfirmation.jsx";
-import Login from './components/Login/Login';
-
-function clearDepartment() {
-  localStorage.removeItem('cyc-department-selected');
-}
-
 
 function App() {
+  const { getAccessTokenSilently, user, isLoading } = useAuth0();
+
   useEffect(() => {
-    clearDepartment();
-  }, []);
+    if (isLoading) return;
+
+    user &&
+      getAccessTokenSilently().then((tkn) =>
+        sessionStorage.setItem("fgacyc-auth-token", tkn)
+      );
+  }, [getAccessTokenSilently, isLoading, user]);
 
   return (
     <Routes>
-      <Route path='/' element={<Home />} />
-      <Route path='/team' element={<Team />} />
-      <Route path='/team/:team' element={<Team />} />
-      <Route path='/team/:team/:sectionNum' element={<Team />} />
-      <Route path='/search' element={<Search />} />
-      <Route path='/selection' element={<Selection />} />
-      <Route path='/complete' element={<Complete />} />
-      <Route path='/form' element={<Submission />} />
-      <Route path='/appointment' element={<Appointment />} />
-      <Route path='/appointment/:date/:RID' element={<Appointment />} />
-      <Route path='milestone' element={<Milestone />} />
-      <Route path='milestone/:RID' element={<Milestone />} />
-      <Route path='recruiter' element={<InterviewerDetail />} />
-      <Route path='recruiter/:RID' element={<InterviewerDetail />} />
-      <Route path='attendance' element={<Attendance />}/>
-      <Route path='orientation_confirmation/:RID' element={<OrientationConfirmation />}/>
-      <Route path='leader_registration' element={<LeaderRegistration />} />
-      <Route path='leader_reg_success' element={<LeaderRegistrationSuccess />} />
-      <Route path='member_registration' element={<MemberRegistration />} />
-      <Route path='leader_retreat' element={<LeaderRetreat />} />
-      <Route path='login' element={<Login />} />
-      <Route path='ministry_registration' element={<LeaderRegistration />} />
+      <Route path="/" element={<LeaderRetreat />} />
+      <Route path="/register" element={<LeaderRetreatRegister />} />
     </Routes>
-  )
+  );
 }
 
-export default App
+export default App;
