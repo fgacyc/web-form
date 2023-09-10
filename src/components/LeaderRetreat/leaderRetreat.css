@@ -169,6 +169,8 @@ button.activated {
   max-width: calc(100vw - 150px);
   border-radius: 40px;
   width: 100%;
+  max-height: 80vh;
+  overflow-y: scroll;
   /* height: 100%; */
   background: #fff;
   filter: drop-shadow(0 20px 13px rgb(0 0 0 / 0.03))
@@ -205,9 +207,13 @@ select option {
 
 .kids-container {
   border-radius: 20px;
-  padding: 10px;
+  padding: 15px;
   border: 1px dotted #303030;
   margin-top: 5px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 
 .btn-kids {
@@ -218,4 +224,14 @@ select option {
   color: #fff;
   font-family: "SF Pro Display";
   font-size: 18px;
+}
+
+.close-btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+input {
+  background: #fff;
 }

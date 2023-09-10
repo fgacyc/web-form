@@ -4,11 +4,18 @@ import { Field, Formik, Form } from "formik";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-date-picker";
+import { AiFillCloseCircle } from "react-icons/ai";
 
 import "react-date-picker/dist/DatePicker.css";
 import "react-calendar/dist/Calendar.css";
 
 import * as Yup from "yup";
+import { useFirestore } from "reactfire";
+import { addDoc, collection } from "firebase/firestore";
+
+const handleSubmit = (col, data, then) => {
+  return addDoc(col, data).then(then);
+};
 
 const DateField = ({ name, notRequired = false, errors, setFieldValue }) => {
   const [date, setDate] = useState("");
@@ -31,6 +38,26 @@ const DateField = ({ name, notRequired = false, errors, setFieldValue }) => {
         />
       </div>
       {errors[name] && <div className="error-text">{errors[name]}</div>}
+    </div>
+  );
+};
+
+const DetailsField = ({ name, value }) => {
+  const inputValue = Array.isArray(value)
+    ? value.map((item) => `${item.name} - ${item.age}`).join(", ")
+    : name === "dob"
+    ? new Date(value).toLocaleDateString()
+    : value;
+  return (
+    <div className="field">
+      <label className="capitalize">{name.replaceAll("_", " ")}</label>
+      <input
+        type="text"
+        className={`register-field`}
+        name={name}
+        disabled
+        value={inputValue === "false" || inputValue === "" ? "N/A" : inputValue}
+      />
     </div>
   );
 };
@@ -71,18 +98,84 @@ const SelectField = ({ name, options, notRequired = false, label }) => {
     </div>
   );
 };
-const KidsField = ({ name, notRequired = false, errors, label }) => {
-  const [count, setCount] = useState(1);
+const KidsField = ({ setFieldValue }) => {
+  const [kids, setKids] = useState([]);
+
+  useEffect(() => {
+    setFieldValue("kids", kids);
+  }, [kids, setFieldValue]);
   return (
     <>
       <button
         className="btn-kids mt-0"
         type="button"
-        onClick={() => setCount((prev) => prev + 1)}
+        onClick={() => setKids((prev) => [...prev, { name: "", age: "" }])}
       >
         Add Kid
       </button>
-      {<div className="kids-container"></div>}
+      {kids.map((item, i) => (
+        <div className="kids-container" key={i}>
+          <AiFillCloseCircle
+            color="#303030"
+            className="close-btn"
+            onClick={() => {
+              const copy = [...kids];
+
+              copy.splice(i, 1);
+              setKids(copy);
+            }}
+          />
+          <div>
+            <div className="field">
+              <label className="capitalize" htmlFor={`name-${i + 1}`}>
+                Name {i + 1}
+              </label>
+              <input
+                type="text"
+                className={`register-field`}
+                onChange={(e) => {
+                  const newArray = [...kids];
+                  const newItem = {
+                    name: e.currentTarget.value,
+                    age: kids[i].age,
+                  };
+
+                  newArray[i] = newItem;
+                  setKids(newArray);
+                }}
+              />
+            </div>
+            <div className="field">
+              <label className="capitalize" htmlFor={`name-${i + 1}`}>
+                Age
+              </label>
+              <input
+                type="number"
+                min="1"
+                max="99"
+                maxLength="2"
+                onInput={(event) =>
+                  (event.target.value = event.target.value.slice(
+                    0,
+                    event.target.maxLength
+                  ))
+                }
+                className={`register-field`}
+                onChange={(e) => {
+                  const newArray = [...kids];
+                  const newItem = {
+                    age: e.currentTarget.value,
+                    name: kids[i].name,
+                  };
+
+                  newArray[i] = newItem;
+                  setKids(newArray);
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      ))}
     </>
   );
 };
@@ -90,13 +183,18 @@ const Register = () => {
   const { user, isLoading } = useAuth0();
   const navigate = useNavigate();
 
+  const firestore = useFirestore();
+  const col = collection(firestore, "registrations");
+
   useEffect(() => {
     if (isLoading) return;
     if (!user) navigate("/", { replace: true });
   }, [navigate, isLoading, user]);
 
   const [page, setPage] = useState(1);
-  return (
+  return status === "loading" ? (
+    <>Loading</>
+  ) : (
     <section className="retreat-bg-3 full flex flex-col justify-center align-center">
       <div className="popup">
         <Formik
@@ -113,7 +211,9 @@ const Register = () => {
             pastoral_team: "Wonderkids",
             invited_by: "pastoral",
             ministry_team: "",
-            additional_joining: false,
+            additional_joining: "false",
+            additional_bed: "false",
+            kids: [],
           }}
           validationSchema={Yup.object().shape({
             email: Yup.string().email("Invalid Format.").required("Required"),
@@ -133,17 +233,33 @@ const Register = () => {
               then: (schema) => schema.required("Required."),
             }),
             marital_status: Yup.string().required("Required."),
-            additional_joining: Yup.boolean().when("marital_status", {
+            additional_joining: Yup.string().when("marital_status", {
               is: "married",
               then: (schema) => schema.required("Required."),
             }),
+            kids: Yup.array().of(
+              Yup.object({
+                name: Yup.string().required("Required."),
+                age: Yup.number().required(),
+              })
+            ),
+            additional_bed: Yup.string().when("additional_joining", {
+              is: "true",
+              then: (schema) => schema.required("Required."),
+            }),
           })}
-          onSubmit={(values) => {
-            console.log(values);
-            alert(JSON.stringify(values, null, 2));
+          onSubmit={(values, actions) => {
+            actions.setSubmitting(true);
+            handleSubmit(col, { ...values, user_id: user.sub }, () => {
+              actions.setSubmitting(false);
+              actions.resetForm();
+              setPage(1);
+            });
+            // console.log({ ...values, userId: user.sub });
+            // alert(JSON.stringify({ ...values, userId: user.sub }, null, 2));
           }}
         >
-          {({ errors, values, setFieldValue, validateForm }) => (
+          {({ errors, values, setFieldValue, validateForm, isSubmitting }) => (
             <Form className="form">
               {page === 1 ? (
                 <>
@@ -330,8 +446,9 @@ const Register = () => {
                     <button
                       onClick={() =>
                         setPage((prev) => {
-                          if (values.marital_status === "married")
+                          if (values.marital_status === "married") {
                             return prev + 1;
+                          } else return 4;
                         })
                       }
                       className="btn-retreat mt-0"
@@ -354,10 +471,25 @@ const Register = () => {
                     ]}
                   />
 
-                  {values.additional_joining && (
+                  {values.additional_joining === "true" && (
                     <div>
-                      <KidsField errors={errors} name={"kids"} />
+                      <KidsField
+                        errors={errors}
+                        name={"kids"}
+                        setFieldValue={setFieldValue}
+                      />
                     </div>
+                  )}
+
+                  {values.additional_joining === "true" && (
+                    <SelectField
+                      name={"additional_bed"}
+                      label="Do you need an additional bed? (+RM50)"
+                      options={[
+                        { value: true, label: "Yes" },
+                        { value: false, label: "No" },
+                      ]}
+                    />
                   )}
 
                   <div
@@ -385,7 +517,42 @@ const Register = () => {
                   </div>
                 </>
               ) : (
-                <></>
+                <>
+                  <h2>Your info</h2>
+                  {Object.entries(values).map(([key, value]) => (
+                    <DetailsField key={key} name={key} value={value} />
+                  ))}
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      marginTop: "1rem",
+                      gap: "1rem",
+                    }}
+                  >
+                    <button
+                      onClick={() =>
+                        setPage((prev) => {
+                          if (values.marital_status === "married") {
+                            return prev - 1;
+                          } else return 2;
+                        })
+                      }
+                      className="btn-retreat secondary mt-0"
+                    >
+                      Back
+                    </button>
+                    <button
+                      type="submit"
+                      className="btn-retreat mt-0"
+                      disabled={isSubmitting}
+                      style={{ width: "100%" }}
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </>
               )}
             </Form>
           )}
