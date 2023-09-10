@@ -72,7 +72,7 @@ const LeaderRetreat3 = ({
     >
       <div className="retreat-3-text-1">FAQ</div>
 
-      <div>
+      <div style={{ width: "100%", padding: "0 20px" }}>
         {faq_data.map((data, index) => {
           return (
             <Collapse
@@ -132,6 +132,9 @@ export default function LeaderRetreat() {
   const navigate = useNavigate();
   useEffect(() => {
     document.querySelector(".fp-watermark")?.classList.add("d-none");
+    document
+      .querySelector("section.retreat-bg-3 > .fp-overflow")
+      ?.classList.add("no-between");
   }, []);
 
   const handleToggle = (index) => {

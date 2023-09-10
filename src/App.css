@@ -56,6 +56,10 @@ section {
   justify-content: space-between !important;
 }
 
+.fp-overflow.no-between {
+  justify-content: flex-start !important;
+}
+
 .overlay {
   position: absolute;
   top: 0;
