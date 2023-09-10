@@ -17,8 +17,14 @@ const handleSubmit = (col, data, then) => {
   return addDoc(col, data).then(then);
 };
 
-const DateField = ({ name, notRequired = false, errors, setFieldValue }) => {
-  const [date, setDate] = useState("");
+const DateField = ({
+  name,
+  notRequired = false,
+  errors,
+  setFieldValue,
+  values,
+}) => {
+  const [date, setDate] = useState(values.dob);
   return (
     <div>
       <div className="field">
@@ -366,6 +372,7 @@ const Register = () => {
                     name={"dob"}
                     errors={errors}
                     setFieldValue={setFieldValue}
+                    values={values}
                   />
                   <FormField
                     name={"contact_no"}
