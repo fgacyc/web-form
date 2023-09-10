@@ -268,7 +268,7 @@ const Register = () => {
     if (!user) navigate("/", { replace: true });
   }, [navigate, isLoading, user]);
 
-  const [page, setPage] = useState(3);
+  const [page, setPage] = useState(1);
   return status === "loading" ? (
     <>Loading</>
   ) : (
