@@ -214,6 +214,7 @@ select option {
   display: flex;
   flex-direction: column;
   gap: 3px;
+  background-color: #fff;
 }
 
 .btn-kids {
