@@ -254,6 +254,7 @@ const Register = () => {
               actions.setSubmitting(false);
               actions.resetForm();
               setPage(1);
+              alert("Submitted Successfully! 🚀 See you there!");
             });
             // console.log({ ...values, userId: user.sub });
             // alert(JSON.stringify({ ...values, userId: user.sub }, null, 2));
