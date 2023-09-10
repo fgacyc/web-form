@@ -202,3 +202,20 @@ select option {
   text-align: end;
   font-family: sans-serif;
 }
+
+.kids-container {
+  border-radius: 20px;
+  padding: 10px;
+  border: 1px dotted #303030;
+  margin-top: 5px;
+}
+
+.btn-kids {
+  padding: 0.5rem 0;
+  width: 100%;
+  border-radius: 40px;
+  background: #21416d;
+  color: #fff;
+  font-family: "SF Pro Display";
+  font-size: 18px;
+}

@@ -71,7 +71,21 @@ const SelectField = ({ name, options, notRequired = false, label }) => {
     </div>
   );
 };
-
+const KidsField = ({ name, notRequired = false, errors, label }) => {
+  const [count, setCount] = useState(1);
+  return (
+    <>
+      <button
+        className="btn-kids mt-0"
+        type="button"
+        onClick={() => setCount((prev) => prev + 1)}
+      >
+        Add Kid
+      </button>
+      <div className="kids-container"></div>
+    </>
+  );
+};
 const Register = () => {
   const { user, isLoading } = useAuth0();
   const navigate = useNavigate();
@@ -340,7 +354,11 @@ const Register = () => {
                     ]}
                   />
 
-                  {values.additional_joining && <></>}
+                  {values.additional_joining && (
+                    <div>
+                      <KidsField errors={errors} name={"kids"} />
+                    </div>
+                  )}
 
                   <div
                     style={{
