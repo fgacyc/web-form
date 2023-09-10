@@ -170,11 +170,11 @@ button.activated {
   border-radius: 40px;
   width: 100%;
   max-height: 90%;
-  /* overflow-y: scroll; */
+  overflow-y: scroll;
   /* height: 100%; */
   background: #fff;
-  filter: drop-shadow(0 20px 13px rgb(0 0 0 / 0.03))
-    drop-shadow(0 8px 5px rgb(0 0 0 / 0.08));
+  /* filter: drop-shadow(0 20px 13px rgb(0 0 0 / 0.03))
+    drop-shadow(0 8px 5px rgb(0 0 0 / 0.08)); */
 }
 
 .mt-0 {
