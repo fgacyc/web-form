@@ -164,7 +164,7 @@ button.activated {
 
 .popup {
   border: 1px solid #000;
-  backdrop-filter: blur(16px);
+  /* backdrop-filter: blur(16px); */
   padding: 50px;
   max-width: 350px;
   border-radius: 40px;
