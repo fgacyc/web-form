@@ -82,7 +82,7 @@ const KidsField = ({ name, notRequired = false, errors, label }) => {
       >
         Add Kid
       </button>
-      <div className="kids-container"></div>
+      {<div className="kids-container"></div>}
     </>
   );
 };
