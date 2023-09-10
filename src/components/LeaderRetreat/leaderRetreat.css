@@ -169,8 +169,36 @@ button.activated {
   max-width: calc(100vw - 150px);
   border-radius: 40px;
   width: 100%;
-  height: 80vh;
+  /* height: 100%; */
   background: #fff;
   filter: drop-shadow(0 20px 13px rgb(0 0 0 / 0.03))
     drop-shadow(0 8px 5px rgb(0 0 0 / 0.08));
+}
+
+.mt-0 {
+  margin-top: 0 !important;
+}
+
+.btn-retreat.secondary {
+  background: transparent;
+  border: 0;
+  color: black;
+  padding: 15px 10px;
+}
+
+select option {
+  width: 200px !important;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.error-text {
+  color: red;
+  font-size: 12px;
+  margin-top: 2px;
+  text-align: end;
+  font-family: sans-serif;
 }

@@ -17,9 +17,6 @@ dependencies:
   idb-keyval:
     specifier: ^6.2.1
     version: 6.2.1
-  openapi-fetch:
-    specifier: ^0.7.6
-    version: 0.7.6
   party-js:
     specifier: ^2.2.0
     version: 2.2.0
@@ -1598,16 +1595,6 @@ packages:
     dependencies:
       wrappy: 1.0.2
     dev: true
-
-  /openapi-fetch@0.7.6:
-    resolution: {integrity: sha512-TmHTmzMqNmVUlRasfaSVsOYnFHHu0L31VGxbk75rk9P7RfOj70kc+Tiuu548koOpB5zs8yiUwW5wsYjeQifHcA==}
-    dependencies:
-      openapi-typescript-helpers: 0.0.2
-    dev: false
-
-  /openapi-typescript-helpers@0.0.2:
-    resolution: {integrity: sha512-r5Z4tlGa2l6jYO1ENT9Giqo/ZWzWPmsYUR41O01kjYr7vg4iBFaMh0W0g8Ef72SpeU2F+TY6CAdKxTv7aq+WXA==}
-    dev: false
 
   /optionator@0.9.3:
     resolution: {integrity: sha512-JjCoypp+jKn1ttEFExxhetCKeJt9zhAgAve5FXHixTvFDW/5aEktX9bufBKLRRMdU7bNtpLfcGu94B3cdEJgjg==}

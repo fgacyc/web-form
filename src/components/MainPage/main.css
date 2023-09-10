@@ -1,139 +1,138 @@
-h1,
-h2 {
-    margin: 0;
-    color: #1A3A66;
-}
-
 #main {
-    background-image: url('/images/KV_white_bg.png');
+  background-image: url("/images/KV_white_bg.png");
 }
 
 #main-container {
-    margin-top: 30px;
+  margin-top: 30px;
 }
 
 #container {
-    margin: 30px 50px 0 50px;
+  margin: 30px 50px 0 50px;
 }
 
 #txt {
-    margin: 25px 0;
+  margin: 25px 0;
 }
 
 #explore {
-    color: "#1A3A66" !important;
-    font-size: 1.875rem !important;
-    font-family: "SF Pro Display" !important;
-    font-weight: 800 !important;
-    margin-bottom: 18px !important;
+  color: "#1A3A66" !important;
+  font-size: 1.875rem !important;
+  font-family: "SF Pro Display" !important;
+  font-weight: 800 !important;
+  margin-bottom: 18px !important;
 }
 
 #txt-search {
-    /* width: 314px; */
-    height: 60px;
-    border: none;
-    border-radius: 30px;
-    background: #FFF;
-    padding-left: 70px;
-    color: #000;
-    font-size: 1rem;
-    font-family: SF Pro Display;
-    font-weight: 700;
+  /* width: 314px; */
+  height: 60px;
+  border: none;
+  border-radius: 30px;
+  background: #fff;
+  padding-left: 70px;
+  color: #000;
+  font-size: 1rem;
+  font-family: SF Pro Display;
+  font-weight: 700;
 }
 
 #search-icon {
-    position: absolute;
-    left: 35px;
-    top: 55%;
-    transform: translateY(-50%);
+  position: absolute;
+  left: 35px;
+  top: 55%;
+  transform: translateY(-50%);
 }
 
 @media (max-height: 843px) {
-    #main-container {
-        margin-top: 15px;
-    }
+  #main-container {
+    margin-top: 15px;
+  }
 
-    #container {
-        margin: 10px 50px 0px 50px;
-    }
+  #container {
+    margin: 10px 50px 0px 50px;
+  }
 
-    #container h1 {
-        font-size: 2.75rem;
-    }
+  #container h1 {
+    font-size: 2.75rem;
+  }
 
-    #txt {
-        margin: 15px 0px;
-    }
+  #txt {
+    margin: 15px 0px;
+  }
 
-    #explore {
-        font-size: 1.375rem !important;
-    }
+  #explore {
+    font-size: 1.375rem !important;
+  }
 
-    #search-icon {
-        left: 30px;
-    }
+  #search-icon {
+    left: 30px;
+  }
 
-    #txt-search {
-        height: 45px;
-        font-size: 0.9rem;
-    }
+  #txt-search {
+    height: 45px;
+    font-size: 0.9rem;
+  }
 }
 
 #landing {
-    background-image: url('/images/KV_blue_bg.png');
+  background-image: url("/images/KV_blue_bg.png");
 }
 
 #landing-info-1 {
-    background-image: url('/images/landing_bg_1.jpg');
+  background-image: url("/images/landing_bg_1.jpg");
 }
 
 #landing-info-2 {
-    background-image: url('/images/landing_bg_2.jpg');
+  background-image: url("/images/landing_bg_2.jpg");
 }
 
 #landing-info-3 {
-    background-image: url('/images/landing_bg_3.jpg');
+  background-image: url("/images/landing_bg_3.jpg");
 }
 
 .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(180deg, rgba(217, 217, 217, 0.00) 0%, rgba(0, 0, 0, 0.99) 99.99%, #F4F4F4 100%);
-    background-blend-mode: multiply;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(217, 217, 217, 0) 0%,
+    rgba(0, 0, 0, 0.99) 99.99%,
+    #f4f4f4 100%
+  );
+  background-blend-mode: multiply;
 }
 
 #cyc-logo {
-    width: 50px;
-    height: 50px;
+  width: 50px;
+  height: 50px;
 }
 
 .tick-icon {
-    background-color: #2dc071;
-    border-radius: 100%;
-    padding: 10px 8px;
-    margin-right: 10px;
+  background-color: #2dc071;
+  border-radius: 100%;
+  padding: 10px 8px;
+  margin-right: 10px;
 }
 
 .mySwiper {
-    --swiper-pagination-color: #D9D9D9;
-    --swiper-pagination-bullet-inactive-color: #5A5555;
-    --swiper-pagination-bullet-inactive-opacity: 1;
+  --swiper-pagination-color: #d9d9d9;
+  --swiper-pagination-bullet-inactive-color: #5a5555;
+  --swiper-pagination-bullet-inactive-opacity: 1;
 }
 
 .home-swiper {
-    --swiper-pagination-bottom: 70px
+  --swiper-pagination-bottom: 70px;
 }
 
 .search-con {
-    display: flex;
-    flex-direction: row;
-    /*justify-content: space-between;*/
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  /*justify-content: space-between;*/
+  align-items: center;
 }
 
 .no-scroll {
-    overflow: hidden;
+  overflow: hidden;
 }

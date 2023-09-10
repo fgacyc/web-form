@@ -71,18 +71,11 @@ section {
   background-blend-mode: multiply;
 }
 
-h1 {
-  margin: 0;
-  margin-bottom: 30px;
-  font-size: 3.4rem;
-  font-family: HYZhuZiChangMeiXin;
-  font-weight: 300;
-}
-
 h2 {
   margin: 0;
   font-size: 1.875rem;
   font-family: SF Pro Display;
+  color: #1a3a66;
 }
 
 h5 {
@@ -224,8 +217,8 @@ button:active {
 
 .register-field {
   outline: none;
+  border: 0px !important;
   border-bottom: 2px solid #303030 !important;
-  border: 0px;
   margin-top: 3px;
   font-size: 18px;
   font-family: SF Pro Display;
@@ -233,8 +226,22 @@ button:active {
   width: 100%;
 }
 
+.register-field.error {
+  border: 0px !important;
+  border-bottom: 2px solid #cc0000 !important;
+}
+
 .form {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+}
+
+.react-date-picker__inputGroup__divider,
+.react-date-picker__inputGroup__input {
+  color: #000 !important;
+}
+
+.react-date-picker__wrapper {
+  border: 0 !important;
 }

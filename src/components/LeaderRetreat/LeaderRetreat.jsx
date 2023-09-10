@@ -4,8 +4,14 @@ import { faq_data } from "./leader_retreat_data";
 import ReactFullpage from "@fullpage/react-fullpage";
 import "./leaderRetreat.css";
 import { useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
-const LeaderRetreat1 = ({ onClick }) => {
+const LeaderRetreat1 = ({ api, isAuthenticated, onClick }) => {
+  useEffect(() => {
+    if (!isAuthenticated) return;
+    api.moveTo(3, 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated]);
   return (
     <section
       className="section relative flex flex-col items-center justify-between retreat-bg-1"
@@ -56,7 +62,7 @@ const LeaderRetreat3 = ({
   // handleTouchStart,
   // handleTouchEnd,
   handleSubmit,
-  user,
+  isAuthenticated,
 }) => {
   return (
     <section
@@ -83,11 +89,11 @@ const LeaderRetreat3 = ({
         <img src="/images/retreat_title.png" alt="Leader's Retreat Title" />
 
         <button
-          className="btn-retreat"
+          className={`btn-retreat ${isAuthenticated ? "activated" : ""}`}
           style={{ marginTop: "25px" }}
           onClick={handleSubmit}
         >
-          {user ? "REGISTER" : "SIGN IN"}
+          {isAuthenticated ? "REGISTER" : "SIGN IN"}
         </button>
       </div>
     </section>
@@ -131,13 +137,18 @@ export default function LeaderRetreat() {
   const handleToggle = (index) => {
     setOpenCollapse((prevIndex) => (prevIndex === index ? undefined : index));
   };
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
 
   return (
     <ReactFullpage
       credits={{ enabled: false, label: "" }}
       render={({ fullpageApi }) => (
         <ReactFullpage.Wrapper>
-          <LeaderRetreat1 onClick={() => fullpageApi.moveSectionDown()} />
+          <LeaderRetreat1
+            isAuthenticated={isAuthenticated}
+            api={fullpageApi}
+            onClick={() => fullpageApi.moveSectionDown()}
+          />
           <LeaderRetreat2
             // handleTouchStart={handleTouchStart}
             // handleTouchEnd={handleTouchEnd(1)}
@@ -146,9 +157,13 @@ export default function LeaderRetreat() {
           <LeaderRetreat3
             openCollapse={openCollapse}
             handleToggle={handleToggle}
+            isAuthenticated={isAuthenticated}
             // handleTouchStart={handleTouchStart}
             // handleTouchEnd={handleTouchEnd(2)}
-            handleSubmit={() => navigate("/register")}
+            handleSubmit={() => {
+              if (isAuthenticated) navigate("/register");
+              if (!isAuthenticated) loginWithRedirect();
+            }}
           />
         </ReactFullpage.Wrapper>
       )}
