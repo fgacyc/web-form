@@ -44,7 +44,14 @@ const DateField = ({ name, notRequired = false, errors, setFieldValue }) => {
 
 const DetailsField = ({ name, value }) => {
   const inputValue = Array.isArray(value)
-    ? value.map((item) => `${item.name} - ${item.age}`).join(", ")
+    ? value
+        .map(
+          (item) =>
+            `${item.name}, ${item.gender === "male" ? "Male" : "Female"} ${
+              item.age
+            }YO (${item.relationship})`
+        )
+        .join("| ")
     : name === "dob"
     ? new Date(value).toLocaleDateString()
     : value;
@@ -102,16 +109,22 @@ const KidsField = ({ setFieldValue }) => {
   const [kids, setKids] = useState([]);
 
   useEffect(() => {
-    setFieldValue("kids", kids);
+    setFieldValue("family_members", kids);
+    console.log(kids);
   }, [kids, setFieldValue]);
   return (
     <>
       <button
         className="btn-kids mt-0"
         type="button"
-        onClick={() => setKids((prev) => [...prev, { name: "", age: "" }])}
+        onClick={() =>
+          setKids((prev) => [
+            ...prev,
+            { name: "", age: "", relationship: "Spouse", gender: "male" },
+          ])
+        }
       >
-        Add Kid
+        Add family members
       </button>
       {kids.map((item, i) => (
         <div className="kids-container" key={i}>
@@ -127,6 +140,65 @@ const KidsField = ({ setFieldValue }) => {
           />
           <div>
             <div className="field">
+              <label className="capitalize" htmlFor={"relationship"}>
+                Relationship <span style={{ color: "red" }}>*</span>
+              </label>
+              <select
+                className="register-field"
+                onChange={(e) => {
+                  const newArray = [...kids];
+                  const newItem = {
+                    name: kids[i].name,
+                    age: kids[i].age,
+                    relationship: e.currentTarget.value,
+                    gender: kids[i].gender,
+                  };
+
+                  newArray[i] = newItem;
+                  setKids(newArray);
+                }}
+              >
+                {[
+                  { value: "Spouse", label: "Spouse" },
+                  { value: "Child", label: "Child" },
+                  { value: "Helper", label: "Helper" },
+                ].map((o) => (
+                  <option value={o.value} key={o.value}>
+                    {o.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="field">
+              <label className="capitalize" htmlFor={"relationship"}>
+                Gender <span style={{ color: "red" }}>*</span>
+              </label>
+              <select
+                className="register-field"
+                onChange={(e) => {
+                  const newArray = [...kids];
+                  const newItem = {
+                    name: kids[i].name,
+                    age: kids[i].age,
+                    relationship: kids[i].relationship,
+                    gender: e.currentTarget.value,
+                  };
+
+                  newArray[i] = newItem;
+                  setKids(newArray);
+                }}
+              >
+                {[
+                  { value: "male", label: "Male" },
+                  { value: "female", label: "Female" },
+                ].map((o) => (
+                  <option value={o.value} key={o.value}>
+                    {o.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="field">
               <label className="capitalize" htmlFor={`name-${i + 1}`}>
                 Name {i + 1}
               </label>
@@ -138,6 +210,8 @@ const KidsField = ({ setFieldValue }) => {
                   const newItem = {
                     name: e.currentTarget.value,
                     age: kids[i].age,
+                    relationship: kids[i].relationship,
+                    gender: kids[i].gender,
                   };
 
                   newArray[i] = newItem;
@@ -145,6 +219,7 @@ const KidsField = ({ setFieldValue }) => {
                 }}
               />
             </div>
+
             <div className="field">
               <label className="capitalize" htmlFor={`name-${i + 1}`}>
                 Age
@@ -166,6 +241,8 @@ const KidsField = ({ setFieldValue }) => {
                   const newItem = {
                     age: e.currentTarget.value,
                     name: kids[i].name,
+                    relationship: kids[i].relationship,
+                    gender: kids[i].gender,
                   };
 
                   newArray[i] = newItem;
@@ -191,7 +268,7 @@ const Register = () => {
     if (!user) navigate("/", { replace: true });
   }, [navigate, isLoading, user]);
 
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(3);
   return status === "loading" ? (
     <>Loading</>
   ) : (
@@ -202,6 +279,7 @@ const Register = () => {
             email: "",
             "full_name_(en)": "",
             "full_name_(chi)": "",
+            nickname: "",
             gender: "male",
             nric_passport: "",
             dob: "",
@@ -213,9 +291,10 @@ const Register = () => {
             ministry_team: "",
             additional_joining: "false",
             additional_bed: "false",
-            kids: [],
+            family_members: [],
           }}
           validationSchema={Yup.object().shape({
+            nickname: Yup.string().required("Required."),
             email: Yup.string().email("Invalid Format.").required("Required"),
             "full_name_(en)": Yup.string().required("Required."),
             "full_name_(chi)": Yup.string().required("Required."),
@@ -237,10 +316,12 @@ const Register = () => {
               is: "married",
               then: (schema) => schema.required("Required."),
             }),
-            kids: Yup.array().of(
+            family_members: Yup.array().of(
               Yup.object({
-                name: Yup.string().required("Required."),
+                name: Yup.string().required(),
                 age: Yup.number().required(),
+                gender: Yup.string().required(),
+                relationship: Yup.string().required(),
               })
             ),
             additional_bed: Yup.string().when("additional_joining", {
@@ -267,6 +348,7 @@ const Register = () => {
                   <h2>Personal Info</h2>
                   <FormField name={"full_name_(en)"} errors={errors} />
                   <FormField name={"full_name_(chi)"} errors={errors} />
+                  <FormField name={"nickname"} errors={errors} />
                   <FormField name={"email"} errors={errors} />
                   <SelectField
                     name={"gender"}
@@ -295,10 +377,6 @@ const Register = () => {
                     name={"marital_status"}
                     options={[
                       { value: "single", label: "Single" },
-                      {
-                        value: "in a relationship",
-                        label: "In a relationship",
-                      },
                       { value: "married", label: "Married" },
                       { value: "widowed", label: "Widowed" },
                     ]}
@@ -422,7 +500,7 @@ const Register = () => {
                       },
                       {
                         value: "invitation",
-                        label: "Invitation: Spouse / Maid / etc.",
+                        label: "Invitation: Family Members / Helpers etc.",
                       },
                     ]}
                   />
@@ -476,7 +554,7 @@ const Register = () => {
                     <div>
                       <KidsField
                         errors={errors}
-                        name={"kids"}
+                        name={"family_members"}
                         setFieldValue={setFieldValue}
                       />
                     </div>

@@ -12,8 +12,6 @@ const clientId = import.meta.env["VITE_AUTH0_CLIENT_ID"];
 const audience = import.meta.env["VITE_AUTH0_AUDIENCE"];
 const scope = import.meta.env["VITE_AUTH0_SCOPE"];
 
-console.log(firebaseConfig);
-
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <FirebaseAppProvider firebaseConfig={firebaseConfig}>
