@@ -50,27 +50,51 @@ const DateField = ({
 
 const DetailsField = ({ name, value }) => {
   const inputValue = Array.isArray(value)
-    ? value
-        .map(
-          (item) =>
-            `${item.name}, ${item.gender === "male" ? "Male" : "Female"} ${
-              item.age
-            }YO (${item.relationship})`
-        )
-        .join("| ")
+    ? value.map((item) => `${item.name}, ${item.age}`).join("\n")
     : name === "dob"
     ? new Date(value).toLocaleDateString()
     : value;
+  console.log(name, inputValue);
   return (
     <div className="field">
       <label className="capitalize">{name.replaceAll("_", " ")}</label>
-      <input
-        type="text"
-        className={`register-field`}
-        name={name}
-        disabled
-        value={inputValue === "false" || inputValue === "" ? "N/A" : inputValue}
-      />
+      {name === "family_members" ? (
+        <textarea
+          style={{
+            resize: "none",
+            background: "#fff",
+          }}
+          className={`register-field`}
+          name={name}
+          rows={value.length}
+          disabled
+          value={
+            inputValue === ""
+              ? "N/A"
+              : inputValue === "false"
+              ? "No"
+              : inputValue === "true"
+              ? "Yes"
+              : inputValue
+          }
+        />
+      ) : (
+        <input
+          type="text"
+          className={`register-field`}
+          name={name}
+          disabled
+          value={
+            inputValue === ""
+              ? "N/A"
+              : inputValue === "false"
+              ? "No"
+              : inputValue === "true"
+              ? "Yes"
+              : inputValue
+          }
+        />
+      )}
     </div>
   );
 };
@@ -274,7 +298,7 @@ const Register = () => {
     if (!user) navigate("/", { replace: true });
   }, [navigate, isLoading, user]);
 
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(3);
   return status === "loading" ? (
     <>Loading</>
   ) : (
