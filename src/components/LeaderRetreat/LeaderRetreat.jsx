@@ -27,11 +27,14 @@ const LeaderRetreat1 = ({ api, isAuthenticated, onClick }) => {
       />
       <div className="relative flex flex-col items-center">
         <img src="/images/retreat_title.png" alt="Leader's Retreat Title" />
-        <div className="retreat-date">28 - 29 OCT 2023</div>
+        <div className="retreat-date">&quot;CHOSEN 300&quot;</div>
       </div>
-      <button className="btn-retreat mb-75 relative" onClick={onClick}>
-        SIGN UP
-      </button>
+      <div className="mb-75">
+        <div className="btn-retreat-title-text">28 - 29 OCT 2023</div>
+        <button className="btn-retreat relative" onClick={onClick}>
+          SIGN UP
+        </button>
+      </div>
     </section>
   );
 };

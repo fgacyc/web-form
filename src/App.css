@@ -19,6 +19,11 @@
 }
 
 @font-face {
+  font-family: SF Pro Display Regular;
+  src: url("./fonts/SF-Pro-Display-Regular.otf");
+}
+
+@font-face {
   font-family: Sorren Black;
   src: url("./fonts/Sorren Black.otf");
 }

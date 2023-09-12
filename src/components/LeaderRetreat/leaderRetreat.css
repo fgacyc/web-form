@@ -31,13 +31,18 @@
 .retreat-date {
   color: #fff;
   font-family: "SF Pro Display";
-  font-size: 1.5rem;
-  margin-top: 15px;
-  color: #fff;
-  font-family: "SF Pro Display";
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   margin-top: 15px;
   text-align: center;
+}
+
+.btn-retreat-title-text {
+  font-family: SF Pro Display Regular;
+  text-align: center;
+  margin: 0 auto;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  font-size: 20px;
 }
 
 .btn-retreat {
@@ -48,7 +53,7 @@
   font-family: "SF Pro Display";
   font-size: 1.25rem;
   padding: 15px 45px;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .retreat-2-text-1,

@@ -54,7 +54,6 @@ const DetailsField = ({ name, value }) => {
     : name === "dob"
     ? new Date(value).toLocaleDateString()
     : value;
-  console.log(name, inputValue);
   return (
     <div className="field">
       <label className="capitalize">{name.replaceAll("_", " ")}</label>
@@ -135,12 +134,9 @@ const SelectField = ({ name, options, notRequired = false, label }) => {
     </div>
   );
 };
-const KidsField = ({ setFieldValue }) => {
-  const [kids, setKids] = useState([]);
-
+const KidsField = ({ setFieldValue, kids, setKids }) => {
   useEffect(() => {
     setFieldValue("family_members", kids);
-    console.log(kids);
   }, [kids, setFieldValue]);
   return (
     <>
@@ -292,13 +288,16 @@ const Register = () => {
 
   const firestore = useFirestore();
   const col = collection(firestore, "registrations");
+  const [kids, setKids] = useState([
+    { name: "", age: "", relationship: "Spouse", gender: "male" },
+  ]);
 
   useEffect(() => {
     if (isLoading) return;
     if (!user) navigate("/", { replace: true });
   }, [navigate, isLoading, user]);
 
-  const [page, setPage] = useState(3);
+  const [page, setPage] = useState(1);
   return status === "loading" ? (
     <>Loading</>
   ) : (
@@ -584,6 +583,8 @@ const Register = () => {
                   {values.additional_joining === "true" && (
                     <div>
                       <KidsField
+                        kids={kids}
+                        setKids={setKids}
                         errors={errors}
                         name={"family_members"}
                         setFieldValue={setFieldValue}
