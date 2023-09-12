@@ -297,7 +297,7 @@ const Register = () => {
     if (!user) navigate("/", { replace: true });
   }, [navigate, isLoading, user]);
 
-  const [page, setPage] = useState(3);
+  const [page, setPage] = useState(1);
   return (
     <section className="retreat-bg-3 full flex flex-col justify-center align-center">
       <div className="popup">
