@@ -24,4 +24,10 @@ export const faq_data = [
       "Live streaming won’t be available for the entirety of the Leader’s Retreat. ",
     ],
   },
+  {
+    question: "Will there be WonderKids?",
+    answer: [
+      "Yes, Wonderkids programs will be provided for kids aged 7-12 years old. Kids aged 6 and below will be taken care by the parents.",
+    ],
+  },
 ];

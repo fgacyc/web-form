@@ -75,7 +75,15 @@ const LeaderRetreat3 = ({
     >
       <div className="retreat-3-text-1">FAQ</div>
 
-      <div style={{ width: "100%", padding: "0 20px" }}>
+      <div
+        style={{
+          width: "100%",
+          padding: "0 20px",
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
+        }}
+      >
         {faq_data.map((data, index) => {
           return (
             <Collapse
@@ -88,7 +96,7 @@ const LeaderRetreat3 = ({
           );
         })}
       </div>
-      <div className="align-center mt-25 mb-75 flex flex-col">
+      <div className="align-center my-30 flex flex-col">
         <img src="/images/retreat_title.png" alt="Leader's Retreat Title" />
 
         <button
@@ -120,7 +128,6 @@ const Collapse = ({ title, content, isOpen, onToggle }) => {
             return (
               <div key={index}>
                 <div>{item}</div>
-                <br />
               </div>
             );
           })}
