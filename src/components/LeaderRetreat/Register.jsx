@@ -298,9 +298,7 @@ const Register = () => {
   }, [navigate, isLoading, user]);
 
   const [page, setPage] = useState(1);
-  return status === "loading" ? (
-    <>Loading</>
-  ) : (
+  return (
     <section className="retreat-bg-3 full flex flex-col justify-center align-center">
       <div className="popup">
         <Formik
