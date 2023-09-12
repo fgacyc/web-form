@@ -530,6 +530,10 @@ const Register = () => {
                         value: "invitation",
                         label: "Invitation: Family Members / Helpers etc.",
                       },
+                      {
+                        value: "recommendation",
+                        label: "Recommendation - Next CGL by Dec 2023",
+                      },
                     ]}
                   />
                   {values.invited_by === "ministry" && (
