@@ -48,7 +48,7 @@ const DateField = ({
   );
 };
 
-const DetailsField = ({ name, value }) => {
+const DetailsField = ({ name, value, allValues }) => {
   const inputValue = Array.isArray(value)
     ? value.map((item) => `${item.name}, ${item.age}`).join("\n")
     : name === "dob"
@@ -68,7 +68,7 @@ const DetailsField = ({ name, value }) => {
           rows={value.length}
           disabled
           value={
-            inputValue === ""
+            allValues.additional_joining === "false" || inputValue === ""
               ? "N/A"
               : inputValue === "false"
               ? "No"
@@ -297,7 +297,7 @@ const Register = () => {
     if (!user) navigate("/", { replace: true });
   }, [navigate, isLoading, user]);
 
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(3);
   return (
     <section className="retreat-bg-3 full flex flex-col justify-center align-center">
       <div className="popup">
@@ -643,7 +643,12 @@ const Register = () => {
                 <>
                   <h2>Your info</h2>
                   {Object.entries(values).map(([key, value]) => (
-                    <DetailsField key={key} name={key} value={value} />
+                    <DetailsField
+                      key={key}
+                      name={key}
+                      value={value}
+                      allValues={values}
+                    />
                   ))}
                   <div
                     style={{
