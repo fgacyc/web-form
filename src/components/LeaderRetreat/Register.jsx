@@ -358,12 +358,22 @@ const Register = () => {
           })}
           onSubmit={(values, actions) => {
             actions.setSubmitting(true);
-            handleSubmit(col, { ...values, user_id: user.sub }, () => {
-              actions.setSubmitting(false);
-              actions.resetForm();
-              setPage(1);
-              alert("Submitted Successfully! 🚀 See you there!");
-            });
+            handleSubmit(
+              col,
+              {
+                ...values,
+                family_members: values.additional_joining
+                  ? values.family_members
+                  : [],
+                user_id: user.sub,
+              },
+              () => {
+                actions.setSubmitting(false);
+                actions.resetForm();
+                setPage(1);
+                alert("Submitted Successfully! 🚀 See you there!");
+              }
+            );
             // console.log({ ...values, userId: user.sub });
             // alert(JSON.stringify({ ...values, userId: user.sub }, null, 2));
           }}
