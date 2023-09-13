@@ -2,8 +2,9 @@ export const faq_data = [
   {
     question: "What is the fee?",
     answer: [
-      "Leader’s Retreat is RM200/pax for adults. RM80 for kids 7-12 years old.",
-      "Kids that are 6 years old and below will be free of charged.",
+      "Adults: RM200/pax - nett",
+      "Kids (4-12YO): RM125/pax - nett",
+      "Kids that are 3 years old and below will be free of charged.",
       "Fee includes accommodation, 1x breakfast, 2 lunches and 1 dinner. Transport not included.",
     ],
   },
@@ -27,7 +28,7 @@ export const faq_data = [
   {
     question: "Will there be WonderKids?",
     answer: [
-      "Yes, Wonderkids programs will be provided for kids aged 7-12 years old. Kids aged 6 and below will be taken care by the parents.",
+      "Yes, Wonderkids programs will be provided for kids aged 3-10 years old. Kids aged 6 and below will be taken care by the parents.",
     ],
   },
 ];

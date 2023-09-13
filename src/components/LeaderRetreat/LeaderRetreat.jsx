@@ -39,7 +39,7 @@ const LeaderRetreat1 = ({ api, isAuthenticated, onClick }) => {
   );
 };
 
-const LeaderRetreat2 = ({ onClick }) => {
+const LeaderRetreat2 = () => {
   return (
     <section
       className="section flex flex-col items-center justify-between retreat-bg-2"
@@ -52,9 +52,6 @@ const LeaderRetreat2 = ({ onClick }) => {
         </div>
         <div className="retreat-2-text-2">MELAKA</div>
       </div>
-      <button className="btn-retreat mb-75 relative" onClick={onClick}>
-        SIGN UP
-      </button>
     </section>
   );
 };
@@ -163,9 +160,8 @@ export default function LeaderRetreat() {
             onClick={() => fullpageApi.moveSectionDown()}
           />
           <LeaderRetreat2
-            // handleTouchStart={handleTouchStart}
-            // handleTouchEnd={handleTouchEnd(1)}
-            onClick={() => fullpageApi.moveSectionDown()}
+          // handleTouchStart={handleTouchStart}
+          // handleTouchEnd={handleTouchEnd(1)}
           />
           <LeaderRetreat3
             openCollapse={openCollapse}

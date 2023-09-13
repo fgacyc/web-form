@@ -537,12 +537,12 @@ const Register = () => {
                         label: "Ministry: Core Team / PIC / Head",
                       },
                       {
-                        value: "invitation",
-                        label: "Invitation: Family Members / Helpers etc.",
-                      },
-                      {
                         value: "recommendation",
                         label: "Recommendation - Next CGL by Dec 2023",
+                      },
+                      {
+                        value: "invitation",
+                        label: "Invitation: Family Members / Helpers etc.",
                       },
                     ]}
                   />
@@ -609,8 +609,9 @@ const Register = () => {
                       name={"additional_bed"}
                       label="Do you need an additional bed? (+RM50)"
                       options={[
-                        { value: true, label: "Yes" },
                         { value: false, label: "No" },
+                        { value: 1, label: "1" },
+                        { value: 2, label: "2" },
                       ]}
                     />
                   )}
