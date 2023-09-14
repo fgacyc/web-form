@@ -2,10 +2,10 @@ export const faq_data = [
   {
     question: "What is the fee?",
     answer: [
-      "Adults: RM200/pax - nett",
-      "Kids (4-12YO): RM125/pax - nett",
-      "Kids that are 3 years old and below will be free of charged.",
-      "Fee includes accommodation, 1x breakfast, 2 lunches and 1 dinner. Transport not included.",
+      "Adults: RM200/pax",
+      "Kids (4-12YO): RM125/pax",
+      "Kids that are 3 years old and below will be FOC (without bed).",
+      "Fee includes accommodation, 1x breakfast, 2 lunches and 1 dinner.",
     ],
   },
   {
@@ -28,7 +28,7 @@ export const faq_data = [
   {
     question: "Will there be WonderKids?",
     answer: [
-      "Yes, Wonderkids programs will be provided for kids aged 3-10 years old. Kids aged 6 and below will be taken care by the parents.",
+      "Yes, Wonderkids programs will be provided for kids aged 3-10 years old. Kids aged 2 and below will be taken care by the parents.",
     ],
   },
 ];

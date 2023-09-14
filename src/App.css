@@ -219,10 +219,13 @@ button:active {
   width: 100%;
 }
 
-.capitalize {
+label {
   color: #303030;
   font-size: 14px;
   font-family: SF Pro Display;
+}
+
+.capitalize {
   text-transform: capitalize;
 }
 

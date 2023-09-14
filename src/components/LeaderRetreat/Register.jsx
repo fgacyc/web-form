@@ -38,7 +38,7 @@ const DateField = ({
           name={name}
           value={date}
           onChange={(e) => {
-            setFieldValue("dob", new Date(e).getTime());
+            setFieldValue("date_of_birth", new Date(e).getTime());
             setDate(e);
           }}
         />
@@ -51,50 +51,60 @@ const DateField = ({
 const DetailsField = ({ name, value, allValues }) => {
   const inputValue = Array.isArray(value)
     ? value.map((item) => `${item.name}, ${item.age}`).join("\n")
-    : name === "dob"
-    ? new Date(value).toLocaleDateString()
+    : name === "date_of_birth"
+    ? new Date(value).toLocaleDateString("en-GB", {
+        dateStyle: "long",
+      })
     : value;
   return (
-    <div className="field">
-      <label className="capitalize">{name.replaceAll("_", " ")}</label>
-      {name === "family_members" ? (
-        <textarea
-          style={{
-            resize: "none",
-            background: "#fff",
-          }}
-          className={`register-field`}
-          name={name}
-          rows={value.length}
-          disabled
-          value={
-            allValues.additional_joining === "false" || inputValue === ""
-              ? "N/A"
-              : inputValue === "false"
-              ? "No"
-              : inputValue === "true"
-              ? "Yes"
-              : inputValue
-          }
-        />
-      ) : (
-        <input
-          type="text"
-          className={`register-field`}
-          name={name}
-          disabled
-          value={
-            inputValue === ""
-              ? "N/A"
-              : inputValue === "false"
-              ? "No"
-              : inputValue === "true"
-              ? "Yes"
-              : inputValue
-          }
-        />
-      )}
-    </div>
+    name !== "additional_joining" && (
+      <div className="field">
+        <label className="capitalize">
+          {name === "nric_passport"
+            ? "NRIC / Passport"
+            : name.replaceAll("_", " ")}
+        </label>
+        {name === "family_members" ? (
+          <textarea
+            style={{
+              resize: "none",
+              background: "#fff",
+            }}
+            className={`register-field`}
+            name={name}
+            rows={value.length}
+            disabled
+            value={
+              allValues.additional_joining === "false" ||
+              inputValue === "" ||
+              inputValue === ", "
+                ? "N/A"
+                : inputValue === "false"
+                ? "No"
+                : inputValue === "true"
+                ? "Yes"
+                : inputValue
+            }
+          />
+        ) : (
+          <input
+            type="text"
+            className={`register-field`}
+            name={name}
+            disabled
+            value={
+              inputValue === ""
+                ? "N/A"
+                : inputValue === "false"
+                ? "No"
+                : inputValue === "true"
+                ? "Yes"
+                : inputValue
+            }
+          />
+        )}
+      </div>
+    )
   );
 };
 
@@ -120,7 +130,7 @@ const FormField = ({ name, notRequired = false, errors, label }) => {
 const SelectField = ({ name, options, notRequired = false, label }) => {
   return (
     <div className="field">
-      <label className="capitalize" htmlFor={name}>
+      <label className={label ? "" : "capitalize"} htmlFor={name}>
         {label ? label : name.replaceAll("_", " ")}{" "}
         {!notRequired && <span style={{ color: "red" }}>*</span>}
       </label>
@@ -150,7 +160,7 @@ const KidsField = ({ setFieldValue, kids, setKids }) => {
           ])
         }
       >
-        Add family members
+        Add family member
       </button>
       {kids.map((item, i) => (
         <div className="kids-container" key={i}>
@@ -215,8 +225,8 @@ const KidsField = ({ setFieldValue, kids, setKids }) => {
                 }}
               >
                 {[
-                  { value: "male", label: "Male" },
-                  { value: "female", label: "Female" },
+                  { value: "Male", label: "Male" },
+                  { value: "Female", label: "Female" },
                 ].map((o) => (
                   <option value={o.value} key={o.value}>
                     {o.label}
@@ -289,7 +299,7 @@ const Register = () => {
   const firestore = useFirestore();
   const col = collection(firestore, "registrations");
   const [kids, setKids] = useState([
-    { name: "", age: "", relationship: "Spouse", gender: "male" },
+    { name: "", age: "", relationship: "Spouse", gender: "Male" },
   ]);
 
   useEffect(() => {
@@ -303,26 +313,28 @@ const Register = () => {
       <div className="popup">
         <Formik
           initialValues={{
-            "full_name_(en)": "",
+            "full_name_as_per_IC_(en)": "",
             "full_name_(chi)": "",
             nickname: "",
-            gender: "male",
+            gender: "Male",
             nric_passport: "",
-            dob: "",
+            date_of_birth: "",
             contact_no: "",
-            marital_status: "single",
+            marital_status: "Single",
             service_location: "Kuchai",
             pastoral_team: "Wonderkids",
-            invited_by: "pastoral",
+            invited_by: "Pastoral",
             ministry_team: "",
             additional_joining: "false",
             additional_bed: "false",
             family_members: [],
           }}
           validationSchema={Yup.object().shape({
+            "full_name_as_per_IC_(en)": Yup.string().required("Required."),
+            "full_name_(chi)": Yup.string().required("Required."),
             nickname: Yup.string().required("Required."),
             nric_passport: Yup.string().required("Required."),
-            dob: Yup.string().required("Required."),
+            date_of_birth: Yup.string().required("Required."),
             contact_no: Yup.string()
               .required("Required.")
               .matches(
@@ -380,7 +392,10 @@ const Register = () => {
               {page === 1 ? (
                 <>
                   <h2>Personal Info</h2>
-                  <FormField name={"full_name_(en)"} errors={errors} />
+                  <FormField
+                    name={"full_name_as_per_IC_(en)"}
+                    errors={errors}
+                  />
                   <FormField name={"full_name_(chi)"} errors={errors} />
                   <FormField name={"nickname"} errors={errors} />
                   <SelectField
@@ -396,7 +411,7 @@ const Register = () => {
                     errors={errors}
                   />
                   <DateField
-                    name={"dob"}
+                    name={"date_of_birth"}
                     errors={errors}
                     setFieldValue={setFieldValue}
                     values={values}
@@ -410,10 +425,10 @@ const Register = () => {
                     errors={errors}
                     name={"marital_status"}
                     options={[
-                      { value: "single", label: "Single" },
-                      { value: "married", label: "Married" },
+                      { value: "Single", label: "Single" },
+                      { value: "Married", label: "Married" },
                       {
-                        value: "divorced / widowed",
+                        value: "Divorced / Widowed",
                         label: "Divorced / Widowed",
                       },
                     ]}
@@ -424,7 +439,7 @@ const Register = () => {
                       validateForm().then((error) => {
                         if (
                           error["full_name_(chi)"] ||
-                          error["full_name_(en)"] ||
+                          error["full_name_as_per_IC_(en)"] ||
                           error["nric_passport"] ||
                           error["contact_no"]
                         ) {
@@ -473,6 +488,10 @@ const Register = () => {
                         value: "Seremban",
                         label: "Seremban",
                       },
+                      {
+                        value: "The Blessing",
+                        label: "The Blessing",
+                      },
                     ]}
                   />
                   <SelectField
@@ -506,6 +525,13 @@ const Register = () => {
                               label: "Daniel Yeo Team",
                             },
                           ]
+                        : values.service_location === "The Blessing"
+                        ? [
+                            {
+                              value: "The Blessing",
+                              label: "The Blessing",
+                            },
+                          ]
                         : [
                             {
                               value: "Wonderkids",
@@ -527,24 +553,24 @@ const Register = () => {
                     name="invited_by"
                     options={[
                       {
-                        value: "pastoral",
+                        value: "Pastoral",
                         label: "Pastoral: CGL / Coach / Team Leader / Pastor",
                       },
                       {
-                        value: "ministry",
+                        value: "Ministry",
                         label: "Ministry: Core Team / PIC / Head",
                       },
                       {
-                        value: "recommendation",
+                        value: "Recommendation",
                         label: "Recommendation - Next CGL by Dec 2023",
                       },
                       {
-                        value: "invitation",
+                        value: "Invitation",
                         label: "Invitation: Family Members / Helpers etc.",
                       },
                     ]}
                   />
-                  {values.invited_by === "ministry" && (
+                  {values.invited_by === "Ministry" && (
                     <FormField name={"ministry_team"} errors={errors} />
                   )}
                   <div
@@ -565,7 +591,10 @@ const Register = () => {
                     <button
                       onClick={() =>
                         setPage((prev) => {
-                          if (values.marital_status === "married") {
+                          if (
+                            values.marital_status === "Married" ||
+                            values.marital_status === "Divorced / Widowed"
+                          ) {
                             return prev + 1;
                           } else return 4;
                         })
@@ -583,7 +612,11 @@ const Register = () => {
 
                   <SelectField
                     name={"additional_joining"}
-                    label="Are your spouse / kids joining?"
+                    label={
+                      values.marital_status === "divorced / widowed"
+                        ? "Are your children joining?"
+                        : "Is your spouse / children joining?"
+                    }
                     options={[
                       { value: true, label: "Yes" },
                       { value: false, label: "No" },
@@ -605,7 +638,7 @@ const Register = () => {
                   {values.additional_joining === "true" && (
                     <SelectField
                       name={"additional_bed"}
-                      label="Do you need an additional bed? (+RM50)"
+                      label="Do you need an additional bed? (+RM50/bed)"
                       options={[
                         { value: false, label: "No" },
                         { value: 1, label: "1" },
@@ -659,13 +692,16 @@ const Register = () => {
                     }}
                   >
                     <button
-                      onClick={() =>
+                      onClick={() => {
                         setPage((prev) => {
-                          if (values.marital_status === "married") {
+                          if (
+                            values.marital_status === "Married" ||
+                            values.marital_status === "Divorced / Widowed"
+                          ) {
                             return prev - 1;
                           } else return 2;
-                        })
-                      }
+                        });
+                      }}
                       className="btn-retreat secondary mt-0"
                     >
                       Back
