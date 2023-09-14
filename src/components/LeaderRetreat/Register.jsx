@@ -24,7 +24,7 @@ const DateField = ({
   setFieldValue,
   values,
 }) => {
-  const [date, setDate] = useState(values.dob);
+  const [date, setDate] = useState(values.date_of_birth);
   return (
     <div>
       <div className="field">
