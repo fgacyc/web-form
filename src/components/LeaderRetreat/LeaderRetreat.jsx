@@ -79,6 +79,7 @@ const LeaderRetreat3 = ({
           display: "flex",
           flexDirection: "column",
           gap: "10px",
+          maxWidth: "390px",
         }}
       >
         {faq_data.map((data, index) => {
