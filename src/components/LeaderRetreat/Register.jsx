@@ -303,7 +303,6 @@ const Register = () => {
       <div className="popup">
         <Formik
           initialValues={{
-            email: "",
             "full_name_(en)": "",
             "full_name_(chi)": "",
             nickname: "",
@@ -322,9 +321,6 @@ const Register = () => {
           }}
           validationSchema={Yup.object().shape({
             nickname: Yup.string().required("Required."),
-            email: Yup.string().email("Invalid Format.").required("Required"),
-            "full_name_(en)": Yup.string().required("Required."),
-            "full_name_(chi)": Yup.string().required("Required."),
             nric_passport: Yup.string().required("Required."),
             dob: Yup.string().required("Required."),
             contact_no: Yup.string()
@@ -366,6 +362,7 @@ const Register = () => {
                   ? values.family_members
                   : [],
                 user_id: user.sub,
+                email: user.email,
               },
               () => {
                 actions.setSubmitting(false);
@@ -386,7 +383,6 @@ const Register = () => {
                   <FormField name={"full_name_(en)"} errors={errors} />
                   <FormField name={"full_name_(chi)"} errors={errors} />
                   <FormField name={"nickname"} errors={errors} />
-                  <FormField name={"email"} errors={errors} />
                   <SelectField
                     name={"gender"}
                     options={[
@@ -416,7 +412,10 @@ const Register = () => {
                     options={[
                       { value: "single", label: "Single" },
                       { value: "married", label: "Married" },
-                      { value: "widowed", label: "Widowed" },
+                      {
+                        value: "divorced / widowed",
+                        label: "Divorced / Widowed",
+                      },
                     ]}
                   />
                   <button
@@ -426,7 +425,6 @@ const Register = () => {
                         if (
                           error["full_name_(chi)"] ||
                           error["full_name_(en)"] ||
-                          error["email"] ||
                           error["nric_passport"] ||
                           error["contact_no"]
                         ) {
