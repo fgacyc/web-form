@@ -11,10 +11,10 @@ import "react-calendar/dist/Calendar.css";
 
 import * as Yup from "yup";
 import { useFirestore } from "reactfire";
-import { addDoc, collection } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 
 const handleSubmit = (col, data, then) => {
-  return addDoc(col, data).then(then);
+  return setDoc(col, data).then(then);
 };
 
 const DateField = ({
@@ -297,7 +297,7 @@ const Register = () => {
   const navigate = useNavigate();
 
   const firestore = useFirestore();
-  const col = collection(firestore, "registrations");
+  const dbRef = doc(firestore, "registrations", String(user?.sub));
   const [kids, setKids] = useState([
     { name: "", age: "", relationship: "Spouse", gender: "Male" },
   ]);
@@ -308,7 +308,7 @@ const Register = () => {
   }, [navigate, isLoading, user]);
 
   const [page, setPage] = useState(1);
-  return (
+  return user ? (
     <section className="retreat-bg-3 full flex flex-col justify-center align-center">
       <div className="popup">
         <Formik
@@ -367,7 +367,7 @@ const Register = () => {
           onSubmit={(values, actions) => {
             actions.setSubmitting(true);
             handleSubmit(
-              col,
+              dbRef,
               {
                 ...values,
                 family_members: values.additional_joining
@@ -722,6 +722,13 @@ const Register = () => {
         </Formik>
       </div>
     </section>
+  ) : (
+    <div className="lds-ellipsis">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
   );
 };
 
