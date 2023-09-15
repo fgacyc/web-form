@@ -332,7 +332,6 @@ const Register = () => {
           validationSchema={Yup.object().shape({
             "full_name_as_per_IC_(en)": Yup.string().required("Required."),
             "full_name_(chi)": Yup.string().required("Required."),
-            nickname: Yup.string().required("Required."),
             nric_passport: Yup.string().required("Required."),
             date_of_birth: Yup.string().required("Required."),
             contact_no: Yup.string()
@@ -441,7 +440,8 @@ const Register = () => {
                           error["full_name_(chi)"] ||
                           error["full_name_as_per_IC_(en)"] ||
                           error["nric_passport"] ||
-                          error["contact_no"]
+                          error["contact_no"] ||
+                          error["date_of_birth"]
                         ) {
                           alert("Please fill up the fields properly.");
                         } else setPage((prev) => prev + 1);
