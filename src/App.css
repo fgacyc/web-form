@@ -44,7 +44,7 @@ section {
   display: inline-block !important;
   background-repeat: no-repeat !important;
   background-size: cover !important;
-  height: 100vh;
+  height: 100svh;
   /* overflow: hidden; */
   /* height: calc(100vh - constant(safe-area-inset-top)); */
   /* height: calc(100vh - env(safe-area-inset-top)); */
@@ -54,7 +54,7 @@ section {
   display: none !important;
 }
 .fp-overflow {
-  height: 100% !important;
+  height: 100svh !important;
   display: flex !important;
   align-items: center;
   flex-direction: column !important;

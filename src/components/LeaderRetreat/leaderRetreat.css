@@ -10,7 +10,7 @@
 
 .retreat-bg-3 {
   background-image: url("/images/retreat_bg_3.png");
-  min-height: 100vh;
+  height: 100svh !important;
   background-position: center;
   height: auto;
 }
@@ -62,7 +62,6 @@
   font-family: "Sorren Black";
   font-size: 3.75rem;
   text-align: center;
-  margin-top: 90px;
 }
 
 .retreat-2-text-2 {
@@ -77,8 +76,8 @@
   margin-top: 60px;
   margin-bottom: 40px;
   color: #fff;
-  margin-top: 60px;
-  margin-bottom: 40px;
+  margin-top: 30px !important;
+  margin-bottom: 20px !important;
 }
 
 .collapse-container {
@@ -169,7 +168,7 @@ button.activated {
 }
 
 .full {
-  height: 100vh;
+  height: 100svh;
   width: 100%;
   overflow: hidden;
 }

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useAuth0 } from "@auth0/auth0-react";
 import { Field, Formik, Form } from "formik";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-date-picker";
 import { AiFillCloseCircle } from "react-icons/ai";
@@ -48,7 +48,7 @@ const DateField = ({
   );
 };
 
-const DetailsField = ({ name, value, allValues }) => {
+const DetailsField = ({ name, value, allValues, errors }) => {
   const inputValue = Array.isArray(value)
     ? value.map((item) => `${item.name}, ${item.age}`).join("\n")
     : name === "date_of_birth"
@@ -58,51 +58,62 @@ const DetailsField = ({ name, value, allValues }) => {
     : value;
   return (
     name !== "additional_joining" && (
-      <div className="field">
-        <label className="capitalize">
-          {name === "nric_passport"
-            ? "NRIC / Passport"
-            : name.replaceAll("_", " ")}
-        </label>
-        {name === "family_members" ? (
-          <textarea
-            style={{
-              resize: "none",
-              background: "#fff",
-            }}
-            className={`register-field`}
-            name={name}
-            rows={value.length}
-            disabled
-            value={
-              allValues.additional_joining === "false" ||
-              inputValue === "" ||
-              inputValue === ", "
-                ? "N/A"
-                : inputValue === "false"
-                ? "No"
-                : inputValue === "true"
-                ? "Yes"
-                : inputValue
-            }
-          />
-        ) : (
-          <input
-            type="text"
-            className={`register-field`}
-            name={name}
-            disabled
-            value={
-              inputValue === ""
-                ? "N/A"
-                : inputValue === "false"
-                ? "No"
-                : inputValue === "true"
-                ? "Yes"
-                : inputValue
-            }
-          />
-        )}
+      <div>
+        <div className="field">
+          <label className="capitalize">
+            {name === "nric_passport"
+              ? "NRIC / Passport"
+              : name.replaceAll("_", " ")}
+          </label>
+          {name === "family_members" ? (
+            <>
+              <textarea
+                style={{
+                  resize: "none",
+                  background: "#fff",
+                }}
+                className={`register-field`}
+                name={name}
+                rows={value.length}
+                disabled
+                value={
+                  allValues.additional_joining === "false" ||
+                  inputValue === "" ||
+                  inputValue === ", "
+                    ? "N/A"
+                    : inputValue === "false"
+                    ? "No"
+                    : inputValue === "true"
+                    ? "Yes"
+                    : inputValue
+                }
+              />
+            </>
+          ) : (
+            <input
+              type="text"
+              className={`register-field`}
+              name={name}
+              disabled
+              value={
+                inputValue === ""
+                  ? "N/A"
+                  : inputValue === "false"
+                  ? "No"
+                  : inputValue === "true"
+                  ? "Yes"
+                  : inputValue
+              }
+            />
+          )}
+        </div>
+        {name === "family_members" &&
+        allValues.additional_joining === "true" &&
+        errors[name] ? (
+          <div className="error-text">Error: missing or invalid value.</div>
+        ) : name !== "family_members" ? (
+          <div className="error-text">{errors[name]}</div>
+        ) : null}
       </div>
     )
   );
@@ -144,7 +155,7 @@ const SelectField = ({ name, options, notRequired = false, label }) => {
     </div>
   );
 };
-const KidsField = ({ setFieldValue, kids, setKids }) => {
+const KidsField = ({ setFieldValue, kids, setKids, errors }) => {
   useEffect(() => {
     setFieldValue("family_members", kids);
   }, [kids, setFieldValue]);
@@ -163,131 +174,157 @@ const KidsField = ({ setFieldValue, kids, setKids }) => {
         Add family member
       </button>
       {kids.map((item, i) => (
-        <div className="kids-container" key={i}>
-          <AiFillCloseCircle
-            color="#303030"
-            className="close-btn"
-            onClick={() => {
-              const copy = [...kids];
+        <Fragment key={i}>
+          <div className="kids-container" key={i}>
+            <AiFillCloseCircle
+              color="#303030"
+              className="close-btn"
+              onClick={() => {
+                const copy = [...kids];
 
-              copy.splice(i, 1);
-              setKids(copy);
-            }}
-          />
-          <div>
-            <div className="field">
-              <label className="capitalize" htmlFor={"relationship"}>
-                Relationship <span style={{ color: "red" }}>*</span>
-              </label>
-              <select
-                className="register-field"
-                onChange={(e) => {
-                  const newArray = [...kids];
-                  const newItem = {
-                    name: kids[i].name,
-                    age: kids[i].age,
-                    relationship: e.currentTarget.value,
-                    gender: kids[i].gender,
-                  };
+                copy.splice(i, 1);
+                setKids(copy);
+              }}
+            />
+            <div>
+              <div className="field">
+                <label className="capitalize" htmlFor={"relationship"}>
+                  Relationship <span style={{ color: "red" }}>*</span>
+                </label>
+                <select
+                  className="register-field"
+                  onChange={(e) => {
+                    const newArray = [...kids];
+                    const newItem = {
+                      name: kids[i].name,
+                      age: kids[i].age,
+                      relationship: e.currentTarget.value,
+                      gender: kids[i].gender,
+                    };
 
-                  newArray[i] = newItem;
-                  setKids(newArray);
-                }}
-              >
-                {[
-                  { value: "Spouse", label: "Spouse" },
-                  { value: "Child", label: "Child" },
-                  { value: "Helper", label: "Helper" },
-                ].map((o) => (
-                  <option value={o.value} key={o.value}>
-                    {o.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="field">
-              <label className="capitalize" htmlFor={"relationship"}>
-                Gender <span style={{ color: "red" }}>*</span>
-              </label>
-              <select
-                className="register-field"
-                onChange={(e) => {
-                  const newArray = [...kids];
-                  const newItem = {
-                    name: kids[i].name,
-                    age: kids[i].age,
-                    relationship: kids[i].relationship,
-                    gender: e.currentTarget.value,
-                  };
+                    newArray[i] = newItem;
+                    setKids(newArray);
+                  }}
+                >
+                  {[
+                    { value: "Spouse", label: "Spouse" },
+                    { value: "Child", label: "Child" },
+                    { value: "Helper", label: "Helper" },
+                  ].map((o) => (
+                    <option value={o.value} key={o.value}>
+                      {o.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <div className="field">
+                  <label className="capitalize" htmlFor={"relationship"}>
+                    Gender <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <select
+                    className="register-field"
+                    onChange={(e) => {
+                      const newArray = [...kids];
+                      const newItem = {
+                        name: kids[i].name,
+                        age: kids[i].age,
+                        relationship: kids[i].relationship,
+                        gender: e.currentTarget.value,
+                      };
 
-                  newArray[i] = newItem;
-                  setKids(newArray);
-                }}
-              >
-                {[
-                  { value: "Male", label: "Male" },
-                  { value: "Female", label: "Female" },
-                ].map((o) => (
-                  <option value={o.value} key={o.value}>
-                    {o.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="field">
-              <label className="capitalize" htmlFor={`name-${i + 1}`}>
-                Name {i + 1}
-              </label>
-              <input
-                type="text"
-                className={`register-field`}
-                onChange={(e) => {
-                  const newArray = [...kids];
-                  const newItem = {
-                    name: e.currentTarget.value,
-                    age: kids[i].age,
-                    relationship: kids[i].relationship,
-                    gender: kids[i].gender,
-                  };
+                      newArray[i] = newItem;
+                      setKids(newArray);
+                    }}
+                  >
+                    {[
+                      { value: "Male", label: "Male" },
+                      { value: "Female", label: "Female" },
+                    ].map((o) => (
+                      <option value={o.value} key={o.value}>
+                        {o.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                {errors["family_members"] &&
+                  errors["family_members"]?.[i]?.["gender"] && (
+                    <div className="error-text">
+                      {errors["family_members"]?.[i]?.["gender"]}
+                    </div>
+                  )}
+              </div>
+              <div>
+                <div className="field">
+                  <label className="capitalize" htmlFor={`name-${i + 1}`}>
+                    Name {i + 1} <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <input
+                    type="text"
+                    className={`register-field`}
+                    onChange={(e) => {
+                      const newArray = [...kids];
+                      const newItem = {
+                        name: e.currentTarget.value,
+                        age: kids[i].age,
+                        relationship: kids[i].relationship,
+                        gender: kids[i].gender,
+                      };
 
-                  newArray[i] = newItem;
-                  setKids(newArray);
-                }}
-              />
-            </div>
+                      newArray[i] = newItem;
+                      setKids(newArray);
+                    }}
+                  />
+                </div>
+                {errors["family_members"] &&
+                  errors["family_members"]?.[i]?.["name"] && (
+                    <div className="error-text">
+                      {errors["family_members"]?.[i]?.["name"]}
+                    </div>
+                  )}
+              </div>
+              <div>
+                <div className="field">
+                  <label className="capitalize" htmlFor={`name-${i + 1}`}>
+                    Age <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <input
+                    type="number"
+                    min="1"
+                    max="99"
+                    maxLength="2"
+                    onInput={(event) =>
+                      (event.target.value = event.target.value.slice(
+                        0,
+                        event.target.maxLength
+                      ))
+                    }
+                    className={`register-field`}
+                    onChange={(e) => {
+                      const newArray = [...kids];
+                      const newItem = {
+                        age: e.currentTarget.value,
+                        name: kids[i].name,
+                        relationship: kids[i].relationship,
+                        gender: kids[i].gender,
+                      };
 
-            <div className="field">
-              <label className="capitalize" htmlFor={`name-${i + 1}`}>
-                Age
-              </label>
-              <input
-                type="number"
-                min="1"
-                max="99"
-                maxLength="2"
-                onInput={(event) =>
-                  (event.target.value = event.target.value.slice(
-                    0,
-                    event.target.maxLength
-                  ))
-                }
-                className={`register-field`}
-                onChange={(e) => {
-                  const newArray = [...kids];
-                  const newItem = {
-                    age: e.currentTarget.value,
-                    name: kids[i].name,
-                    relationship: kids[i].relationship,
-                    gender: kids[i].gender,
-                  };
+                      newArray[i] = newItem;
+                      setKids(newArray);
+                    }}
+                  />
+                </div>
 
-                  newArray[i] = newItem;
-                  setKids(newArray);
-                }}
-              />
+                {errors["family_members"] &&
+                  errors["family_members"]?.[i]?.["age"] && (
+                    <div className="error-text">
+                      {errors["family_members"]?.[i]?.["age"]}
+                    </div>
+                  )}
+              </div>
             </div>
           </div>
-        </div>
+        </Fragment>
       ))}
     </>
   );
@@ -298,9 +335,7 @@ const Register = () => {
 
   const firestore = useFirestore();
   const dbRef = doc(firestore, "registrations", String(user?.sub));
-  const [kids, setKids] = useState([
-    { name: "", age: "", relationship: "Spouse", gender: "Male" },
-  ]);
+  const [kids, setKids] = useState([]);
 
   useEffect(() => {
     if (isLoading) return;
@@ -342,7 +377,7 @@ const Register = () => {
               ),
             invited_by: Yup.string().required("Required."),
             ministry_team: Yup.string().when("invited_by", {
-              is: "ministry",
+              is: "Ministry",
               then: (schema) => schema.required("Required."),
             }),
             marital_status: Yup.string().required("Required."),
@@ -352,10 +387,10 @@ const Register = () => {
             }),
             family_members: Yup.array().of(
               Yup.object({
-                name: Yup.string().required(),
-                age: Yup.number().required(),
-                gender: Yup.string().required(),
-                relationship: Yup.string().required(),
+                name: Yup.string().required("Required."),
+                age: Yup.string().required("Required."),
+                gender: Yup.string(),
+                relationship: Yup.string(),
               })
             ),
             additional_bed: Yup.string().when("additional_joining", {
@@ -618,8 +653,8 @@ const Register = () => {
                         : "Is your spouse / children joining?"
                     }
                     options={[
-                      { value: true, label: "Yes" },
-                      { value: false, label: "No" },
+                      { value: "true", label: "Yes" },
+                      { value: "false", label: "No" },
                     ]}
                   />
 
@@ -680,6 +715,7 @@ const Register = () => {
                       name={key}
                       value={value}
                       allValues={values}
+                      errors={errors}
                     />
                   ))}
                   <div
@@ -693,6 +729,14 @@ const Register = () => {
                   >
                     <button
                       onClick={() => {
+                        setKids([
+                          {
+                            name: "",
+                            age: "",
+                            relationship: "Spouse",
+                            gender: "Male",
+                          },
+                        ]);
                         setPage((prev) => {
                           if (
                             values.marital_status === "Married" ||
