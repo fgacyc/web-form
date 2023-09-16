@@ -382,7 +382,7 @@ const Register = () => {
             }),
             marital_status: Yup.string().required("Required."),
             additional_joining: Yup.string().when("marital_status", {
-              is: "married",
+              is: "Married",
               then: (schema) => schema.required("Required."),
             }),
             family_members: Yup.array().of(
