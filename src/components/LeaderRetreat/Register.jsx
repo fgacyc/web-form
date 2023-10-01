@@ -342,6 +342,8 @@ const Register = () => {
     if (!user) navigate("/", { replace: true });
   }, [navigate, isLoading, user]);
 
+  console.log(user);
+
   const [page, setPage] = useState(1);
   return user ? (
     <section className="retreat-bg-3 full flex flex-col justify-center align-center">
@@ -410,11 +412,31 @@ const Register = () => {
                 user_id: user.sub,
                 email: user.email,
               },
-              () => {
-                actions.setSubmitting(false);
-                actions.resetForm();
-                setPage(1);
-                alert("Submitted Successfully! 🚀 See you there!");
+              async () => {
+                await fetch("https://adminretreat.fgacyc.com/api/sendEmail", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  mode: "no-cors",
+                  body: JSON.stringify({
+                    to: user.email,
+                    recipientName: values.nickname
+                      ? values.nickname
+                      : values["full_name_as_per_IC_(en)"],
+                  }),
+                })
+                  .then(() =>
+                    alert("Submitted Successfully! 🚀 See you there!")
+                  )
+                  .catch((err) => {
+                    throw new Error(err);
+                  })
+                  .finally(() => {
+                    actions.setSubmitting(false);
+                    actions.resetForm();
+                    setPage(1);
+                  });
               }
             );
             // console.log({ ...values, userId: user.sub });
