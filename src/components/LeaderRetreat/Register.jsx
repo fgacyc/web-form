@@ -418,7 +418,6 @@ const Register = () => {
                   headers: {
                     "Content-Type": "application/json",
                   },
-                  mode: "no-cors",
                   body: JSON.stringify({
                     to: user.email,
                     recipientName: values.nickname
