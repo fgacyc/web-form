@@ -119,6 +119,38 @@ const DetailsField = ({ name, value, allValues, errors }) => {
   );
 };
 
+const ReadOnlyField = ({ value, logout }) => {
+  return (
+    <div>
+      <div className="field">
+        <label className="capitalize">Email</label>
+        <div
+          style={{
+            color: "gray",
+          }}
+          className={`register-field`}
+          contentEditable={false}
+          disabled
+        >
+          {value}
+        </div>
+      </div>
+      <div className="link-text">
+        Not You?{" "}
+        <span
+          style={{
+            textDecoration: "underline",
+            color: "blue",
+            cursor: "pointer",
+          }}
+          onClick={logout}
+        >
+          Logout
+        </span>
+      </div>
+    </div>
+  );
+};
 const FormField = ({ name, notRequired = false, errors, label }) => {
   return (
     <div>
@@ -330,19 +362,16 @@ const KidsField = ({ setFieldValue, kids, setKids, errors }) => {
   );
 };
 const Register = () => {
-  const { user, isLoading } = useAuth0();
+  const { user, isLoading, logout } = useAuth0();
   const navigate = useNavigate();
 
   const firestore = useFirestore();
   const dbRef = doc(firestore, "registrations", String(user?.sub));
   const [kids, setKids] = useState([]);
-
   useEffect(() => {
     if (isLoading) return;
     if (!user) navigate("/", { replace: true });
   }, [navigate, isLoading, user]);
-
-  console.log(user);
 
   const [page, setPage] = useState(1);
   return user ? (
@@ -447,6 +476,7 @@ const Register = () => {
               {page === 1 ? (
                 <>
                   <h2>Personal Info</h2>
+                  <ReadOnlyField value={user.email} logout={logout} />
                   <FormField
                     name={"full_name_as_per_IC_(en)"}
                     errors={errors}

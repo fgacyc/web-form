@@ -216,6 +216,14 @@ select option {
   font-family: sans-serif;
 }
 
+.link-text {
+  color: black;
+  font-size: 12px;
+  margin-top: 6px;
+  text-align: end;
+  font-family: sans-serif;
+}
+
 .kids-container {
   border-radius: 20px;
   padding: 15px;
