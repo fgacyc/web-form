@@ -95,6 +95,7 @@ const LeaderRetreat3 = ({
         <button
           style={{ marginTop: "25px" }}
           className="btn-retreat btn-disabled"
+          disabled
         >
           Registrations closed.
         </button>
