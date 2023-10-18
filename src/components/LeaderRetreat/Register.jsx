@@ -362,16 +362,15 @@ const KidsField = ({ setFieldValue, kids, setKids, errors }) => {
   );
 };
 const Register = () => {
-  const { user, isLoading, logout } = useAuth0();
+  const { user, logout } = useAuth0();
   const navigate = useNavigate();
 
   const firestore = useFirestore();
   const dbRef = doc(firestore, "registrations", String(user?.sub));
   const [kids, setKids] = useState([]);
   useEffect(() => {
-    if (isLoading) return;
-    if (!user) navigate("/", { replace: true });
-  }, [navigate, isLoading, user]);
+    navigate("/", { replace: true });
+  }, [navigate]);
 
   const [page, setPage] = useState(1);
   return user ? (
