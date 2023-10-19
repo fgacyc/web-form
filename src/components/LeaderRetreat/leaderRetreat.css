@@ -255,7 +255,3 @@ select option {
 input {
   background: #fff;
 }
-
-.btn-disabled {
-  opacity: 0.5;
-}
