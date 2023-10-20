@@ -6,12 +6,7 @@ import "./leaderRetreat.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
-const LeaderRetreat1 = ({ api, isAuthenticated, onClick }) => {
-  useEffect(() => {
-    if (!isAuthenticated) return;
-    api.moveTo(3, 0);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isAuthenticated]);
+const LeaderRetreat1 = ({ onClick }) => {
   return (
     <section
       className="section relative flex flex-col items-center justify-between retreat-bg-1"
@@ -32,7 +27,7 @@ const LeaderRetreat1 = ({ api, isAuthenticated, onClick }) => {
       <div className="mb-75">
         <div className="btn-retreat-title-text">28 - 29 OCT 2023</div>
         <button className="btn-retreat relative" onClick={onClick}>
-          SIGN UP
+          SCROLL
         </button>
       </div>
     </section>
@@ -61,8 +56,8 @@ const LeaderRetreat3 = ({
   handleToggle,
   // handleTouchStart,
   // handleTouchEnd,
-  handleSubmit,
-  isAuthenticated,
+  // handleSubmit,
+  // isAuthenticated,
 }) => {
   return (
     <section
@@ -98,12 +93,20 @@ const LeaderRetreat3 = ({
         <img src="/images/retreat_title.png" alt="Leader's Retreat Title" />
 
         <button
+          style={{ marginTop: "25px" }}
+          className="btn-retreat btn-disabled"
+          disabled
+        >
+          Registrations closed.
+        </button>
+
+        {/* <button
           className={`btn-retreat ${isAuthenticated ? "activated" : ""}`}
           style={{ marginTop: "25px" }}
           onClick={handleSubmit}
         >
           {isAuthenticated ? "REGISTER" : "SIGN IN"}
-        </button>
+        </button> */}
       </div>
     </section>
   );
@@ -148,7 +151,12 @@ export default function LeaderRetreat() {
   const handleToggle = (index) => {
     setOpenCollapse((prevIndex) => (prevIndex === index ? undefined : index));
   };
-  const { isAuthenticated, loginWithRedirect } = useAuth0();
+  const { isAuthenticated, loginWithRedirect, isLoading, logout } = useAuth0();
+
+  useEffect(() => {
+    if (!isAuthenticated || isLoading) return;
+    logout();
+  }, [isAuthenticated, isLoading, logout]);
 
   return (
     <ReactFullpage
@@ -156,7 +164,6 @@ export default function LeaderRetreat() {
       render={({ fullpageApi }) => (
         <ReactFullpage.Wrapper>
           <LeaderRetreat1
-            isAuthenticated={isAuthenticated}
             api={fullpageApi}
             onClick={() => fullpageApi.moveSectionDown()}
           />
