@@ -7,14 +7,14 @@ export const roomArrangement = {
     "Loh Xin Jing",
   ],
   "BR2 - 02": [
-    "Tee Ah Hieong",
+    "Tee Ah Hieong (FRI)",
     "Choy Lai Yee",
     "Lee Kang Hui",
     "Hannah Lee",
     "Gideon Lee",
     "Helper",
-    "Tai Chu Huang (FRI)",
-    "Tan Siew Mien (FRI)",
+    "Tai Chu Huang (SAT)",
+    "Tan Siew Mien (SAT)",
   ],
   "BR2 - 03": [
     "Low Sim Guang",
