@@ -304,7 +304,9 @@ const LeaderRetreat5 = () => {
                         paddingBottom: "10px",
                       }}
                     >
-                      {name === "BR2"
+                      {name === "BK2 (FRI)"
+                        ? "2 BEDROOMS (FRI)"
+                        : name === "BR2"
                         ? "2 BEDROOMS"
                         : name === "BR3"
                         ? "3 BEDROOMS"
