@@ -62,6 +62,7 @@
   font-family: "Sorren Black";
   font-size: 3.75rem;
   text-align: center;
+  line-height: 3.5rem;
 }
 
 .retreat-2-text-2 {
@@ -73,11 +74,9 @@
 
 .retreat-3-text-1 {
   color: #fff;
-  margin-top: 60px;
-  margin-bottom: 40px;
-  color: #fff;
-  margin-top: 30px !important;
-  margin-bottom: 20px !important;
+  font-family: "SF Pro Display";
+  font-size: 2.5rem;
+  line-height: 2.25rem;
 }
 
 .collapse-container {
@@ -86,7 +85,7 @@
 }
 
 .collapse-container {
-  margin: 0px 35px;
+  margin: 0px 15px;
 }
 
 .collapse-header {
@@ -199,6 +198,42 @@ button.activated {
   padding: 15px 10px;
 }
 
+.btn-retreat.maps {
+  background: #8aec49 !important;
+  border-radius: 40px;
+  border: 0 !important;
+  background: #000;
+  color: #fff;
+  font-family: "SF Pro Display";
+  font-size: 1rem;
+  padding: 10px 50px;
+  margin-top: 0 !important;
+  margin-bottom: 10px !important;
+  width: 230px !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.btn-retreat.waze {
+  background: #05c8f7 !important;
+  border-radius: 40px;
+  border: 0 !important;
+  background: #000;
+  color: #fff;
+  font-family: "SF Pro Display";
+  font-size: 1rem;
+  padding: 10px 50px;
+  margin-top: 0 !important;
+  margin-bottom: 10px !important;
+  width: 230px !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
 select option {
   width: 200px !important;
   font-size: 14px;
@@ -259,4 +294,63 @@ input {
 .btn-disabled {
   opacity: 0.5;
   cursor: default !important;
+}
+
+.title-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.welcome-msg {
+  color: #b3b3b3;
+  font-family: SF Pro Display;
+  text-align: center;
+  font-size: 22px;
+  text-transform: uppercase;
+}
+
+.schedule-box {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 23px 30px;
+  border-radius: 13px;
+  width: 100%;
+  color: #000;
+  max-width: 380px;
+}
+
+.section-3 {
+  padding: 0 40px;
+}
+
+.h-17 {
+  height: 17px;
+}
+
+.h-20 {
+  height: 20px;
+}
+
+.schedule-main-title {
+  font-family: SF Pro Display;
+  font-size: 25px;
+  padding-bottom: 5px;
+}
+
+.schedule-item {
+  font-family: SF Pro Display Regular;
+  font-size: 15px;
+}
+
+.schedule-head {
+  font-family: SF Pro Display;
+}
+
+.schedule-main-title.kids-title {
+  font-size: 20px;
+}
+
+.retreat-4-text-1 {
+  font-family: Sorren Black;
+  font-size: 60px;
 }
