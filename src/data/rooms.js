@@ -1,10 +1,12 @@
 export const roomArrangement = {
-  "BR2 - 01": [
+  "BR3 - 01": [
     "Ps. Jonathan Loh",
     "Priscilla Cheah",
     "Loh Xin Yee",
     "Loh Xin Yan",
     "Loh Xin Jing",
+    "Loh Xin Kai",
+    "Harry Liow Siang Yi",
   ],
   "BR2 - 02": [
     "Tee Ah Hieong (FRI)",
@@ -309,13 +311,12 @@ export const roomArrangement = {
     "Ng Ping Ping (RL)",
     "Ooi Seow Hoon",
   ],
-  "BR3 - 01": [
+  "BR2 - 01": [
     "Chin Ghee Choong",
     "Loh Swee Mee",
     "Qian Rou",
     "Qian Qi",
     "Qian Xin",
-    "Loh Xin Kai",
   ],
   "BR3 - 02": [
     "David Ooi",
