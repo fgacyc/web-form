@@ -56,9 +56,7 @@ const LeaderRetreat2 = ({ onClick }) => {
         <button
           className="btn-retreat maps relative"
           onClick={() =>
-            window.open(
-              "https://www.google.com/maps?q=bayou+lagoon&rlz=1C1CHBD_enMY1079MY1079&gs_lcrp=EgZjaHJvbWUqFggBEC4YrwEYxwEYsQMYgAQYmAUYmgUyBggAEEUYOTIWCAEQLhivARjHARixAxiABBiYBRiaBTITCAIQLhivARjHARiABBiYBRiZBTINCAMQLhivARjHARiABDIHCAQQABiABDIHCAUQABiABDIHCAYQABiABDINCAcQLhivARjHARiABDINCAgQLhivARjHARiABDIHCAkQABiPAtIBCjEwMzY1NmowajeoAgCwAgA&um=1&ie=UTF-8&sa=X&ved=2ahUKEwiBm8yFt5OCAxWIM0QIHfpMDWcQ_AUoAnoECAMQBA"
-            )
+            window.open("https://maps.app.goo.gl/JkuXdEhYbSQSKTca8")
           }
         >
           <p
@@ -76,7 +74,7 @@ const LeaderRetreat2 = ({ onClick }) => {
         </button>
         <button
           className="btn-retreat waze relative"
-          onClick={() => window.open("https://waze.com/ul/hw22ub02su")}
+          onClick={() => window.open("https://waze.com/ul/hw22ub0314")}
         >
           <p
             style={{
