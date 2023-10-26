@@ -114,7 +114,7 @@ const LeaderRetreat3 = () => {
         <div className="schedule-item">11.00AM — Doors Open</div>
         <div className="schedule-item">11.15AM — Pre-Show</div>
         <div className="schedule-item">11.30AM — Session 1</div>
-        <div className="schedule-item">11.30PM — Lunch + Check In</div>
+        <div className="schedule-item">1.30PM — Lunch + Check In</div>
         <div className="schedule-item">3.00PM — Team Building</div>
         <div className="schedule-item">5.00PM — Break</div>
         <div className="schedule-item">6.30PM — Dinner</div>
