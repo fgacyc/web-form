@@ -51,6 +51,8 @@ export const roomArrangement = {
     "Phang Zheng Hai",
     "Joel Wong Xie Zhe (FRI)",
     "Wong Kin Hou (FRI)",
+    "Tan Qin Yong (SAT)",
+    "John Hee Wen Jun (SAT)",
   ],
   "BR2 - 08": [
     "Yap Meng Teck",
